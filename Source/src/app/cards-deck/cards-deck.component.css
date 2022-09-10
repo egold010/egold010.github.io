@@ -1,0 +1,38 @@
+.grid-container {
+    display: inline-grid;
+    column-gap: 20px;
+    row-gap: 20px;
+    margin-left: 50px;
+}
+
+.grid-item {
+    height: 400px;
+    width: 250px;
+    background-color: rgb(175, 175, 175);
+    border-radius: 10px;
+    text-decoration: none;
+}
+
+.grid-item:hover {
+    scale: 1.02;
+    cursor: pointer;
+}
+
+.card-header {
+    width: 100%;
+    height: 50px;
+    line-height: 50px;
+    font-size: 30px;
+    background-color: rgb(24, 24, 65);
+    text-align: center;
+    border-radius: 10px 10px 0 0;
+}
+
+.card-img {
+    width: 250px;
+    height: 150px;
+}
+
+* {
+    color: white;
+}

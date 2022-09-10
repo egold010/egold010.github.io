@@ -1,0 +1,9 @@
+<div class="grid-container">
+    <a *ngFor="let card of cardItems; let i=index" class="grid-item" [routerLink]="'/projects/' + card.title"
+    [style.grid-column-start]="i + 1">
+        <div class="card-header">
+            {{card.title}}
+        </div>
+        <img class="card-img" src="/assets/placeholder.png">
+    </a>
+</div>
