@@ -2,3 +2,34 @@ h1 {
     margin: 10px;
     font-size: 40px;
 }
+
+button {
+    font-size: 20px;
+    width: 75px;
+    height: 30px;
+}
+
+iframe {
+    border: transparent;
+}
+
+a {
+    display: block;
+    color: black;
+    text-align: center;
+    text-decoration: none;
+    font-size: 20px;
+    line-height: 30px;
+}
+
+.backBtn {
+    width: 75px;
+    height: 30px;
+    margin: 10px 10px 0px 10px;
+    background: rgb(216, 216, 216);
+    border-radius: 5px;
+}
+
+.backBtn:hover {
+    background: rgb(138, 138, 138);
+}

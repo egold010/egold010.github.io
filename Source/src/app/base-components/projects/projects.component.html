@@ -1,2 +1,13 @@
-<h1>Projects</h1>
-<app-cards-deck [Cards]="projects"></app-cards-deck>
+
+<div *ngIf="projectName == null">
+    <h1>Projects</h1>
+    <app-cards-deck  [Cards]="projects"></app-cards-deck>
+</div>
+<div *ngIf="projectName != null">
+    <iframe [src]="projectSrc"></iframe>
+    <div class="backBtn">
+        <a routerLink="/projects">
+            Back
+        </a>
+    </div>
+</div>
