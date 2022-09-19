@@ -14,6 +14,14 @@ export class ProjectsComponent implements OnInit {
   projectName: string | null = null
   projectSrc?: SafeUrl
 
+  categories: string[] = [
+    "Work Experience",
+    "Electrical",
+    "General SW",
+    "Game Dev",
+    "Game Bot",
+  ]
+
   constructor(
     private route: ActivatedRoute,
     private sanitizer: DomSanitizer,
@@ -24,8 +32,16 @@ export class ProjectsComponent implements OnInit {
 
   ngOnInit(): void {
     this.projectName = this.route.snapshot.paramMap.get('project')
-    console.log(this.projectName)
     this.projectSrc = this.sanitizer.bypassSecurityTrustResourceUrl('/assets/item-details/' + this.projectName + '.html')
   }
 
+  iframeLoad(iframe: HTMLIFrameElement) {
+    iframe.height = iframe.contentWindow?.document.body.scrollHeight.toString() + 'px'
+    console.log(iframe.height)
+  }
+
+  hover(category?: string) {
+    for (let project of this.projects)
+      project.highlighted = project.category == category
+  }
 }

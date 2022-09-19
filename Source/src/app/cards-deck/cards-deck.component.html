@@ -1,9 +1,12 @@
 <div class="grid-container">
     <a *ngFor="let card of cardItems; let i=index" class="grid-item" [routerLink]="'/projects/' + card.title"
-    [style.grid-column-start]="i + 1">
+    [style.grid-row-start]="Math.floor(i / 4 + 1)"
+    [style.grid-column-start]="Math.floor(i % 4 + 1)"
+    [style.scale]="card.highlighted ? '1.02' : undefined">
         <div class="card-header">
             {{card.title}}
         </div>
         <img class="card-img" src="/assets/placeholder.png">
+        <div class="description">{{card.description}}</div>
     </a>
 </div>

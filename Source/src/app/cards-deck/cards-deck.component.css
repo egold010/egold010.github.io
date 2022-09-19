@@ -23,14 +23,20 @@
     height: 50px;
     line-height: 50px;
     font-size: 30px;
-    background-color: rgb(24, 24, 65);
     text-align: center;
+    background: rgb(24, 24, 65);
     border-radius: 10px 10px 0 0;
 }
 
 .card-img {
     width: 250px;
     height: 150px;
+}
+
+.description {
+    margin: 10px 15px 10px 15px;
+    color: black;
+    text-indent: 16px;
 }
 
 * {

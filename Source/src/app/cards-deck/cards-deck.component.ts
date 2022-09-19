@@ -12,6 +12,8 @@ export class CardsDeckComponent implements OnInit {
     this.cardItems = items
   }
 
+  Math = Math
+
   cardItems: CardItem[] = []
 
   constructor() { }

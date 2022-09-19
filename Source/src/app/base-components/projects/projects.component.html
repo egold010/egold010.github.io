@@ -1,10 +1,16 @@
 
 <div *ngIf="projectName == null">
-    <h1>Projects</h1>
-    <app-cards-deck  [Cards]="projects"></app-cards-deck>
+    <div>
+        <h1>Projects</h1>
+        <div *ngFor="let category of categories" class="category"
+        (mouseenter)="hover(category)"
+        (mouseleave)="hover()"
+        >{{category}}</div>
+    </div>
+    <app-cards-deck [Cards]="projects"></app-cards-deck>
 </div>
 <div *ngIf="projectName != null">
-    <iframe [src]="projectSrc"></iframe>
+    <iframe #iframe (load)="iframeLoad(iframe)" [src]="projectSrc"></iframe>
     <div class="backBtn">
         <a routerLink="/projects">
             Back
