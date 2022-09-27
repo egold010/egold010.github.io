@@ -37,7 +37,6 @@ export class ProjectsComponent implements OnInit {
 
   iframeLoad(iframe: HTMLIFrameElement) {
     iframe.height = iframe.contentWindow?.document.body.scrollHeight.toString() + 'px'
-    console.log(iframe.height)
   }
 
   hover(category?: string) {

@@ -4,18 +4,11 @@
       <li class="img-li">
         <img src="/assets/half-picture.png">
       </li>
-      <li><a routerLink="/home">
-        Home
-      </a></li>
-      <li><a routerLink="/projects">
-        Projects
-      </a></li>
-      <li class="hidden"><a routerLink="/interests">
-        Interests
-      </a></li>
-      <li><a routerLink="/resume">
-        Resume
-      </a></li>
+      <li *ngFor="let anchor of anchors">
+        <a [routerLink]="anchor.link" [style.background-color]="router.url.includes(anchor.link) ? '#444' : undefined">
+          {{anchor.name}}
+        </a>
+      </li>
     </ul>
   </nav>
 </div>

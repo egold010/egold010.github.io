@@ -8,12 +8,12 @@ export interface CardItem {
 export const Projects: CardItem[] = [
     {
         title: "Website",
-        description: "I made this website to act as a professional portfolio in AngularJS.",
+        description: "I made this website using AngularJS to act as a professional portfolio.",
         category: "General SW"
     },
     {
-        title: "Early games",
-        description: "A collection of lower quality games I made when I was still learning how to make games.",
+        title: "Early Games",
+        description: "A collection of lower quality games I made when I was still learning the basics of game development.",
         category: "Game Dev"
     },
     {
@@ -42,8 +42,13 @@ export const Projects: CardItem[] = [
         category: "Work Experience"
     },
     {
-        title: "Blender modeling",
+        title: "3D Modeling with blender",
         description: "Created various 3d models in blender mainly for use in game development.",
+        category: "Game Dev"
+    },
+    {
+        title: "Random Map Generator",
+        description: "Created random dungeons using cellular automation and perlin noise.",
         category: "Game Dev"
     },
 ]

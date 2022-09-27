@@ -6,7 +6,7 @@
         <div class="card-header">
             {{card.title}}
         </div>
-        <img class="card-img" src="/assets/placeholder.png">
+        <img class="card-img" [src]="'/assets/item-images/' + card.title + '.png'">
         <div class="description">{{card.description}}</div>
     </a>
 </div>
