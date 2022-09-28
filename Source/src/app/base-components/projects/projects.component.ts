@@ -33,6 +33,7 @@ export class ProjectsComponent implements OnInit {
   ngOnInit(): void {
     this.projectName = this.route.snapshot.paramMap.get('project')
     this.projectSrc = this.sanitizer.bypassSecurityTrustResourceUrl('/assets/item-details/' + this.projectName + '.html')
+    window.scroll(0,0)
   }
 
   iframeLoad(iframe: HTMLIFrameElement) {
