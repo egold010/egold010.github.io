@@ -27,7 +27,7 @@ export const Projects: CardItem[] = [
         category: "Game Bot"
     },
     {
-        title: "Jurrasic World Player",
+        title: "Jurassic World Player",
         description: "Using Tesseract from google, I made a bot to read the current state of the battle and move accordingly.",
         category: "Game Bot"
     },
