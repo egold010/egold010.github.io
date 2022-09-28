@@ -31,3 +31,8 @@ html {
     line-height: 30px;
     text-indent: 40px;
 }
+
+.header-img {
+    width: 750;
+    height: 400;
+}
