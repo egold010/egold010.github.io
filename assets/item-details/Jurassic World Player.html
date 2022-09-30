@@ -1,0 +1,36 @@
+<html>
+    <head>
+        <link href="/styles.css" rel="stylesheet" type="text/css">
+    </head>
+    <body>
+        <img class="header-img" src="/assets/item-images/Jurassic World Player.png">
+        <h1 class="header">Jurassic World Player</h1>
+        <p class="subber">9/28/2022</p>
+        <h2 class="section">Introduction</h2>
+        <p class="content">
+            As a fan of dinosaurs, I took interest in dinosaur games and one of them with the coolest designs is Jurassic World: The Game. I wanted to collect and upgrade more dinosaurs, but I absolutely hated the battling mechanic. Battling is the primary way of unlocking new dinosaurs and getting resources, so if I wanted to progress in the game, I would need to come up with a way to progress without battling. The most obvious and fun solution to me was to create a bot that battles for me, so I don’t even have to watch the battle if I don’t want to.
+        </p>
+        <p class="content">
+            Battling is turn based, where each turn, the player will get a certain amount of action points, which they can choose to either attack the enemy, block attacks, save for next turn, or swap to a different dinosaur. At first glance, there doesn’t seem to be much strategy, which there isn’t. The only possible optimizations people can use their points for is to not attack on turns where the enemy blocks or to only use the exact amount of attacks needed to defeat the enemy and spend the rest on block or saving. Dinosaurs have elements, where they deal double damage and receive half damage from dinosaurs they are strong against.
+        </p>
+        <h2 class="section">Development</h2>
+        <p class="content">
+            I started reading up on text processing to see what options are available to read the text and found out about pytesseract from Google. Tesseract uses machine learning to read text and although it is still relatively unreliable when reading text much different than what it was trained on, it is reliable enough for my intents and is free. I would have preferred to write the bot in C#, but python has much more documentation about tesseract, so I went with python.
+        </p>
+        <h3 class="category">Idea</h3>
+        <p class="content">
+            Initially, I was planning on using the minimax algorithm to control how the bot would move, so I would need to have captured all information about the battle available to me. The only incomplete information I have is the points that the enemy spent on blocking and saving, since I won’t know that until after I attack. When swapping dinosaurs, an expanded view of the game is available, where all dinosaurs on both teams with their element, attack, and health are shown. The bot can get the entire state of the game from just one screen except for the amount of points the enemy puts in blocking and saving. I decided to start with a “DumbAI” as a testing harness, which would swap dinosaurs if doing so would give an elemental advantage and otherwise spend all points on attacking.
+        </p>
+        <p class="content">
+            To determine when it’s the bot’s turn, it queries the positions of the attack, defend, and save buttons because they are only visible on the player’s turn. By clicking the top of the screen, the bot opens the expanded view, where it reads the whole state of the battle with tesseract and acts accordingly. Accurately reading the state of the battle with tesseract was perhaps the only difficult part of making the bot.
+        </p>
+        <h3 class="category">Challenges</h3>
+        <p class="content">
+            Tesseract is unreliable when reading text too different from what it was trained on. It would immensely struggle with reading single numbers and changing the image size by one pixel would greatly change what it output. I was able to mitigate this by cropping an image of a piece of text it was trained on and the number together, which completely fixed all issues relating to tesseract not finding any words. The problem then became where it would read numbers as letters or other characters. This was especially apparent with the number 1 because many other characters that look like 1 such as slashes, the pipe symbol, and the letter L. I was able to work around this issue by using regular expressions to replace commonly mistaken letters with their numbers.
+        </p>
+        <h2 class="section">Result</h2>
+        <p class="content">
+            After the bot was able to consistently read the state of the game, it was really easy to get the rest of the bot working. I was planning to go over and replace DumbAI with a minimax based bot, but DumbAI surprisingly has a 70% win rate, so I didn’t find it necessary to try to improve the battle AI immediately. For the sake of challenging myself, I plan to implement a minimax algorithm at some point and have already created the infrastructure for it.
+        </p>
+    </body>
+</html>
