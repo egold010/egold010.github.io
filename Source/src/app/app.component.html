@@ -2,7 +2,7 @@
   <nav>
     <ul>
       <li class="img-li">
-        <img src="/assets/half-picture.png">
+        <img src="assets/half-picture.png">
       </li>
       <li *ngFor="let anchor of anchors">
         <a [routerLink]="anchor.link" [style.background-color]="router.url.includes(anchor.link) ? '#444' : undefined">
