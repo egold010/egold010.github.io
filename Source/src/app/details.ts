@@ -27,6 +27,11 @@ export const Projects: CardItem[] = [
         category: "Game Bot"
     },
     {
+        title: "Chess Player",
+        description: "Python application to play chess on chess.com by reading the screen and moving accordingly. Uses Stockfish chess engine.",
+        category: "Game Bot"
+    },
+    {
         title: "Jurassic World Player",
         description: "Using Tesseract from google, I made a bot to read the current state of the battle and move accordingly.",
         category: "Game Bot"
