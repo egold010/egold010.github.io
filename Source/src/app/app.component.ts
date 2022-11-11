@@ -20,5 +20,6 @@ export class AppComponent {
   anchors: anchor[] = [
     { name: "Home", link: "/home" },
     { name: "Projects", link: "/projects" },
+    { name: "Resume", link: "/resume" }
   ]
 }
