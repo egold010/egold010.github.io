@@ -68,5 +68,14 @@
         <p class="content">
             Screen capture is by far the slowest operation in the bot. I looked into capturing only individual pixels instead of the whole screen, but it doesn’t seem like it would be possible without making my own video driver. The only way I can foresee making the bot faster is by making it in either C or assembly if possible.
         </p>
+        <h3 class="category">Edit</h3>
+        <p class="subber">11/15/22</p>
+        <p class="content">
+            I made the bot in C++ and as expected, it was faster, but negligibly so. Just like the C# version, it would check to see if the B value of the pixel is below a certain amount and I am having trouble finding the sweet spot. The hold down tiles are a gradient, so those need some tolerance, and it seems that a B value of 160 is perfect for that. However, when a tile is clicked, it has a disappearing animation with the center clearing first. When the tiles are moving so fast that the tiles move faster than the animation, the bot will click on the same tile twice. The B value of the tile during the clearing animation is 111, which can be filtered out by reducing the B value, but that would cause the bot to miss some of the hold down tiles.
+        </p>
+        <p class="subber">C# Version</p>
+        <img src="../details-images/PianoTiles_score8000.gif">
+        <p class="subber">C++ Version</p>
+        <img src="../details-images/PianoTiles_Demo.gif">
     </body>
 </html>
