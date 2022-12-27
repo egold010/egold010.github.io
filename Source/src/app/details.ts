@@ -36,16 +36,16 @@ export const Projects: CardItem[] = [
         description: "Using Tesseract from google, I made a bot to read the current state of the battle and move accordingly.",
         category: "Game Bot"
     },
-    {
-        title: "Fluidigm Internship",
-        description: "Interned in software development at Fluidigm, where I worked closely with the hardware of the instrument.",
-        category: "Work Experience"
-    },
-    {
-        title: "Seer Internship",
-        description: "Interned in software development at Seer, where I mainly on developing a customer facing UI for the instrument.",
-        category: "Work Experience"
-    },
+    // {
+    //     title: "Fluidigm Internship",
+    //     description: "Interned in software development at Fluidigm, where I worked closely with the hardware of the instrument.",
+    //     category: "Work Experience"
+    // },
+    // {
+    //     title: "Seer Internship",
+    //     description: "Interned in software development at Seer, where I mainly developed a customer facing UI for the instrument.",
+    //     category: "Work Experience"
+    // },
     {
         title: "3D Modeling with blender",
         description: "Created various 3d models in blender mainly for use in game development.",
