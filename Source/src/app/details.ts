@@ -12,6 +12,11 @@ export const Projects: CardItem[] = [
         category: "General SW"
     },
     {
+        title: "Geometry Dash RL",
+        description: "I made a bot that learned to play a simplified version of geometry dash with machine learning.",
+        category: "General SW"
+    },
+    {
         title: "Early Games",
         description: "A collection of lower quality games I made when I was still learning the basics of game development.",
         category: "Game Dev"
