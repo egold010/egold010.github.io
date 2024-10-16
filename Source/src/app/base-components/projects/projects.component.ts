@@ -15,8 +15,8 @@ export class ProjectsComponent implements OnInit {
   projectSrc?: SafeUrl
 
   categories: string[] = [
-    "Work Experience",
     "Electrical",
+    "Machine Learning",
     "General SW",
     "Game Dev",
     "Game Bot",

@@ -7,13 +7,28 @@ export interface CardItem {
 
 export const Projects: CardItem[] = [
     {
-        title: "Website",
-        description: "I made this website using AngularJS to act as a professional portfolio.",
-        category: "General SW"
+        title: "YOLO in PyTorch",
+        description: "I implemented the YOLO (You Only Look Once) real time object detection model in PyTorch.",
+        category: "Machine Learning"
+    },
+    {
+        title: "Minecraft Dataset",
+        description: "I made a dataset of 20,000+ screenshots of minecraft with full depth and semantic annotations.",
+        category: "Machine Learning"
+    },
+    {
+        title: "Arduino Galactica",
+        description: "I made a simple version of Galactica using AVR C++ as the final project for my Embedded Systems class.",
+        category: "Electrical"
     },
     {
         title: "Geometry Dash RL",
         description: "I made a bot that learned to play a simplified version of geometry dash with machine learning.",
+        category: "Machine Learning"
+    },
+    {
+        title: "Website",
+        description: "I made this website using AngularJS to act as a professional portfolio.",
         category: "General SW"
     },
     {
