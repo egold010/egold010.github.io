@@ -5,13 +5,17 @@
     <body>
         <h1 class="header">Professional Portfolio Website</h1>
         <p class="subber">9/17/2022</p>
-        <h2 class="section">Details</h2>
+        <h2 class="section">Introduction</h2>
         <p class="content">
-            At my internship and part time work at Seer, I became familiar with Angular, a technology used for web development. 
-            I decided to make a website to act as a professional portfolio for professional use and to verify that I am able 
-            to create an angular application from scratch.
-            The repository for this website can be found <a href="https://github.com/egold010/website" target="_blank">here</a>
-            and the components of the website can be found <a href="https://github.com/egold010/website/tree/main/Source/src/app" target="_blank">here</a>.
+            YOLO (You Only Look Once) is a computer vision model used to perform object detection and classification quickly for use in real time applications. In 2015, when v1 came out, its major innovation was turning object detection and classification into a single step, rather than detection, then classification on that detected image. For my final project in my Advanced Computer Vision project, I created an implementation of YOLO in PyTorch, which is the industry standard machine learning framework. The official YOLOv5 implementation is in PyTorch, with its major innovation being migrating to PyTorch to be more accessible by the industry. I did something similar, but picked up various parts of YOLO 1-4 and used it as a final project.
+        </p>
+        <h2 class="section">Method</h2>
+        <p class="content">
+            My design strays pretty far from the original YOLO designs, but still got the job done. For the backbone, I used a pretrained vision transformer. Note that vision transformers wouldn’t come out for 5 years after YOLOv1. For the classification layer, I used two linear layers separated by a LeakyReLU. The model is pretty simple but the concepts behind the loss function and the output format were complicated. For the loss function, the papers used intersection over union loss, but I ended up using MSE loss for bbox locations and classes separately due to the time constraint and complexity. YOLO’s output format at first is very complicated, but when you understand it, visualizing it isn’t a hard challenge. It breaks an image up into an SxS grid, so the first two dimensions are both S. After that, there are 5 values representing x, y, w, h, objectness, followed by c values where c is the number of classes. 
+        </p>
+        <h2 class="section">Results</h2>
+        <p class="content">
+            My results weren't the most accurate, with an accuracy of 60% and a lot of struggling on images with multiple objects. However, I learned a lot about the YOLO algorithm and how to implement it in PyTorch, and I believe it is a job well done given the time constraint and my knowledge going into the project.
         </p>
     </body>
 </html>
