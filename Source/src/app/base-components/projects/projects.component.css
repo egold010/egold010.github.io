@@ -51,6 +51,7 @@ a {
     display: block;
     width: 75px;
     height: 30px;
+    margin-top: 8px;
     margin-left: calc(50% - 400px);
     background: rgb(136, 136, 136);
     border-radius: 5px;

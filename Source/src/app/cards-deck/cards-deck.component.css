@@ -6,6 +6,7 @@
 }
 
 .grid-item {
+    position: relative;
     height: 400px;
     width: 250px;
     background-color: rgb(175, 175, 175);
@@ -39,6 +40,14 @@
     margin: 10px 15px 10px 15px;
     color: black;
     text-indent: 16px;
+}
+
+.date {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    margin: 10px;
+    color: black;
 }
 
 * {

@@ -9,7 +9,8 @@
 
 .section {
     font-size: 20px;
-    margin-bottom: -16px;
+    margin-top: 4px;
+    margin-bottom: -8px;
 }
 
 .category {
@@ -31,4 +32,9 @@
 .header-img {
     width: 750;
     height: 400;
+}
+
+.content-img {
+    width: 750;
+    height: auto;
 }

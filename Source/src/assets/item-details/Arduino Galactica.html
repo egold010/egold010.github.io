@@ -5,13 +5,16 @@
     <body>
         <h1 class="header">Professional Portfolio Website</h1>
         <p class="subber">9/17/2022</p>
-        <h2 class="section">Details</h2>
+        <h2 class="section">Introduction</h2>
         <p class="content">
-            At my internship and part time work at Seer, I became familiar with Angular, a technology used for web development. 
-            I decided to make a website to act as a professional portfolio for professional use and to verify that I am able 
-            to create an angular application from scratch.
-            The repository for this website can be found <a href="https://github.com/egold010/website" target="_blank">here</a>
-            and the components of the website can be found <a href="https://github.com/egold010/website/tree/main/Source/src/app" target="_blank">here</a>.
+            For my Embedded Systems class, we were tasked with implementing a game in AVR C++. I found that the rest of the class came naturally to me and I wanted to really challenge myself. Towards that end, I picked a very hard project, which to my knowledge is the most challenging final project anyone did in the class out of 200+ students. Not only that, I completed the project in only two days, even though we were given 4 weeks. The real motivation for me to finish the project early on though, is that my final projects for my other two classes would soon get released and I know that I won’t have time for this class project with the other two looming over me.
         </p>
+        <h2 class="section">My Game (straight from the project proposal)</h2>
+        <p class="content">
+            The player will control the ship by moving the joystick left and right. The player is locked to exclusively horizontal movement. The player can click the button to shoot a laser and can press the joystick down to shoot a big laser, which takes time to charge up. The game will be broken up into levels and scores will be given based on levels completed and speed at which the aliens were defeated, with less time being worth more points. Rather than the classic rows of aliens zig zagging down from the top, there will be intermittent aliens generated randomly (with a scaling difficulty) and there will also be different power ups that the aliens sometimes drop. Instead of the aliens moving closer to the bottom, they will move erratically, periodically shooting at the player. The levels will follow the naming scheme of “1-1, 1-2, …, 5-3” and so on. Each “world” will have 3 levels and will have a different visual theme. When the player shoots, gets shot, defeats an enemy, etc, there will be a small vibration to create an immersive feel. The main menu of the game will prompt the player to press the start button to begin, and display the highest level that was completed.
+	        The hardware components I used for this project are three LEDs, a 4 digit 7 segment display, a buzzer, an LCD screen, which I communicated with using SPI, a shift register, two buttons, and a joystick.
+	        Since I have experience with game development, I tried to make the base of my game as similar to a real game engine as possible. Every game tick, it would step all the entities, including the player, enemies, and projectiles. I had also built some sketchy functions for outputting sprites to the LCD, which is basically just predefining bitmap size functions. I’m sure there is a much more elegant way to do that, but that would require me learning in depth C++ and I didn’t have time for that. The code for this game ended up being about 900 lines and it is all posted on my github. I also uploaded the video demonstration to youtube and it got thousands of views. The code is available on <a href="https://github.com/egold010/ee120_project" target="_blank">my Github</a>.
+        </p>
+        <iframe width="750" height="450" src="https://www.youtube.com/embed/8Z1kFCmxbgo"></iframe>
     </body>
 </html>
