@@ -1,0 +1,43 @@
+<html>
+    <head>
+        <link href="../asset-styles.css" rel="stylesheet" type="text/css">
+    </head>
+    <body>
+        <h1 class="header">Raw Pixel Data RL</h1>
+        <p class="subber">12/7/2024</p>
+        <div>
+            <img src="../details-images/RawPixelDataRL/pong.gif" style="width: 200px;">
+            <img src="../details-images/RawPixelDataRL/breakout.gif" style="width: 200px;">
+            <img src="../details-images/RawPixelDataRL/spaceinvaders.gif" style="width: 200px;">
+        </div>
+        <h2 class="section">Summary</h2>
+        <p class="content">Reinforcement learning (RL) with visual data has far-reaching applications in robotics, autonomous systems, and game AI, where agents must act based on high-dimensional sensory input. Traditionally, Convolutional Neural Networks (CNNs) have been the standard choice for processing visual data in RL tasks. However, recent advances in Vision Transformers (ViTs) suggest they might also excel in visual RL by capturing long-range dependencies. This project explores and compares the effectiveness of CNNs and ViTs in learning robust policies directly from raw pixel data.</p>
+        <p class="content">I conducted experiments on three Atari games from the OpenAI Gym library: Pong, Breakout, and Space Invaders. Using CNN and ViT architectures as the neural network backbone for Double DQN and PPO, I evaluated their performance. The results indicate that, in their current state, Vision Transformers are unsuitable as the backbone for reinforcement learning agents. I hypothesize that transformers are likely to perform poorly even when handling non-pixel state inputs, for reasons consistent with their failures in this study.</p>
+        <h2 class="section">Environment</h2>
+        <h3 class="category">Setup</h3>
+        <p class="content">The Atari environments include redundant inputs, such as the "FIRE" button in Pong, which I excluded from the action space. I provided the agent with temporal context by stacking four consecutive frames in the channel dimension.</p>
+        <ul>
+            <li><b>Pong-v5:</b> The agent controls a paddle to deflect a ball, aiming to reach 21 points to win. The action space includes "no action," "up," and "down."</li>
+            <li><b>Breakout-v5:</b> The agent controls a paddle to bounce a ball into bricks, earning rewards for each brick hit. Actions include "no action," "up," "down," and "fire."</li>
+            <li><b>SpaceInvaders-v5:</b> The agent operates a ship, shooting at aliens to prevent them from reaching Earth. The game ends when the ship loses all health or aliens reach the bottom. Rewards are given for destroying aliens.</li>
+        </ul> 
+        <h2 class="section">Methodology</h2>
+        <p class="content">In all experiments, Vision Transformers failed to learn meaningful policies, so their results are omitted from this section and discussed in the conclusion.</p>
+        <p class="content">The Atari environments present additional challenges compared to simpler RL tasks. Rewards are often delayed, occurring long after the action responsible for them. For instance, in Breakout, the paddle must align with the ball before the ball hits a brick, which happens many frames later.</p>
+        <p class="content">To preprocess the input frames, I reshaped, grayscaled, and normalized them. For the CNN architecture yielding the best results, I used three convolutional layers followed by a fully connected layer, all separated by ReLU activations. In the PPO configuration, this was followed by separate linear heads for policy and value estimation. Due to time constraints, the models were not trained to convergence, and hyperparameter tuning was limited. With more time, I believe the results could be significantly improved.</p>
+        <p class="content">I focused on PPO for most experiments because it provided more stable and consistent results, making analysis easier.</p>
+        <h2 class="section">Results</h2>
+        <h3 class="category">Pong</h3>
+        <p class="content">Using PPO, I achieved a top score of 8. Each Pong game ran until one player reached 21 points, leading to longer training times (approximately 6,000 steps per episode toward the end of training). CNNs performed well, achieving balanced gameplay and understanding the game's mechanics, though they struggled to optimize strategy fully. The lack of long-range dependencies in Pong gives CNNs an inherent advantage over ViTs.</p>
+        <h3 class="category">Breakout</h3>
+        <p class="content">Breakout had extended evaluation times early in training due to a large maximum step count (27,000). If the agent's initial action was not "FIRE," the game would not start, leading untrained models to do nothing 75% of the time. Breakout involves some long-range dependencies, which might favor ViTs, but their inability to learn undermined this advantage.</p>
+        <h3 class="category">Space Invaders</h3>
+        <p class="content">Space Invaders combines short- and long-range visual context. The agent must align shots with distant aliens while avoiding incoming fire, requiring simultaneous consideration of short-range obstacles and long-range targets. While ViTs were expected to show potential in this environment, they failed to learn effectively. The CNN achieved only modest results, likely due to insufficient sample collection and prematurely truncated rollouts.</p>
+        <h2 class="section">Conclusion</h2>
+        <p class="content">Experiments demonstrated that Vision Transformers are inferior to CNNs in the selected Atari games. Further research revealed the reasons for their poor performance and suggests that transformers would also perform poorly in non-pixel observation environments. This hypothesis could be validated with additional experiments.</p>
+        <p class="content">Transformers amplify challenges inherent to RL, such as sample and computational inefficiency and sensitivity to hyperparameter tuning. Many RL algorithms are designed to address these inefficiencies (e.g., DQN for sample efficiency and PPO for computational efficiency), but transformers exacerbate these challenges due to their high resource demands.</p>
+        <p class="content">CNNs also outperform ViTs because of their superior ability to capture temporal differences between stacked frames. The complexity of ViTs tends to abstract away this temporal context, further limiting their effectiveness.</p>
+        <h2 class="section">Future Work</h2>
+        <p class="content">Due to time constraints, some avenues of investigation remain unexplored. I plan to test transformers with non-pixel inputs to confirm the hypothesis that they perform poorly across different types of observations. Additionally, I aim to evaluate pre-trained CNN and ViT backbones. A pre-trained ViT might mitigate sample inefficiency and yield better results in visual RL tasks.</p>
+    </body>
+</html>

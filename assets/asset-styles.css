@@ -38,3 +38,19 @@
     width: 750;
     height: auto;
 }
+
+li {
+    font-size: 18px;
+    line-height: 30px;
+}
+
+div {
+    display: flex;
+    justify-content: center;
+    margin: auto;
+}
+
+div img {
+    margin: 10px;
+    height: auto;
+}
