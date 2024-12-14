@@ -3,33 +3,52 @@ export interface CardItem {
     description: string,
     category: string,
     date: string,
-    highlighted?: boolean
+    highlighted?: boolean,
+    relevant?: boolean
 }
 
 export const Projects: CardItem[] = [
     {
+        title: "Raw Pixel Data RL",
+        description: "I compared CNNs and ViTs on their ability to function as the neural network backbone of a RL agent with raw pixels as observations. Experimented on OpenAI's Atari environments.",
+        category: "Machine Learning",
+        date: "12/7/2024",
+        relevant: true
+    },
+    {
+        title: "MC Data Experiments",
+        description: "I trained CNNs on the Minecraft Dataset I made and compared their performance to foundation models.",
+        category: "Machine Learning",
+        date: "12/3/2024",
+        relevant: true
+    },
+    {
         title: "YOLO in PyTorch",
         description: "I implemented the YOLO (You Only Look Once) real time object detection model in PyTorch.",
         category: "Machine Learning",
-        date: "5/29/2024"
+        date: "5/29/2024",
+        relevant: true
     },
     {
         title: "Minecraft Dataset",
         description: "I made a dataset of 20,000+ screenshots of minecraft with full depth and semantic annotations.",
         category: "Machine Learning",
-        date: "10/21/2024"
+        date: "10/21/2024",
+        relevant: true
     },
     {
         title: "Arduino Galactica",
         description: "I made a simple version of Galactica using AVR C++ as the final project for my Embedded Systems class.",
         category: "Electrical",
-        date: "6/9/2024"
+        date: "6/9/2024",
+        relevant: true
     },
     {
         title: "Geometry Dash RL",
         description: "I made a bot that learned to play a simplified version of geometry dash with machine learning.",
         category: "Machine Learning",
-        date: "8/4/2023"
+        date: "8/4/2023",
+        relevant: true
     },
     {
         title: "Website",

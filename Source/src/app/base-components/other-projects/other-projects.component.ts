@@ -5,26 +5,27 @@ import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { Location } from '@angular/common';
 
 @Component({
-  selector: 'app-projects',
-  templateUrl: './projects.component.html',
-  styleUrls: ['./projects.component.css']
+  selector: 'app-other-projects',
+  templateUrl: './other-projects.component.html',
+  styleUrls: ['./other-projects.component.css']
 })
-export class ProjectsComponent implements OnInit {
+export class OtherProjectsComponent implements OnInit {
 
   projects: CardItem[]
   projectName: string | null = null
   projectSrc?: SafeUrl
 
   categories: string[] = [
-    "Electrical",
-    "Machine Learning",
+    "General SW",
+    "Game Dev",
+    "Game Bot",
   ]
 
   constructor(
     private route: ActivatedRoute,
     private sanitizer: DomSanitizer,
     private location: Location
-  ) { this.projects = this.all_projects.filter(project => project.relevant); }
+  ) { this.projects = this.all_projects.filter(project => !project.relevant); }
 
   all_projects = Projects
 

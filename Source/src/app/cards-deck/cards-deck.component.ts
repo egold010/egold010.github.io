@@ -21,4 +21,7 @@ export class CardsDeckComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  hover(card: CardItem, highlighted: boolean) {
+    card.highlighted = highlighted
+  }
 }

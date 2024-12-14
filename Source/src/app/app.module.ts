@@ -10,6 +10,7 @@ import { InterestsComponent } from './base-components/interests/interests.compon
 import { ResumeComponent } from './base-components/resume/resume.component';
 
 import { CardsDeckComponent } from './cards-deck/cards-deck.component';
+import { OtherProjectsComponent } from './base-components/other-projects/other-projects.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { CardsDeckComponent } from './cards-deck/cards-deck.component';
     ProjectsComponent,
     InterestsComponent,
     ResumeComponent,
-    CardsDeckComponent
+    CardsDeckComponent,
+    OtherProjectsComponent
   ],
   imports: [
     BrowserModule,

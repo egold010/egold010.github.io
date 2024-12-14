@@ -23,27 +23,29 @@ img {
 }
 
 ul {
-    display: block;
+    display: flex;
     list-style-type: none;
     background: transparent;
     margin: 0;
     padding: 0;
     overflow: hidden;
+    justify-content: space-evenly;
+    align-items: center;
 }
 
 li {
     float: left;
-    width: 100px;
 }
 
 li a {
     display: block;
     color: white;
     text-align: center;
-    padding: 14px, 16px;
+    padding: 0 16px;
     text-decoration: none;
     font-size: 18px;
     line-height: 50px;
+    white-space: nowrap;
 }
 
 li a:hover {

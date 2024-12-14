@@ -1,6 +1,6 @@
 <div *ngIf="projectName == null">
     <div>
-        <h1>Relevant Projects</h1>
+        <h1>Other Projects</h1>
     </div>
     <div *ngFor="let category of categories" class="category"
         (mouseenter)="hover(category)"
@@ -15,7 +15,7 @@
 <div *ngIf="projectName != null">
     <iframe #iframe (load)="iframeLoad(iframe)" [src]="projectSrc"></iframe>
     <div class="backBtn">
-        <a routerLink="/projects">
+        <a routerLink="/other-projects">
             Back
         </a>
     </div>

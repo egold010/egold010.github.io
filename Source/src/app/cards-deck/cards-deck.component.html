@@ -1,9 +1,11 @@
 <div class="grid-container">
-    <a *ngFor="let card of cardItems; let i=index" class="grid-item" [routerLink]="'/projects/' + card.title"
+    <a *ngFor="let card of cardItems; let i=index" class="grid-item" [routerLink]="(card.relevant ? '/projects/' : '/other-projects/') + card.title"
     [style.grid-row-start]="Math.floor(i / 4 + 1)"
     [style.grid-column-start]="Math.floor(i % 4 + 1)"
-    [style.scale]="card.highlighted ? '1.02' : undefined">
-        <div class="card-header">
+    [style.scale]="card.highlighted ? '1.02' : undefined"
+    (mouseenter)="hover(card, true)"
+    (mouseleave)="hover(card, false)">
+        <div class="card-header" [style.background]="card.highlighted ? 'rgb(33, 33, 90)' : 'rgb(24, 24, 65)'">
             {{card.title}}
         </div>
         <img class="card-img" [src]="'assets/item-images/' + card.title + '.png'">
