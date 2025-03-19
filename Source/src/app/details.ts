@@ -10,7 +10,7 @@ export interface CardItem {
 export const Projects: CardItem[] = [
     {
         title: "SLAM from Scratch",
-        description: "I implemented a ROS2 node from scratch to perform the SLAM algorithm from scratch. Uses odometry and LIDAR data from the turtlebot3 library.",
+        description: "I developed a custom ROS2 node to implement the SLAM algorithm from the ground up, utilizing odometry and LIDAR data from the TurtleBot3 library.",
         category: "Software",
         date: "3/19/2025",
         relevant: true
