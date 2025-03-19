@@ -9,6 +9,13 @@ export interface CardItem {
 
 export const Projects: CardItem[] = [
     {
+        title: "SLAM from Scratch",
+        description: "I implemented a ROS2 node from scratch to perform the SLAM algorithm from scratch. Uses odometry and LIDAR data from the turtlebot3 library.",
+        category: "Software",
+        date: "3/19/2025",
+        relevant: true
+    },
+    {
         title: "Raw Pixel Data RL",
         description: "I compared CNNs and ViTs on their ability to function as the neural network backbone of a RL agent with raw pixels as observations. Experimented on OpenAI's Atari environments.",
         category: "Machine Learning",

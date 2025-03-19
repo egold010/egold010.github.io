@@ -18,6 +18,7 @@ export class ProjectsComponent implements OnInit {
   categories: string[] = [
     "Electrical",
     "Machine Learning",
+    "Software",
   ]
 
   constructor(
@@ -32,6 +33,15 @@ export class ProjectsComponent implements OnInit {
     this.projectName = this.route.snapshot.paramMap.get('project')
     this.projectSrc = this.sanitizer.bypassSecurityTrustResourceUrl('assets/item-details/' + this.projectName + '.html')
     window.scroll(0,0)
+
+    window.addEventListener("message", function (event) {
+      if (event.data.type === "resizeIframe") {
+        const iframe = document.querySelector("iframe");
+        if (iframe) {
+          iframe.style.height = event.data.height + "px";
+        }
+      }
+    });
   }
 
   iframeLoad(iframe: HTMLIFrameElement) {
