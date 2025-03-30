@@ -1,0 +1,17 @@
+<section class="container">
+    <h1>Relevant Coursework</h1>
+    <div class="coursework-columns">
+        <div class="course-category">
+            <h3>Graduate</h3>
+            <ul>
+                <li *ngFor="let course of coursework.graduate">{{ course }}</li>
+            </ul>
+        </div>
+        <div class="course-category">
+            <h3>Undergrad</h3>
+            <ul>
+                <li *ngFor="let course of coursework.undergrad">{{ course }}</li>
+            </ul>
+        </div>
+    </div>
+</section>

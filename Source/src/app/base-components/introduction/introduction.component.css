@@ -1,0 +1,119 @@
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: 100vh;
+    gap: 2rem;
+}
+
+/* Left Side (Picture) */
+.left-side {
+    position: relative;
+    display: flex;
+}
+
+.left-side img {
+    margin-left: 20%;
+    width: 60%;
+    border-radius: 50%;
+    opacity: 0;
+    display: flex;
+    justify-content: right;
+}
+
+/* Right Side (Text and Buttons) */
+.right-side {
+    position: relative;
+}
+
+.button-container {
+    display: flex;
+}
+
+.button-container button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    width: 3rem;
+    margin: 1rem;
+}
+
+.button-container button img {
+    width: 100%;
+    border-radius: 8px;
+    transition: transform 0.3s ease;
+    filter: invert(50%);
+}
+
+@keyframes slideInFromLeft {
+    0% {
+        transform: translateX(-50%);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideInFromRight {
+    0% {
+        transform: translateX(50%);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.animate-left {
+    animation: slideInFromLeft 1s ease-out forwards;
+}
+
+.animate-right {
+    animation: slideInFromRight 0.5s ease-out forwards;
+    font-size: 3rem;
+    opacity: 0;
+    white-space: nowrap;
+}
+
+.animate-arrow {
+    width: 6rem;
+    position: absolute;
+    bottom: 20px;         /* adjust this value as needed */
+    left: 50%;
+    transform: translate(-50%, 0); /* center horizontally */
+    animation: arrow_appear 1s forwards, bounce 4s infinite;
+    animation-delay: 0s, 3s;
+    filter: invert(80%);
+    opacity: 0;
+}
+
+@keyframes arrow_appear {
+    0% {
+        transform: translateX(-50%);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateX(-50%);
+        opacity: 1;
+    }
+}
+
+@keyframes bounce {
+    0%, 10%, 25%, 40%, 100% {
+        transform: translate(-50%, 0);
+    }
+    20% {
+        opacity: 1;
+        transform: translate(-50%, -50px);
+    }
+    30% {
+        transform: translate(-50%, -35px);
+    }
+}

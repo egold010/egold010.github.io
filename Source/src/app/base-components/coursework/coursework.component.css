@@ -1,0 +1,51 @@
+.container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 70vw;
+    align-items: left;
+    justify-content: center;
+    gap: 2rem;
+    margin: 2rem auto;
+    margin-top: 10vh;
+}
+
+.coursework-section h2 {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.coursework-columns {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    justify-content: center;
+}
+
+.course-category {
+    flex: 1 1 300px;
+    padding: 1.5rem;
+}
+
+.course-category h3 {
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+    color: #8f8f8f;
+}
+
+.course-category ul {
+    list-style-type: disc;
+    padding-left: 1.5rem;
+}
+
+.course-category li {
+    margin-bottom: 0.5rem;
+    color: #ffffff;
+    font-size: 1rem;
+}
+
+h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+}

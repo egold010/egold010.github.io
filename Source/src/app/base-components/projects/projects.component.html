@@ -1,22 +1,55 @@
-<div *ngIf="projectName == null">
-    <div>
-        <h1>Relevant Projects</h1>
+<section class="container">
+    <h1>Projects <span class="title-subtext">(click for more info)</span></h1>
+    <div class="project-list">
+      <!-- Relevant projects -->
+      <div
+        *ngFor="let project of relevantProjects"
+        class="project-card"
+        [routerLink]="['/project', project.title]"
+      >
+        <div class="project-image">
+          <img [src]="'assets/item-images/' + project.title + '.png'" [alt]="project.title" />
+        </div>
+        <div class="project-info">
+          <h3>{{ project.title }}</h3>
+          <p class="description">{{ project.description }}</p>
+          <div class="skill-list">
+            <span *ngFor="let skill of project.skills" class="skill-pill">{{ skill }}</span>
+          </div>
+        </div>
+      </div>
+  
+      <!-- Toggle button -->
+      <button class="toggle-button" (click)="showAllProjects = !showAllProjects">
+        {{ showAllProjects ? 'Show Less' : 'Show More' }}
+        <img
+          src="assets/arrow_down.png"
+          alt="Arrow"
+          [style.transform]="showAllProjects ? 'rotate(-180deg)' : 'rotate(0deg)'"
+          [style.transition]="'transform 0.3s ease'"
+        />
+      </button>
+  
+      <!-- Hidden projects -->
+      <ng-container *ngIf="showAllProjects">
+        <div
+          *ngFor="let project of hiddenProjects; let i = index"
+          class="project-card animate"
+          [routerLink]="['/project', project.title]"
+          [style.animation-delay]="(i * 100) + 'ms'"
+        >
+          <div class="project-image">
+            <img [src]="'assets/item-images/' + project.title + '.png'" [alt]="project.title" />
+          </div>
+          <div class="project-info">
+            <h3>{{ project.title }}</h3>
+            <p class="description">{{ project.description }}</p>
+            <div class="skill-list">
+              <span *ngFor="let skill of project.skills" class="skill-pill">{{ skill }}</span>
+            </div>
+          </div>
+        </div>
+      </ng-container>
     </div>
-    <div *ngFor="let category of categories" class="category"
-        (mouseenter)="hover(category)"
-        (mouseleave)="hover()"
-        >{{category}}
-    </div>
-    <div>
-        <app-cards-deck [Cards]="projects"></app-cards-deck>
-    </div>
-</div>
-
-<div *ngIf="projectName != null">
-    <iframe #iframe (load)="iframeLoad(iframe)" [src]="projectSrc"></iframe>
-    <div class="backBtn">
-        <a routerLink="/projects">
-            Back
-        </a>
-    </div>
-</div>
+  </section>
+  

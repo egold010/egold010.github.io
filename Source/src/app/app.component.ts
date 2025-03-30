@@ -1,9 +1,12 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { HostListener } from '@angular/core';
+
+import { Router, NavigationEnd } from '@angular/router';
+import { ViewportScroller } from '@angular/common';
+import { filter } from 'rxjs/operators';
 
 interface anchor {
   name: string,
-  link: string
 }
 
 @Component({
@@ -15,12 +18,34 @@ interface anchor {
 export class AppComponent {
   title = 'Evan Goldman';
 
-  constructor (protected router: Router) {}
+  constructor (protected router: Router, private viewportScroller: ViewportScroller) {}
 
   anchors: anchor[] = [
-    { name: "Home", link: "/home" },
-    { name: "Relevant Projects", link: "/projects" },
-    { name: "Other Projects", link: "/other-projects" },
-    { name: "Resume", link: "/resume" }
+    { name: "home" },
+    { name: "about"  },
+    { name: "career" },
+    { name: "projects" },
+    { name: "coursework" },
   ]
+
+  lastScrollTop = 0;
+  isBarHidden = false;
+
+  @HostListener('window:scroll', [])
+  onWindowScroll() {
+    const scrollTop = window.scrollY || document.documentElement.scrollTop;
+    this.isBarHidden = scrollTop > this.lastScrollTop;
+    this.lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+  }
+
+  scrollToSection(id: string) {
+    this.router.navigate(['/home']).then(() => {
+      setTimeout(() => {
+        const el = document.getElementById(id);
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }, 100); // Delay ensures content is rendered first
+    });
+  }
 }

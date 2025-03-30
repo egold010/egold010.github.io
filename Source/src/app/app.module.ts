@@ -4,23 +4,24 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-import { HomeComponent } from './base-components/home/home.component';
+import { HomeComponent } from './home/home.component';
+import { IntroductionComponent } from './base-components/introduction/introduction.component';
+import { AboutComponent } from './base-components/about/about.component';
+import { CareerComponent } from './base-components/career/career.component';
 import { ProjectsComponent } from './base-components/projects/projects.component';
-import { InterestsComponent } from './base-components/interests/interests.component';
-import { ResumeComponent } from './base-components/resume/resume.component';
-
-import { CardsDeckComponent } from './cards-deck/cards-deck.component';
-import { OtherProjectsComponent } from './base-components/other-projects/other-projects.component';
+import { CourseworkComponent } from './base-components/coursework/coursework.component';
+import { ProjectComponent } from './project/project.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
+    IntroductionComponent,
+    AboutComponent,
+    CareerComponent,
     ProjectsComponent,
-    InterestsComponent,
-    ResumeComponent,
-    CardsDeckComponent,
-    OtherProjectsComponent
+    CourseworkComponent,
+    ProjectComponent,
   ],
   imports: [
     BrowserModule,

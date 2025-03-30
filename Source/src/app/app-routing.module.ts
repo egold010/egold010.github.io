@@ -1,20 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { HomeComponent } from './base-components/home/home.component';
-import { ProjectsComponent } from './base-components/projects/projects.component';
-import { OtherProjectsComponent } from './base-components/other-projects/other-projects.component';
-import { InterestsComponent } from './base-components/interests/interests.component';
-import { ResumeComponent } from './base-components/resume/resume.component';
+import { HomeComponent } from './home/home.component';
+import { ProjectComponent } from './project/project.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
-  { path: 'projects', component: ProjectsComponent },
-  { path: 'projects/:project', component: ProjectsComponent },
-  { path: 'other-projects', component: OtherProjectsComponent },
-  { path: 'other-projects/:project', component: OtherProjectsComponent },
-  { path: 'interests', component: InterestsComponent },
-  { path: 'interests/:interest', component: InterestsComponent },
-  { path: 'resume', component: ResumeComponent},
+  { path: 'project/:title', component: ProjectComponent},
   { path: '', redirectTo: '/home', pathMatch: 'full'}
 ];
 
@@ -23,3 +14,8 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
+
+RouterModule.forRoot(routes, {
+  anchorScrolling: 'enabled',
+  scrollPositionRestoration: 'enabled'
+})

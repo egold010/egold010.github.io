@@ -1,0 +1,19 @@
+<div class="container">
+    <h1>Career</h1>
+    <div class="timeline-container">
+        <div class="timeline-entry" *ngFor="let item of timeline">
+            <img [src]="item.image" alt="icon" class="timeline-icon" />
+            <div class="timeline-content">
+                <h3>
+                    {{ item.title }}
+                    <span class="company-name"> &#64; {{ item.company }}</span>
+                </h3>
+                <span class="timeline-date">{{ item.date }}</span>
+                <p>{{ item.description }}</p>
+                <div class="skills" *ngIf="item.skills?.length">
+                    <span *ngFor="let skill of item.skills" class="skill-pill">{{ skill }}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,15 +1,11 @@
-<div class="nav-bar">
-  <nav>
-    <ul>
-      <li class="img-li">
-        <img src="assets/half-picture.png">
-      </li>
-      <li *ngFor="let anchor of anchors">
-        <a [routerLink]="anchor.link" [style.background-color]="router.url.includes(anchor.link) ? '#444' : undefined">
-          {{anchor.name}}
-        </a>
-      </li>
-    </ul>
+<div class="nav-bar" [class.hidden]="isBarHidden">
+  <h3 class="name-header">Evan Goldman</h3>
+  <nav class="nav-header">
+    <div *ngFor="let anchor of anchors">
+      <a (click)="scrollToSection(anchor.name)">
+        <h3 class="nav-header">{{ anchor.name }}</h3>
+      </a>
+    </div>
   </nav>
 </div>
 <router-outlet></router-outlet>
