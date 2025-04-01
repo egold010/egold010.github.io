@@ -69,7 +69,8 @@ body {
         width: 100%;
     }
 
-    img {
-        max-width: 100%;
+    .multi-img {
+        margin: 3px;
+        max-width: 30%;
     }
 }

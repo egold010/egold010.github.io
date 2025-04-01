@@ -34,6 +34,14 @@ export const Projects: CardItem[] = [
         skills: ["Python", "PyTorch", "CNN"]
     },
     {
+        title: "Bullet Hopper PPO",
+        description: "I implemented the PPO (Proximal Policy Optimization) algorithm in PyTorch and trained it on the Bullet Hopper environment.",
+        category: "Machine Learning",
+        date: "11/18/2024",
+        relevant: true,
+        skills: ["Python", "PyTorch", "RL"]
+    },
+    {
         title: "YOLO in PyTorch",
         description: "I implemented the YOLO (You Only Look Once) real time object detection model in PyTorch.",
         category: "Machine Learning",
