@@ -6,7 +6,7 @@
             <div class="timeline-content">
                 <h3>
                     {{ item.title }}
-                    <span class="company-name"> &#64; {{ item.company }}</span>
+                    <span class="company-name"> &#64;<a class="company-name" [href]="item.link" target="_blank">{{ item.company }}</a></span>
                 </h3>
                 <span class="timeline-date">{{ item.date }}</span>
                 <p>{{ item.description }}</p>
