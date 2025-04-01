@@ -59,3 +59,17 @@ div img {
 body {
     overflow: hidden;
 }
+
+@media (max-width: 600px) {
+    .container {
+        padding-top: 60px;
+    }
+
+    iframe {
+        width: 100%;
+    }
+
+    img {
+        max-width: 100%;
+    }
+}
