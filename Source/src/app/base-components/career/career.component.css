@@ -87,3 +87,10 @@ h1 {
     margin-right: 0.5rem;
     margin-top: 0.25rem;
 }
+
+/* Mobile Styles */
+@media (max-width: 600px) {
+    .container {
+        width: 90vw;
+    }
+}

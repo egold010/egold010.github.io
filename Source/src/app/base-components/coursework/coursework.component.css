@@ -49,3 +49,10 @@ h1 {
     font-size: 2.5rem;
     font-weight: 700;
 }
+
+/* Mobile Styles */
+@media (max-width: 600px) {
+    .container {
+        width: 90vw;
+    }
+}

@@ -18,3 +18,10 @@ h1 {
 p {
     line-height: 1.5;
 }
+
+/* Mobile Styles */
+@media (max-width: 600px) {
+    .container {
+        width: 90vw;
+    }
+}

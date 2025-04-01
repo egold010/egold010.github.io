@@ -30,12 +30,14 @@ export class AppComponent {
 
   lastScrollTop = 0;
   isBarHidden = false;
+  isMenuOpen = false;
 
   @HostListener('window:scroll', [])
   onWindowScroll() {
     const scrollTop = window.scrollY || document.documentElement.scrollTop;
     this.isBarHidden = scrollTop > this.lastScrollTop;
     this.lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+    this.isMenuOpen = false;
   }
 
   scrollToSection(id: string) {
@@ -47,5 +49,9 @@ export class AppComponent {
         }
       }, 100); // Delay ensures content is rendered first
     });
+  }
+
+  toggleMenu() {
+    this.isMenuOpen = !this.isMenuOpen;
   }
 }

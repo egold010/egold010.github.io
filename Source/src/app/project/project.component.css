@@ -36,3 +36,13 @@ iframe {
     display: flex;
     margin: auto;
 }
+
+@media (max-width: 600px) {
+    .container {
+        padding-top: 60px;
+    }
+
+    iframe {
+        width: 100%;
+    }
+}
