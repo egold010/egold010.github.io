@@ -18,12 +18,20 @@ export const Projects: CardItem[] = [
         skills: ["ROS2", "Python", "Linux", "SLAM"]
     },
     {
+        title: "MNIST Classifier",
+        description: "I created a linear MNIST classifier from scratch in Python. I include derivations for linear and quadratic loss gradients.",
+        category: "Software",
+        date: "10/21/2024",
+        relevant: true,
+        skills: ["Python", "Computer Vision"]
+    },
+    {
         title: "Raw Pixel Data RL",
         description: "I compared CNNs and ViTs on their ability to function as the neural network backbone of a RL agent with raw pixels as observations. Experimented on OpenAI's Atari environments.",
         category: "Machine Learning",
         date: "12/7/2024",
         relevant: true,
-        skills: ["Python", "PyTorch", "RL", "CNN", "ViT"]
+        skills: ["Python", "PyTorch", "RL", "CNN", "ViT", "Computer Vision"]
     },
     {
         title: "MC Data Experiments",
@@ -31,7 +39,7 @@ export const Projects: CardItem[] = [
         category: "Machine Learning",
         date: "12/3/2024",
         relevant: true,
-        skills: ["Python", "PyTorch", "CNN"]
+        skills: ["Python", "PyTorch", "CNN", "Computer Vision"]
     },
     {
         title: "Bullet Hopper PPO",
@@ -47,15 +55,14 @@ export const Projects: CardItem[] = [
         category: "Machine Learning",
         date: "5/29/2024",
         relevant: true,
-        skills: ["Python", "PyTorch", "CNN"]
+        skills: ["Python", "PyTorch", "CNN", "Computer Vision"]
     },
     {
         title: "Minecraft Dataset",
         description: "I made a dataset of 20,000+ screenshots of minecraft with full depth and semantic annotations.",
         category: "Machine Learning",
         date: "10/21/2024",
-        relevant: true,
-        skills: ["Java"]
+        skills: ["Java", "Computer Vision"]
     },
     {
         title: "Arduino Galactica",
@@ -63,14 +70,13 @@ export const Projects: CardItem[] = [
         category: "Electrical",
         date: "6/9/2024",
         relevant: true,
-        skills: ["C++", "Game Dev"]
+        skills: ["C++", "Game Dev", "Electrical", "Embedded Systems"],
     },
     {
         title: "Geometry Dash RL",
         description: "I made a bot that learned to play a simplified version of geometry dash with machine learning.",
         category: "Machine Learning",
         date: "8/4/2023",
-        relevant: true,
         skills: ["Python", "PyTorch", "RL", "Game Dev"]
     },
     {
