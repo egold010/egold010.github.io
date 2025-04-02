@@ -1,0 +1,161 @@
+<html>
+
+<head>
+    <script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+            MathJax.Hub.Queue(function () {
+                window.parent.postMessage({
+                    type: "resizeIframe",
+                    height: document.body.scrollHeight
+                }, "*");
+            });
+        </script>
+    <link href="../asset-styles.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+    <h1 class="header">MNIST Classifier</h1>
+    <p class="subber">10/21/2024</p>
+    <div style="display: flex; flex-direction: column; align-items: center;">
+        <img src="../details-images/MNISTClassifier/MNIST Classifier.png" style="width: 750px;">
+        <p style="margin-top: 0;"><b>Figure: </b>Images in the MNIST dataset.</p>
+    </div>
+
+    <h2 class="section">Introduction</h2>
+    <p class="content">
+        In this project, I implemented a linear classifier and a quadratic classifier (two weight matrices). I trained
+        each classifier for 50,000 iterations using Stochastic Gradient Descent. In practice, classifiers are generally
+        done with PyTorch, but my implementation is done from scratch. What PyTorch does under the hood is similar to
+        what I did in this project.
+    </p>
+    <p class="content">
+        Stochastic Gradient Descent (SGD) is an iterative optimization method used to minimize the loss function of a
+        model. Instead of computing the gradient of the loss function over the entire dataset, SGD updates the model
+        parameters using the gradient computed from a single training example or a small mini-batch. This makes it
+        computationally efficient and effective for large datasets such as MNIST.
+    </p>
+    <p class="content">
+        The result of SGD after a number of iterations is a set of model parameters that minimize the loss function.
+        The model can then be used to make predictions on new data. In the context of the MNIST dataset, the model is a
+        linear classifier that predicts the digit represented by a given image. The loss function measures the
+        difference between the predicted digit and the true digit, and the goal of SGD is to minimize this difference.
+        For example, the linear model predictions are made by applying the learned parameters to the input image as
+        follows:
+    </p>
+    <p class="content">
+        $$
+        \hat{y} = W \cdot x
+        $$
+        $$
+        \text{probs} = \text{softmax}(\hat{y}) = \frac{e^{W \cdot x}}{\sum_{j} e^{(W \cdot x)_j}}
+        $$
+    </p>
+
+    <p class="content">
+        Here, \( W \) is the weight matrix, \( x \) is the input vector (e.g., a flattened image), and the softmax
+        function transforms the raw logits into a probability distribution across all classes. The loss function we
+        use is the same for all, with y&#770; differing for each model:
+        $$
+        L = \frac{1}{2}|y - \hat{y}|^2
+        $$
+        and the model weights for each batch are updated as follows:
+        $$
+        W = W - \eta \nabla \frac{\partial L}{\partial W}
+        $$
+        where &eta; is the learning rate (typically a small number).
+    </p>
+
+    <h2 class="section">Loss Gradient Calculations</h2>
+    <p class="content">
+        To implement the SGD algorithm, we need to compute the gradients of the loss function with respect to the model
+        parameters. Here are the derivations for the gradients of the loss functions I used in this project:
+    </p>
+
+    <p class="content"><strong>Linear Loss:</strong>
+        Linear loss is the most simple loss function. The output of the model is calculated as just
+        $$
+        \hat{y} = W \cdot x
+        $$
+        and so the loss function would be
+        $$
+        L = \frac{1}{2}|y - \hat{y}|^2 = \frac{1}{2}|y - Wx|^2
+        $$
+        $$
+        = \frac{1}{2}(y - Wx)^T(y - Wx)
+        $$
+        $$
+        = \frac{1}{2}(y^Ty - y^TxW - x^TWy + x^TW^Txw)
+        $$
+        $$
+        = \frac{1}{2}(y^Ty - 2y^TxW + x^Tw^TxW)
+        $$
+        therefore,
+        $$
+        \frac{\partial L}{\partial W} = \frac{1}{2}(-2y^Tx + 2x^TxW)
+        $$
+        $$
+        = x^TxW - y^Tx
+        $$
+    </p>
+
+    <p class="content"><strong>Quadratic Loss:</strong>
+        The quadratic model uses two sets of weights along with a ReLU. The output of the model is calculated as
+        $$
+        \hat{y} = v^T\text{ReLU}(Wx)
+        $$
+        where v and W are both weight matrices. The ReLU function is defined as
+        $$
+        \operatorname{ReLU}(x) =
+        \begin{cases}
+        x, & \text{if } x > 0 \\
+        0, & \text{otherwise}
+        \end{cases}
+        $$
+        $$
+        \nabla \operatorname{ReLU}(x) =
+        \begin{cases}
+        1, & \text{if } x > 0 \\
+        0, & \text{otherwise}
+        \end{cases}
+        $$
+        and so the loss function would be
+        $$
+        L = \frac{1}{2}|y - \hat{y}|^2 = \frac{1}{2}|y - v^T\text{ReLU}(Wx)|
+        $$
+        $$
+        \frac{\partial L}{\partial v} = \frac{\partial L}{\partial \hat{y}} \cdot \frac{\partial \hat{y}}{\partial v}
+        $$
+        $$
+        = 2(y - v^T\text{ReLU}(Wx))\text{ReLU}(Wx)
+        $$
+        $$
+        \frac{\partial L}{\partial W} = \frac{\partial L}{\partial \hat{y}} \cdot \frac{\partial \hat{y}}{\partial
+        \text{ReLU}} \cdot \frac{\partial \text{ReLU}}{\partial W}
+        $$
+        $$
+        = 2(y - v^T\text{ReLU}(Wx))(v^T)(\text{ReLU'}(Wx))
+        $$
+        As we can see, the quadratic model is far more complex than the linear model. The ReLU function introduces
+        non-linearity allowing for more complex decision boundaries, but it also makes the loss gradient calculations
+        more complicated.
+    </p>
+
+    <p class="content">
+        This project demonstrates how a linear classifier can be built from scratch for the MNIST dataset using these
+        fundamental concepts in optimization and loss gradient computation. I achieved about an 85% accuracy with the
+        linear model and about a 90% accuracy with the quadratic model. Much higher accuracy can be achieved with models
+        like CNNs or with more efficient optimization methods and hyperparameter tuning.
+    </p>
+
+    <div style="display: flex; flex-direction: column; align-items: center;">
+        <img src="../details-images/MNISTClassifier/results.png" style="width: 750px;">
+        <p style="margin-top: 0;"><b>Figure: </b>Training curve of the quadratic model.</p>
+    </div>
+
+    <p class="content">
+        This assignment was completed as part of my Deep Learning class, and the code is available on my GitHub.
+    </p>
+
+</body>
+
+</html>
