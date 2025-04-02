@@ -1,15 +1,17 @@
-<div class="nav-bar" [class.hidden]="isBarHidden">
-  <div class="top-bar">
-    <h3 class="name-header">Evan Goldman</h3>
-    <button class="hamburger" (click)="toggleMenu()">&#9776;</button>
-  </div>
-  <nav class="nav-header" [class.open]="isMenuOpen">
-    <div *ngFor="let anchor of anchors">
-      <a (click)="scrollToSection(anchor.name)">
-        <h3 class="nav-item">{{ anchor.name }}</h3>
-      </a>
+<div class="background">
+  <div class="nav-bar" [class.hidden]="isBarHidden">
+    <div class="top-bar">
+      <h3 class="name-header">Evan Goldman</h3>
+      <button class="hamburger" (click)="toggleMenu()">&#9776;</button>
     </div>
-  </nav>
-</div>
+    <nav class="nav-header" [class.open]="isMenuOpen">
+      <div *ngFor="let anchor of anchors">
+        <a (click)="scrollToSection(anchor.name)">
+          <h3 class="nav-item">{{ anchor.name }}</h3>
+        </a>
+      </div>
+    </nav>
+  </div>
 
-<router-outlet></router-outlet>
+  <router-outlet></router-outlet>
+</div>
