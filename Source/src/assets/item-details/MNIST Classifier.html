@@ -54,7 +54,7 @@
     <p class="content">
         Here, \( W \) is the weight matrix, \( x \) is the input vector (e.g., a flattened image), and the softmax
         function transforms the raw logits into a probability distribution across all classes. The loss function we
-        use is the same for all, with y&#770; differing for each model:
+        use is the same for both (Mean Squared Error), with y&#770; differing for each model:
         $$
         L = \frac{1}{2}|y - \hat{y}|^2
         $$
@@ -84,10 +84,10 @@
         = \frac{1}{2}(y - Wx)^T(y - Wx)
         $$
         $$
-        = \frac{1}{2}(y^Ty - y^TxW - x^TWy + x^TW^Txw)
+        = \frac{1}{2}(y^Ty - y^TxW - x^TWy + x^TW^TxW)
         $$
         $$
-        = \frac{1}{2}(y^Ty - 2y^TxW + x^Tw^TxW)
+        = \frac{1}{2}(y^Ty - 2y^TxW + x^TW^TxW)
         $$
         therefore,
         $$
@@ -133,7 +133,7 @@
         \text{ReLU}} \cdot \frac{\partial \text{ReLU}}{\partial W}
         $$
         $$
-        = 2(y - v^T\text{ReLU}(Wx))(v^T)(\text{ReLU'}(Wx))
+        = 2(y - v^T\text{ReLU}(x))(v^T)(\text{ReLU'}(Wx))
         $$
         As we can see, the quadratic model is far more complex than the linear model. The ReLU function introduces
         non-linearity allowing for more complex decision boundaries, but it also makes the loss gradient calculations
