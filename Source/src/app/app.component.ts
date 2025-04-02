@@ -41,6 +41,7 @@ export class AppComponent {
   }
 
   scrollToSection(id: string) {
+    this.isMenuOpen = false;
     this.router.navigate(['/home']).then(() => {
       setTimeout(() => {
         const el = document.getElementById(id);
