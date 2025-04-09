@@ -27,7 +27,7 @@ export class CareerComponent implements OnInit {
       company: 'TASL',
       link: 'https://tasl.ucr.edu/',
       date: 'Oct 2024 - Present',
-      description: 'Trustworthy Autonomous Systems Laboratory. Advised by Prof. Jiachen Li',
+      description: 'Trustworthy Autonomous Systems Laboratory. Advised by Prof. Jiachen Li.',
       skills: ['C++', 'Python', 'ROS2'],
       image: 'assets/timeline-images/tasl.png',
     },
