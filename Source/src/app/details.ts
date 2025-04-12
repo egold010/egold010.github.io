@@ -10,11 +10,18 @@ export interface CardItem {
 
 export const Projects: CardItem[] = [
     {
+        title: "VGGT Visual SLAM",
+        description: "I'm working on utilizing the new VGGT model to implement a new Visual SLAM algorithm that relies solely on visual data. Not even IMU data is used.",
+        category: "Software",
+        date: "4/12/2025",
+        relevant: true,
+        skills: ["Python", "SLAM"]
+    },
+    {
         title: "SLAM from Scratch",
         description: "I developed a custom ROS2 node to implement the SLAM algorithm from the ground up, utilizing odometry and LIDAR data from the TurtleBot3 library.",
         category: "Software",
         date: "3/19/2025",
-        relevant: true,
         skills: ["ROS2", "Python", "Linux", "SLAM"]
     },
     {
