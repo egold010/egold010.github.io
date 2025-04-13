@@ -62,7 +62,7 @@ export class CareerComponent implements OnInit {
       title: 'Software Engineer Intern',
       company: 'Fluidigm Corp.',
       link: 'https://www.standardbio.com/',
-      date: 'Jun 2020 - Sep 2022 | 1 yr 4 mos',
+      date: 'Jun 2020 - Sep 2021 | 1 yr 4 mos',
       description: 'Built an internal dev tool used by engineers to run scripts and perform operations on the product.',
       skills: ['C#', 'C++', 'Python'],
       image: 'assets/timeline-images/fluidigm.png',
