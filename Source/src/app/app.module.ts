@@ -11,6 +11,7 @@ import { CareerComponent } from './base-components/career/career.component';
 import { ProjectsComponent } from './base-components/projects/projects.component';
 import { CourseworkComponent } from './base-components/coursework/coursework.component';
 import { ProjectComponent } from './project/project.component';
+import { PapersComponent } from './papers/papers.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { ProjectComponent } from './project/project.component';
     ProjectsComponent,
     CourseworkComponent,
     ProjectComponent,
+    PapersComponent,
   ],
   imports: [
     BrowserModule,
