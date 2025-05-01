@@ -19,13 +19,18 @@ export class PapersComponent implements OnInit {
       date: 'March 2025',
     },
     {
+      title: 'Context Aware GAN Image Compression',
+      link: 'ImageCompression',
+      date: 'March 2025',
+    },
+    {
       title: 'Synthetic Depth and Semantic Dataset Generation from Minecraft',
       link: 'MCData',
       date: 'November 2024',
     },
     {
-      title: 'Synthetic Depth and Semantic Dataset Generation from Minecraft',
-      link: 'MCData',
+      title: 'Deep RL Models with Raw Pixel Data',
+      link: 'RawPixelRL',
       date: 'November 2024',
     },
   ]
