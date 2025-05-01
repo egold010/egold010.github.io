@@ -14,6 +14,16 @@ export class PapersComponent implements OnInit {
 
   papers = [
     {
+      title: 'Evaluating π0 on Long-horizon Manipulation Tasks',
+      link: 'EvaluatingPi0',
+      date: 'March 2025',
+    },
+    {
+      title: 'Synthetic Depth and Semantic Dataset Generation from Minecraft',
+      link: 'MCData',
+      date: 'November 2024',
+    },
+    {
       title: 'Synthetic Depth and Semantic Dataset Generation from Minecraft',
       link: 'MCData',
       date: 'November 2024',

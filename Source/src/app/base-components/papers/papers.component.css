@@ -15,6 +15,10 @@ h1 {
     font-weight: 700;
 }
 
+li:not(:last-child) { 
+    margin-bottom: 0.5rem;  
+}
+
 .paper-list {
     margin-left: 2rem;
     font-size: 1.3rem;
