@@ -22,8 +22,9 @@ export class AppComponent {
 
   anchors: anchor[] = [
     { name: "home" },
-    { name: "about"  },
+    { name: "about" },
     { name: "career" },
+    { name: "papers" },
     { name: "projects" },
     { name: "coursework" },
   ]

@@ -8,10 +8,11 @@ import { HomeComponent } from './home/home.component';
 import { IntroductionComponent } from './base-components/introduction/introduction.component';
 import { AboutComponent } from './base-components/about/about.component';
 import { CareerComponent } from './base-components/career/career.component';
+import { PapersComponent } from './base-components/papers/papers.component';
 import { ProjectsComponent } from './base-components/projects/projects.component';
 import { CourseworkComponent } from './base-components/coursework/coursework.component';
 import { ProjectComponent } from './project/project.component';
-import { PapersComponent } from './papers/papers.component';
+import { PaperComponent } from './paper/paper.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { PapersComponent } from './papers/papers.component';
     CourseworkComponent,
     ProjectComponent,
     PapersComponent,
+    PaperComponent,
   ],
   imports: [
     BrowserModule,

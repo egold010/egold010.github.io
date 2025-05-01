@@ -12,4 +12,12 @@ export class PapersComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  papers = [
+    {
+      title: 'Synthetic Depth and Semantic Dataset Generation from Minecraft',
+      link: 'MCData',
+      date: 'November 2024',
+    },
+  ]
+
 }

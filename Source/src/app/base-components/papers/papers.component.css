@@ -1,0 +1,31 @@
+.container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 70vw;
+    align-items: left;
+    justify-content: center;
+    gap: 2rem;
+    margin: 2rem auto;
+    margin-top: 10vh;
+}
+
+h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+}
+
+.paper-list {
+    margin-left: 2rem;
+    font-size: 1.3rem;
+}
+
+.paper-name {
+    margin-left: 1rem;
+}
+
+.date {
+    font-size: 1.1rem;
+    color: #888;
+    margin-left: 1rem;
+}

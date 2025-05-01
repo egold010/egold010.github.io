@@ -33,7 +33,14 @@ export class ProjectComponent implements OnInit {
   }
 
   iframeLoad(iframe: HTMLIFrameElement, backBtn: HTMLButtonElement) {
-    iframe.height = iframe.contentWindow?.document.body.scrollHeight.toString() + 'px';
+    if (iframe.contentWindow) {
+      const doc = iframe.contentWindow.document;
+      const height = Math.max(
+        doc.body.scrollHeight,
+        doc.documentElement.scrollHeight
+      );
+      iframe.style.height = height + 'px';
+    }
     backBtn.style.opacity = '1';
   }
 

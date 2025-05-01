@@ -1,0 +1,11 @@
+<div class="container">
+    <h1>Papers</h1>
+    <div class="paper-list">
+        <ul>
+            <li *ngFor="let paper of papers">
+                <a class="paper-name" [routerLink]="['/paper', paper.link]">{{ paper.title }}</a>
+                <span class="date">({{ paper.date }})</span>
+            </li>
+        </ul>
+    </div>
+</div>
