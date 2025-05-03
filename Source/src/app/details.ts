@@ -22,6 +22,7 @@ export const Projects: CardItem[] = [
         description: "I developed a custom ROS2 node to implement the SLAM algorithm from the ground up, utilizing odometry and LIDAR data from the TurtleBot3 library.",
         category: "Software",
         date: "3/19/2025",
+        relevant: true,
         skills: ["ROS2", "Python", "Linux", "SLAM"]
     },
     {
@@ -53,7 +54,7 @@ export const Projects: CardItem[] = [
         description: "I implemented the PPO (Proximal Policy Optimization) algorithm in PyTorch and trained it on the Bullet Hopper environment.",
         category: "Machine Learning",
         date: "11/18/2024",
-        relevant: true,
+        relevant: false,
         skills: ["Python", "PyTorch", "RL"]
     },
     {

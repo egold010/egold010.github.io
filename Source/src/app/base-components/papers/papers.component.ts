@@ -14,6 +14,11 @@ export class PapersComponent implements OnInit {
 
   papers = [
     {
+      title: 'VGGT-SLAM: Purely Vision Based SLAM',
+      link: 'VGGT-SLAM',
+      date: 'May 2025',
+    },
+    {
       title: 'Evaluating π0 on Long-horizon Manipulation Tasks',
       link: 'EvaluatingPi0',
       date: 'March 2025',
