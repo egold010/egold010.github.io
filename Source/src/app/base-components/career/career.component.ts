@@ -14,10 +14,19 @@ export class CareerComponent implements OnInit {
 
   timeline = [
     {
+      title: 'Robotics Engineer',
+      company: 'Pursuit Robotics',
+      link: 'https://www.pursuitrobotics.com/',
+      date: 'June 2025 - Present',
+      description: 'Robotics startup building autonomous security robots.',
+      skills: ['C++', 'Python', 'ROS1', 'ROS2'],
+      image: 'assets/timeline-images/pursuit.jpg',
+    },
+    {
       title: 'Computer Science Lead/Co-Founder',
       company: 'Aviat\'r',
       link: 'https://aviatr.ucrhighlanders.org/',
-      date: 'Nov 2024 - Present',
+      date: 'Nov 2024 - June 2025 | 8 mos',
       description: 'Manages the computer vision and autonomous navigation subteams (6 members) at UCR\'s drone club.',
       skills: ['C++', 'Python'],
       image: 'assets/timeline-images/aviatr.jpg',
@@ -26,7 +35,7 @@ export class CareerComponent implements OnInit {
       title: 'Graduate Research Assistant',
       company: 'TASL',
       link: 'https://tasl.ucr.edu/',
-      date: 'Oct 2024 - Present',
+      date: 'Oct 2024 - June 2025 | 9 mos',
       description: 'Trustworthy Autonomous Systems Laboratory. Advised by Prof. Jiachen Li.',
       skills: ['C++', 'Python', 'ROS2'],
       image: 'assets/timeline-images/tasl.png',
