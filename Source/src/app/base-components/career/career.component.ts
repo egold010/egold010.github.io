@@ -14,16 +14,16 @@ export class CareerComponent implements OnInit {
 
   timeline = [
     {
-      title: 'Robotics Engineer',
+      title: 'Robotics Engineer (Part-Time)',
       company: 'Pursuit Robotics',
       link: 'https://www.pursuitrobotics.com/',
       date: 'June 2025 - Present',
-      description: 'Robotics startup building autonomous security robots.',
+      description: 'Pre-seed robotics startup building autonomous security robots.',
       skills: ['C++', 'Python', 'ROS1', 'ROS2'],
       image: 'assets/timeline-images/pursuit.jpg',
     },
     {
-      title: 'Computer Science Lead/Co-Founder',
+      title: 'Autonomy Lead/Co-Founder',
       company: 'Aviat\'r',
       link: 'https://aviatr.ucrhighlanders.org/',
       date: 'Nov 2024 - June 2025 | 8 mos',
@@ -41,7 +41,7 @@ export class CareerComponent implements OnInit {
       image: 'assets/timeline-images/tasl.png',
     },
     {
-      title: 'Software Engineer Intern',
+      title: 'R&D Intern',
       company: 'Standard Biotools',
       link: 'https://www.standardbio.com/',
       date: 'Jun 2024 - Sep 2024 | 4 mos',
@@ -50,7 +50,7 @@ export class CareerComponent implements OnInit {
       image: 'assets/timeline-images/stdbio.jpg',
     },
     {
-      title: 'Part-time Software Engineer',
+      title: 'Software Engineer (Part-Time)',
       company: 'Seer',
       link: 'https://seer.bio/',
       date: 'Oct 2022 - Sep 2023 | 1 yr',
@@ -59,7 +59,7 @@ export class CareerComponent implements OnInit {
       image: 'assets/timeline-images/seer.jpg',
     },
     {
-      title: 'Software Engineer Intern',
+      title: 'R&D Intern',
       company: 'Seer',
       link: 'https://seer.bio/',
       date: 'Jun 2022 - Sep 2022 | 4 mos',
@@ -68,7 +68,7 @@ export class CareerComponent implements OnInit {
       image: 'assets/timeline-images/seer.jpg',
     },
     {
-      title: 'Software Engineer Intern',
+      title: 'R&D Intern',
       company: 'Fluidigm Corp.',
       link: 'https://www.standardbio.com/',
       date: 'Jun 2020 - Sep 2021 | 1 yr 4 mos',
