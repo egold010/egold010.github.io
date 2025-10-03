@@ -13,6 +13,7 @@ import { ProjectsComponent } from './base-components/projects/projects.component
 import { CourseworkComponent } from './base-components/coursework/coursework.component';
 import { ProjectComponent } from './project/project.component';
 import { PaperComponent } from './paper/paper.component';
+import { GymComponent } from './gym/gym.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { PaperComponent } from './paper/paper.component';
     ProjectComponent,
     PapersComponent,
     PaperComponent,
+    GymComponent,
   ],
   imports: [
     BrowserModule,

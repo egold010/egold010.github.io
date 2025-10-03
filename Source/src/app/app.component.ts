@@ -27,6 +27,7 @@ export class AppComponent {
     { name: "papers" },
     { name: "projects" },
     { name: "coursework" },
+    { name: "gym" }
   ]
 
   lastScrollTop = 0;
@@ -42,15 +43,19 @@ export class AppComponent {
   }
 
   scrollToSection(id: string) {
-    this.isMenuOpen = false;
-    this.router.navigate(['/home']).then(() => {
-      setTimeout(() => {
-        const el = document.getElementById(id);
-        if (el) {
-          el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-      }, 100); // Delay ensures content is rendered first
-    });
+    if (id == "gym") {
+      this.router.navigate(['/gym'])
+    } else {
+      this.isMenuOpen = false;
+      this.router.navigate(['/home']).then(() => {
+        setTimeout(() => {
+          const el = document.getElementById(id);
+          if (el) {
+            el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        }, 100); // Delay ensures content is rendered first
+      });
+    }
   }
 
   toggleMenu() {
