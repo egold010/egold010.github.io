@@ -10,10 +10,36 @@
     margin-top: 10vh;
 }
 
+h1 {
+    font-family: "Rajdhani", sans-serif;
+    font-size: 2.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: var(--text-primary);
+}
+
+h1::before {
+    content: '< ';
+    color: var(--accent-primary);
+    font-weight: 400;
+}
+
+h1::after {
+    content: ' />';
+    color: var(--accent-primary);
+    font-weight: 400;
+}
+
 .coursework-section h2 {
+    font-family: "Rajdhani", sans-serif;
     font-size: 2rem;
+    font-weight: 600;
     margin-bottom: 1.5rem;
     text-align: center;
+    color: var(--accent-secondary);
+    text-transform: uppercase;
+    letter-spacing: 2px;
 }
 
 .coursework-columns {
@@ -26,33 +52,89 @@
 .course-category {
     flex: 1 1 300px;
     padding: 1.5rem;
+    background: linear-gradient(135deg, 
+        rgba(18, 23, 31, 0.6) 0%, 
+        rgba(10, 13, 18, 0.8) 100%);
+    border: 1px solid var(--steel-dark);
+    border-radius: 8px;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.course-category:hover {
+    border-color: var(--accent-primary);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(255, 107, 53, 0.1);
+}
+
+/* Corner accent on category cards */
+.course-category::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 30px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent-primary), transparent);
+}
+
+.course-category::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 3px;
+    height: 30px;
+    background: linear-gradient(180deg, var(--accent-primary), transparent);
 }
 
 .course-category h3 {
-    font-size: 1.25rem;
+    font-family: "Rajdhani", sans-serif;
+    font-size: 1.3rem;
+    font-weight: 600;
     margin-bottom: 1rem;
-    color: #8f8f8f;
+    color: var(--accent-secondary);
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
 .course-category ul {
-    list-style-type: disc;
-    padding-left: 1.5rem;
+    list-style-type: none;
+    padding-left: 0;
 }
 
 .course-category li {
-    margin-bottom: 0.5rem;
-    color: #ffffff;
-    font-size: 1rem;
+    margin-bottom: 0.6rem;
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    padding-left: 1.2rem;
+    position: relative;
+    transition: color 0.2s ease;
 }
 
-h1 {
-    font-size: 2.5rem;
-    font-weight: 700;
+.course-category li::before {
+    content: '▸';
+    position: absolute;
+    left: 0;
+    color: var(--accent-primary);
+    font-size: 0.8rem;
+}
+
+.course-category li:hover {
+    color: var(--text-primary);
 }
 
 /* Mobile Styles */
 @media (max-width: 600px) {
     .container {
         width: 90vw;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    .course-category {
+        flex: 1 1 100%;
     }
 }

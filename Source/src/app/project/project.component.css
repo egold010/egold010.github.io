@@ -3,38 +3,50 @@
 }
 
 .backBtn {
-    background-color: #1b1b1b;
-    color: white;
-    border: 1px solid #2e2e2e;
+    background: linear-gradient(135deg, var(--bg-tertiary) 0%, var(--steel-dark) 100%);
+    color: var(--text-primary);
+    border: 1px solid var(--steel-dark);
     padding: 0.8rem 1.5rem;
     margin: 20px 20% 20px;
-    border-radius: 8px;
+    border-radius: 6px;
     cursor: pointer;
-    font-size: 1.5rem;
-
+    font-family: "Rajdhani", sans-serif;
+    font-size: 1.2rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
     display: flex;
     align-items: center;
-    
     gap: 0.5rem;
     height: 2.5rem;
-    width: 9rem;
+    width: auto;
+    transition: all 0.3s ease;
 }
 
 .backBtn img {
-    height: 1.5rem;
-    filter: invert(80%);
+    height: 1.2rem;
+    filter: invert(50%) sepia(100%) saturate(500%) hue-rotate(340deg);
     rotate: 90deg;
+    transition: transform 0.2s ease;
 }
 
 .backBtn:hover {
-    background-color: #2e2e2e;
+    background: var(--steel-dark);
+    border-color: var(--accent-primary);
+    box-shadow: 0 5px 20px rgba(255, 107, 53, 0.2);
+}
+
+.backBtn:hover img {
+    transform: translateX(-3px);
 }
 
 iframe {
-    border: none;
+    border: 2px solid var(--steel-dark);
+    border-radius: 8px;
     width: 800px;
     display: flex;
     margin: auto;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
 }
 
 @media (max-width: 600px) {
@@ -42,7 +54,12 @@ iframe {
         padding-top: 60px;
     }
 
+    .backBtn {
+        margin: 15px 5%;
+    }
+
     iframe {
         width: 100%;
+        border-radius: 0;
     }
 }

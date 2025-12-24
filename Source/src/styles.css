@@ -1,5 +1,36 @@
+/* ===================================
+   ROBOTICS ENGINEER PORTFOLIO THEME
+   Industrial / Mechanical Aesthetic
+   =================================== */
+
+:root {
+    /* Primary Colors - Industrial Steel & Titanium */
+    --bg-primary: #0a0d12;
+    --bg-secondary: #12171f;
+    --bg-tertiary: #1a2332;
+    
+    /* Accent Colors - Engineering Orange & Cyan */
+    --accent-primary: #ff6b35;
+    --accent-secondary: #00d4ff;
+    --accent-tertiary: #ffc857;
+    
+    /* Metallic Tones */
+    --steel-dark: #2a3441;
+    --steel-light: #4a5568;
+    --chrome: #a0aec0;
+    
+    /* Text Colors */
+    --text-primary: #e2e8f0;
+    --text-secondary: #94a3b8;
+    --text-muted: #64748b;
+    
+    /* Technical Grid Lines */
+    --grid-color: rgba(0, 212, 255, 0.03);
+    --grid-accent: rgba(255, 107, 53, 0.05);
+}
+
 html {
-    background-color: rgb(15, 15, 17);
+    background-color: var(--bg-primary);
     scroll-behavior: smooth;
 }
 
@@ -7,6 +38,17 @@ body {
     width: 100%;
     height: 100%;
     overflow-x: hidden;
+    background: 
+        /* Technical grid pattern */
+        linear-gradient(90deg, var(--grid-color) 1px, transparent 1px),
+        linear-gradient(0deg, var(--grid-color) 1px, transparent 1px),
+        /* Subtle radial glow */
+        radial-gradient(ellipse at 50% 0%, rgba(0, 212, 255, 0.08) 0%, transparent 50%),
+        var(--bg-primary);
+    background-size: 
+        50px 50px,
+        50px 50px,
+        100% 100%;
 }
 
 * {
@@ -14,6 +56,49 @@ body {
     padding: 0;
     box-sizing: border-box;
     background-color: transparent;
-    font-family: "Monaco", "Lucida Console", monospace;
-    color: white;
+    font-family: "Exo 2", "Segoe UI", sans-serif;
+    color: var(--text-primary);
+}
+
+/* Headings use Rajdhani for that technical feel */
+h1, h2, h3, h4, h5, h6 {
+    font-family: "Rajdhani", "Segoe UI", sans-serif;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+/* Selection styling */
+::selection {
+    background: var(--accent-primary);
+    color: var(--bg-primary);
+}
+
+/* Scrollbar styling for that industrial look */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--steel-dark);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--accent-primary);
+}
+
+/* Link styling */
+a {
+    color: var(--accent-secondary);
+    text-decoration: none;
+    transition: color 0.2s ease, text-shadow 0.2s ease;
+}
+
+a:hover {
+    color: var(--accent-primary);
+    text-shadow: 0 0 8px rgba(255, 107, 53, 0.4);
 }
