@@ -1,172 +1,57 @@
 .container{padding-top:100px}
-
-body{
-  height:100%;
-  width:100%;
-  box-sizing:border-box;
-  color:#fff;
-  background:#0f0f11
-}
-
-.background{
-  position:fixed;inset:0;z-index:0;
-  background:url("../../assets/dumbbell.png") repeat 50% 50% / 100px 100px fixed;
-  opacity:.01;pointer-events:none
-}
-
+body{height:100%;width:100%;box-sizing:border-box;color:#fff;background:#0f0f11}
+.background{position:fixed;inset:0;z-index:0;background:url("../../assets/dumbbell.png") repeat 50% 50% / 100px 100px fixed;opacity:.01;pointer-events:none}
 .content{position:relative;margin:80px auto;z-index:1;width:1200px}
-
 img{max-width:100%;display:block}
-
 .wrap{margin-inline:auto}
-
-/* Section headings */
-.section-title{
-  text-align:center;font-weight:700;
-  font-size:clamp(26px,3.4vw,34px);
-  margin:16px 0 8px
-}
-
-.title-underline{
-  height:3px;width:64px;border-radius:999px;margin:8px auto 0
-}
-
-/* ABOUT */
+.section-title{text-align:center;font-weight:700;font-size:clamp(26px,3.4vw,34px);margin:16px 0 8px}
+.title-underline{height:3px;width:64px;border-radius:999px;margin:8px auto 0}
 .about{padding:32px 0 18px}
 .about-top{text-align:center}
-.about p{
-  max-width:800px;margin:10px auto 22px;
-  line-height:1.6;font-size:18px
-}
-
-.portrait{
-  width:300px;height:300px;margin:18px auto 8px;overflow:hidden;
-  border:2px solid rgba(255,122,61,.55);
-  box-shadow:0 10px 26px rgba(16,24,40,.08);
-  background:#fff
-}
-
-/* PERSONAL RECORDS SECTION */
+.about p{max-width:800px;margin:10px auto 22px;line-height:1.6;font-size:18px}
+.portrait{width:300px;height:300px;margin:18px auto 8px;overflow:hidden;border:2px solid rgba(255,122,61,.55);box-shadow:0 10px 26px rgba(16,24,40,.08);background:#fff}
 .records-band{padding:36px 0 44px;margin-top:22px}
-.records-grid{
-  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
-  gap:18px;margin-top:22px
-}
-.record-card{
-  border-top:3px solid rgba(255,122,61,.75);
-  padding:22px 18px;text-align:center;background:#161616
-}
+.records-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-top:22px}
+.record-card{border-top:3px solid rgba(255,122,61,.75);padding:22px 18px;text-align:center;background:#161616}
 .record-label{font-size:14px;margin-bottom:8px;font-weight:600}
 .record-value{font-size:28px;font-weight:800;letter-spacing:.2px}
-
-/* CLIENT STORIES */
 .clients{padding:34px 0 70px}
-.cards{
-  margin-top:22px;display:grid;
-  grid-template-columns:repeat(3,minmax(0,1fr));gap:22px
-}
-
-.card{
-  border-radius:16px;padding:18px 18px 22px;
-  display:flex;flex-direction:column;align-items:center;text-align:center
-}
+.cards{margin-top:22px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}
+.card{border-radius:16px;padding:18px 18px 22px;display:flex;flex-direction:column;align-items:center;text-align:center}
 .card h3{margin:6px 0 2px;font-size:18px;font-weight:700}
 .card .subtitle{font-style:italic;font-size:12.5px;margin-bottom:12px}
-
-.kv{
-  width:100%;display:flex;justify-content:space-between;align-items:center;
-  font-size:12.5px;padding:8px 10px;border-radius:10px;
-  background:#161616;border:1px solid #f0f2f5;margin:4px 0
-}
+.kv{width:100%;display:flex;justify-content:space-between;align-items:center;font-size:12.5px;padding:8px 10px;border-radius:10px;background:#161616;border:1px solid #f0f2f5;margin:4px 0}
 .kv strong{color:#a8542d;font-weight:700;font-size:12.5px}
-
-.avatar{
-  margin-top:14px;width:200px;height:200px;border-radius:999px;overflow:hidden;
-  border:3px solid rgba(255,122,61,.6);background:#fff
-}
-
+.avatar{margin-top:14px;width:200px;height:200px;border-radius:999px;overflow:hidden;border:3px solid rgba(255,122,61,.6);background:#fff}
 footer{padding-top:100px;text-align:center;opacity:.5}
-
 .client_msgs{gap:22px}
 .message h3{margin:10px 0}
-
-/* --- Responsive --- */
 @media (max-width:1000px){
-
-  /* Background: only override differences */
-  .background{
-    background-size:72px 72px;
-    background-attachment:scroll; /* mobile perf */
-    opacity:.02
-  }
-
-  .content{
-    position:relative;z-index:1;width:100%;max-width:100%;padding-inline:5vw
-  }
-
-  .wrap{margin-inline:auto;width:100%;max-width:100%}
-
-  .section-title{
-    text-align:center;font-weight:700;
-    font-size:clamp(20px,6.5vw,26px);margin:12px 0 6px
-  }
-
-  .title-underline{
-    height:2px;width:48px;border-radius:999px;margin:6px auto 0;
-    background:currentColor
-  }
-
-  .about{padding:20px 0 14px}
-  .about-top{text-align:left}
-  .about p{
-    max-width:100%;margin:8px 0 16px;line-height:1.6;
-    font-size:clamp(15px,4.2vw,17px)
-  }
-
-  .portrait{
-    width:48vw;height:48vw;max-width:280px;max-height:280px;
-    margin:14px auto 6px;border:2px solid rgba(255,122,61,.55);
-    box-shadow:0 8px 18px rgba(16,24,40,.1);background:#fff;border-radius:8px
-  }
-
-  .records-band{padding:22px 0 28px;margin-top:14px}
-  .records-grid{grid-template-columns:1fr;gap:14px;margin-top:16px}
-  .record-card{
-    border-top:3px solid rgba(255,122,61,.75);
-    padding:16px 14px;text-align:center;background:#161616;border-radius:10px
-  }
-  .record-label{font-size:clamp(13px,3.6vw,14px);margin-bottom:6px}
-  .record-value{font-size:clamp(22px,6vw,28px);font-weight:800;letter-spacing:.2px}
-
-  .clients{padding:22px 0 40px}
-
-  .cards{margin-top:16px;grid-template-columns:1fr;gap:16px}
-
-  .card,.message{
-    border-radius:14px;padding:14px;display:flex;flex-direction:column;
-    align-items:center;text-align:center;
-    background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06)
-  }
-
-  .card h3{margin:6px 0 2px;font-size:clamp(16px,4.4vw,18px);font-weight:700}
-  .card .subtitle{font-style:italic;font-size:clamp(12px,3.8vw,14px);margin-bottom:10px;opacity:.9}
-
-  .kv{
-    font-size:clamp(12px,3.6vw,14px);padding:8px 12px;border-radius:10px;
-    background:#161616;border:1px solid #2b2b2b;margin:6px 0;gap:8px
-  }
-  .kv span{flex:1;min-width:0}
-  .kv strong{white-space:nowrap;color:#a8542d}
-
-  .avatar{
-    margin-top:12px;width:44vw;height:44vw;max-width:220px;max-height:220px;
-    border-radius:999px;overflow:hidden;border:3px solid rgba(255,122,61,.6);background:#fff
-  }
-
-  footer{padding:40px 0 20px;text-align:center;opacity:.6}
-
-  .client_msgs{gap:16px}
-  .message h3{margin:8px 0}
-
-  img{max-width:100%;height:auto;display:block}
+.background{background-size:72px 72px;background-attachment:scroll;opacity:.02}
+.content{width:100%;max-width:100%;padding-inline:5vw}
+.wrap{width:100%;max-width:100%}
+.section-title{font-size:clamp(20px,6.5vw,26px);margin:12px 0 6px}
+.title-underline{height:2px;width:48px;margin:6px auto 0;background:currentColor}
+.about{padding:20px 0 14px}
+.about-top{text-align:left}
+.about p{max-width:100%;margin:8px 0 16px;font-size:clamp(15px,4.2vw,17px)}
+.portrait{width:48vw;height:48vw;max-width:280px;max-height:280px;margin:14px auto 6px;box-shadow:0 8px 18px rgba(16,24,40,.1);border-radius:8px}
+.records-band{padding:22px 0 28px;margin-top:14px}
+.records-grid{grid-template-columns:1fr;gap:14px;margin-top:16px}
+.record-card{padding:16px 14px;border-radius:10px}
+.record-label{font-size:clamp(13px,3.6vw,14px);margin-bottom:6px}
+.record-value{font-size:clamp(22px,6vw,28px)}
+.clients{padding:22px 0 40px}
+.cards{margin-top:16px;grid-template-columns:1fr;gap:16px}
+.card,.message{border-radius:14px;padding:14px;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06)}
+.card h3{font-size:clamp(16px,4.4vw,18px)}
+.card .subtitle{font-size:clamp(12px,3.8vw,14px);margin-bottom:10px;opacity:.9}
+.kv{font-size:clamp(12px,3.6vw,14px);padding:8px 12px;border:1px solid #2b2b2b;margin:6px 0;gap:8px}
+.kv span{flex:1;min-width:0}
+.kv strong{white-space:nowrap}
+.avatar{margin-top:12px;width:44vw;height:44vw;max-width:220px;max-height:220px}
+footer{padding:40px 0 20px;opacity:.6}
+.client_msgs{gap:16px}
+.message h3{margin:8px 0}
+img{height:auto}
 }
