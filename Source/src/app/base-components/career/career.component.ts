@@ -14,13 +14,22 @@ export class CareerComponent implements OnInit {
 
   timeline = [
     {
-      title: 'Simulation Engineer',
+      title: 'Robotics Engineer',
       company: 'Duality AI',
       link: 'https://www.duality.ai/',
       date: 'Sep 2025 - Present',
       description: 'Integrating robots into a digital twin simulator.',
       skills: ['C++', 'Python', 'ROS1', 'ROS2'],
       image: 'assets/timeline-images/duality.jpg',
+    },
+    {
+      title: 'Content Creator',
+      company: 'Vibe Engineering',
+      link: 'https://www.youtube.com/@vibe-engineering-10',
+      date: 'Dec 2025 - Present',
+      description: 'Making videos about robotics and engineering. Check out my channel!',
+      skills: ['Robotics', 'Engineering', 'Video Editing'],
+      image: 'assets/timeline-images/vibe-engineering.png',
     },
     {
       title: 'Robotics Engineer',

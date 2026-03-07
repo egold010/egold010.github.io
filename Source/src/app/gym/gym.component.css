@@ -20,7 +20,9 @@ img{max-width:100%;display:block}
 .card{border-radius:16px;padding:18px 18px 22px;display:flex;flex-direction:column;align-items:center;text-align:center}
 .card h3{margin:6px 0 2px;font-size:18px;font-weight:700}
 .card .subtitle{font-style:italic;font-size:12.5px;margin-bottom:12px}
-.kv{width:100%;display:flex;justify-content:space-between;align-items:center;font-size:12.5px;padding:8px 10px;border-radius:10px;background:#161616;border:1px solid #f0f2f5;margin:4px 0}
+.lifts{width:100%;border-radius:10px;background:#161616;border:1px solid #f0f2f5;overflow:hidden}
+.kv{width:100%;display:flex;justify-content:space-between;align-items:center;font-size:12.5px;padding:8px 10px}
+.kv+.kv{border-top:1px solid #2b2b2b}
 .kv strong{color:#a8542d;font-weight:700;font-size:12.5px}
 .avatar{margin-top:14px;width:200px;height:200px;border-radius:999px;overflow:hidden;border:3px solid rgba(255,122,61,.6);background:#fff}
 footer{padding-top:100px;text-align:center;opacity:.5}
@@ -46,7 +48,7 @@ footer{padding-top:100px;text-align:center;opacity:.5}
 .card,.message{border-radius:14px;padding:14px;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06)}
 .card h3{font-size:clamp(16px,4.4vw,18px)}
 .card .subtitle{font-size:clamp(12px,3.8vw,14px);margin-bottom:10px;opacity:.9}
-.kv{font-size:clamp(12px,3.6vw,14px);padding:8px 12px;border:1px solid #2b2b2b;margin:6px 0;gap:8px}
+.kv{font-size:clamp(12px,3.6vw,14px);padding:8px 12px;gap:8px}
 .kv span{flex:1;min-width:0}
 .kv strong{white-space:nowrap}
 .avatar{margin-top:12px;width:44vw;height:44vw;max-width:220px;max-height:220px}
