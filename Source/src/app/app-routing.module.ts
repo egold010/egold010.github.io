@@ -5,9 +5,9 @@ import { ProjectComponent } from './project/project.component';
 import { PaperComponent } from './paper/paper.component';
 
 const routes: Routes = [
-  { path: 'home', component: HomeComponent },
-  { path: 'project/:title', component: ProjectComponent},
-  { path: 'paper/:title', component: PaperComponent},
+  { path: 'home', component: HomeComponent, data: { animation: 'Home' } },
+  { path: 'project/:title', component: ProjectComponent, data: { animation: 'Project' } },
+  { path: 'paper/:title', component: PaperComponent, data: { animation: 'Paper' } },
   { path: '', redirectTo: '/home', pathMatch: 'full'}
 ];
 

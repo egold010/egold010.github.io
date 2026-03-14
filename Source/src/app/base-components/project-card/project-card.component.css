@@ -1,0 +1,181 @@
+:host {
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    color: inherit;
+    background: rgba(25, 25, 35, 0.4);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 1.5rem;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    text-align: left;
+    cursor: pointer;
+    opacity: 0;
+    transform: translateY(40px);
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Mouse spotlight effect */
+:host::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(
+        600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), 
+        rgba(255, 255, 255, 0.06),
+        transparent 40%
+    );
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+    z-index: 1;
+}
+
+:host:hover::before {
+    opacity: 1;
+}
+
+/* Ensure content stays above the spotlight */
+.project-card-container {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    width: 100%;
+    height: 100%;
+}
+
+:host(.is-visible) {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+:host:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 15px 30px rgba(124, 58, 237, 0.15);
+    border-color: rgba(124, 58, 237, 0.3);
+    background: rgba(35, 35, 45, 0.6);
+}
+
+.project-image {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border-radius: 12px;
+    overflow: hidden;
+    position: relative;
+    transform-style: preserve-3d;
+}
+
+.cv-filter-overlay {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: 
+        linear-gradient(rgba(0, 255, 255, 0.1) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 255, 255, 0.1) 1px, transparent 1px);
+    background-size: 20px 20px;
+    z-index: 2;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    mix-blend-mode: overlay;
+}
+
+.cv-scanner {
+    position: absolute;
+    top: -10px;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: rgba(0, 255, 255, 0.8);
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
+    z-index: 3;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+:host:hover .cv-filter-overlay {
+    opacity: 1;
+}
+
+:host:hover .cv-scanner {
+    opacity: 1;
+    animation: image-scan 2s linear infinite;
+}
+
+@keyframes image-scan {
+    0% { top: -10%; }
+    100% { top: 110%; }
+}
+
+.project-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), filter 0.4s ease;
+    transform: translate3d(0, 0, 0) scale(1);
+    will-change: transform;
+}
+
+:host:hover .project-image img {
+    filter: sepia(1) hue-rotate(180deg) saturate(3) contrast(1.2);
+}
+
+.project-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.project-info h3 {
+    margin: 0 0 0.75rem;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-main);
+}
+
+.description {
+    color: var(--text-muted);
+    margin-bottom: 1.5rem;
+    flex: 1;
+    line-height: 1.6;
+}
+
+.skill-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: auto;
+}
+
+.skill-pill {
+    background: rgba(124, 58, 237, 0.1);
+    color: #a78bfa;
+    border: 1px solid rgba(124, 58, 237, 0.2);
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 500;
+    padding: 0.4rem 0.8rem;
+    border-radius: 20px;
+    transition: background 0.3s ease;
+}
+
+:host:hover .skill-pill {
+    background: rgba(124, 58, 237, 0.2);
+}
+
+/* Mobile Styles */
+@media (max-width: 600px) {
+    :host {
+        padding: 1rem;
+    }
+}

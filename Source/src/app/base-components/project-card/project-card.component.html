@@ -1,0 +1,14 @@
+<div class="project-card-container">
+  <div class="project-image" style="transform-style: preserve-3d; perspective: 1000px;">
+    <div class="cv-filter-overlay"></div>
+    <div class="cv-scanner"></div>
+    <img [src]="'assets/item-images/' + project.title + '.png'" [alt]="project.title" loading="lazy" />
+  </div>
+  <div class="project-info">
+    <h3>{{ project.title }}</h3>
+    <p class="description">{{ project.description }}</p>
+    <div class="skill-list">
+      <span *ngFor="let skill of project.skills" class="skill-pill" appRepel [repelRadius]="50" [repelForce]="0.3">{{ skill }}</span>
+    </div>
+  </div>
+</div>

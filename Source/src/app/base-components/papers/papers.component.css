@@ -2,34 +2,108 @@
     position: relative;
     display: flex;
     flex-direction: column;
-    width: 70vw;
-    align-items: left;
+    width: 100%;
+    max-width: 900px;
+    align-items: flex-start;
     justify-content: center;
     gap: 2rem;
-    margin: 2rem auto;
-    margin-top: 10vh;
+    margin: 4rem auto;
+    padding: 0 5%;
 }
 
 h1 {
-    font-size: 2.5rem;
-    font-weight: 700;
+    font-size: 3rem;
+    font-weight: 800;
+    margin-bottom: 1rem;
+    background: var(--primary-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
-li:not(:last-child) { 
-    margin-bottom: 0.5rem;  
+.paper-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    width: 100%;
 }
 
-.paper-list {
-    margin-left: 2rem;
-    font-size: 1.3rem;
+.paper-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2rem;
+    opacity: 0;
+    animation: fadeIn 0.8s ease forwards;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
 }
 
-.paper-name {
-    margin-left: 1rem;
+.paper-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(124, 58, 237, 0.3);
+}
+
+.paper-content {
+    flex: 1;
+}
+
+.paper-content a {
+    text-decoration: none;
+}
+
+.paper-content h3 {
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: var(--text-main);
+    transition: color 0.3s ease;
+}
+
+.paper-card:hover h3 {
+    color: var(--accent);
 }
 
 .date {
-    font-size: 1.1rem;
-    color: #888;
+    font-size: 0.9rem;
+    color: var(--text-muted-dark);
+    font-family: var(--font-mono);
+}
+
+.paper-link-btn {
+    display: inline-block;
+    background: rgba(124, 58, 237, 0.1);
+    color: #c4b5fd;
+    padding: 0.6rem 1.2rem;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    border: 1px solid rgba(124, 58, 237, 0.2);
+    transition: all 0.3s ease;
+    white-space: nowrap;
     margin-left: 1rem;
+    text-decoration: none;
+}
+
+.paper-link-btn:hover {
+    background: rgba(124, 58, 237, 0.2);
+    color: #fff;
+    box-shadow: 0 0 15px rgba(124, 58, 237, 0.3);
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 600px) {
+    .paper-card {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1.5rem;
+    }
+    
+    .paper-link-btn {
+        margin-left: 0;
+        width: 100%;
+        text-align: center;
+    }
 }

@@ -1,23 +1,75 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef, AfterViewInit } from '@angular/core';
 
 @Component({
   selector: 'app-career',
   templateUrl: './career.component.html',
   styleUrls: ['./career.component.css']
 })
-export class CareerComponent implements OnInit {
+export class CareerComponent implements OnInit, AfterViewInit {
 
-  constructor() { }
+  constructor(private el: ElementRef) { }
 
   ngOnInit(): void {
   }
 
+  ngAfterViewInit(): void {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    });
+
+    const entries = this.el.nativeElement.querySelectorAll('.timeline-entry');
+    entries.forEach((entry: Element) => observer.observe(entry));
+
+    const containerObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('line-visible');
+          containerObserver.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.05,
+      rootMargin: '0px 0px -50px 0px'
+    });
+
+    const timelineContainer = this.el.nativeElement.querySelector('.timeline-container');
+    if (timelineContainer) {
+      containerObserver.observe(timelineContainer);
+    }
+  }
+
   timeline = [
     {
-      title: 'Robotics Engineer (Part-Time)',
+      title: 'Robotics Engineer',
+      company: 'Duality AI',
+      link: 'https://www.duality.ai/',
+      date: 'Sep 2025 - Present',
+      description: 'Integrating robots into a digital twin simulator.',
+      skills: ['Python', 'ROS2', 'UE5'],
+      image: 'assets/timeline-images/duality.jpg',
+    },
+    {
+      title: 'Content Creator',
+      company: 'Vibe Engineering',
+      link: 'https://www.youtube.com/@vibe-engineering-10',
+      date: 'Dec 2025 - Present',
+      description: 'Making videos about robotics and engineering. Check out my channel!',
+      skills: ['Robotics', 'Engineering', 'Video Editing'],
+      image: 'assets/timeline-images/vibe-engineering.png',
+    },
+    {
+      title: 'Robotics Engineer',
       company: 'Pursuit Robotics',
       link: 'https://www.pursuitrobotics.com/',
-      date: 'June 2025 - Present',
+      date: 'June 2025 - Sep 2025',
       description: 'Pre-seed robotics startup building autonomous security robots.',
       skills: ['C++', 'Python', 'ROS1', 'ROS2'],
       image: 'assets/timeline-images/pursuit.jpg',

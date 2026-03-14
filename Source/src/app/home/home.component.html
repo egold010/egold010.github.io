@@ -17,4 +17,31 @@
     <section id="coursework">
         <app-coursework></app-coursework>
     </section>
+
+    <!-- Massive Footer CTA -->
+    <section id="contact" class="footer-section">
+        <div class="footer-container glass glow-on-hover">
+            <h1 class="footer-heading">Let's build something <br/><span class="gradient-text">amazing</span> together.</h1>
+            <p class="footer-subtext">Always open for new opportunities and collaborations in robotics and AI.</p>
+            
+            <div class="footer-links">
+                <a href="mailto:evangoldman10@gmail.com" class="footer-btn primary-btn" appMagnetic [magneticPull]="0.5">
+                    <img src="assets/mail-icon.png" alt="" aria-hidden="true" class="btn-icon invert-icon"> Say Hello
+                </a>
+                <a href="https://www.linkedin.com/in/egold018/" target="_blank" class="footer-btn secondary-btn" appMagnetic [magneticPull]="0.5">
+                    <img src="assets/linkedin-icon.png" alt="" aria-hidden="true" class="btn-icon invert-icon"> LinkedIn
+                </a>
+                <a href="https://github.com/egold010?tab=repositories" target="_blank" class="footer-btn secondary-btn" appMagnetic [magneticPull]="0.5">
+                    <img src="assets/github-icon.png" alt="" aria-hidden="true" class="btn-icon invert-icon"> GitHub
+                </a>
+            </div>
+            
+            <div class="footer-bottom">
+                <p class="copyright">© 2026 Evan Goldman. Designed & Built with ❤️ in Angular.</p>
+                <div class="scroll-to-top" (click)="scrollToTop()" appMagnetic [magneticPull]="0.5">
+                    <img src="assets/arrow_down.png" alt="Scroll to Top" aria-hidden="true">
+                </div>
+            </div>
+        </div>
+    </section>
 </div>

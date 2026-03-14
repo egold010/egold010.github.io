@@ -1,14 +1,16 @@
 <div class="container">
-    <h1>Papers</h1>
-    <div class="paper-list">
-        <ul>
-            <li *ngFor="let paper of papers">
-                <!-- <a class="paper-name" [routerLink]="['/paper', paper.link]">{{ paper.title }}</a> -->
-                <a href="assets/papers/{{ paper.link }}.pdf" class="paper-name"
-                target="_blank"
-                rel="noopener noreferrer">{{ paper.title }}</a>
-                <span class="date">({{ paper.date }})</span>
-            </li>
-        </ul>
+    <h1 appReveal appDecode>Papers</h1>
+    <div class="paper-grid">
+        <div class="paper-card glass glow-on-hover" *ngFor="let paper of papers; let i = index" appTilt [tiltMax]="3" [style.animation-delay]="(i * 0.1) + 's'">
+            <div class="paper-content">
+                <a href="assets/papers/{{ paper.link }}.pdf" target="_blank" rel="noopener noreferrer">
+                    <h3>{{ paper.title }}</h3>
+                </a>
+                <span class="date">{{ paper.date }}</span>
+            </div>
+            <a href="assets/papers/{{ paper.link }}.pdf" target="_blank" rel="noopener noreferrer" class="paper-link-btn" appMagnetic [magneticPull]="0.4">
+                View PDF
+            </a>
+        </div>
     </div>
 </div>

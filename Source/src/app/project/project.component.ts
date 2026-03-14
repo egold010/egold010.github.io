@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-project',
@@ -11,37 +10,36 @@ export class ProjectComponent implements OnInit {
 
   constructor(
     protected router: Router,
-    private route: ActivatedRoute,
-    private sanitizer: DomSanitizer,) { }
+    private route: ActivatedRoute
+  ) { }
 
-  projectName: string | null = null
-  projectSrc?: SafeUrl
+  projectName: string | null = null;
+  projectHtml: string = '';
 
   ngOnInit(): void {
-    this.projectName = this.route.snapshot.paramMap.get('title')
-    this.projectSrc = this.sanitizer.bypassSecurityTrustResourceUrl('assets/item-details/' + this.projectName + '.html')
-    window.scroll(0,0)
-
-    window.addEventListener("message", function (event) {
-      if (event.data.type === "resizeIframe") {
-        const iframe = document.querySelector("iframe");
-        if (iframe) {
-          iframe.style.height = event.data.height + "px";
-        }
-      }
-    });
-  }
-
-  iframeLoad(iframe: HTMLIFrameElement, backBtn: HTMLButtonElement) {
-    if (iframe.contentWindow) {
-      const doc = iframe.contentWindow.document;
-      const height = Math.max(
-        doc.body.scrollHeight,
-        doc.documentElement.scrollHeight
-      );
-      iframe.style.height = height + 'px';
+    this.projectName = this.route.snapshot.paramMap.get('title');
+    window.scroll(0,0);
+    
+    if (this.projectName) {
+      // Fetch the HTML content
+      fetch(`assets/item-details/${this.projectName}.html`)
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Network response was not ok');
+          }
+          return response.text();
+        })
+        .then(html => {
+          // Extract the body content from the HTML file
+          const parser = new DOMParser();
+          const doc = parser.parseFromString(html, 'text/html');
+          this.projectHtml = doc.body.innerHTML;
+        })
+        .catch(error => {
+          console.error('Error loading project details:', error);
+          this.projectHtml = '<p>Error loading project details.</p>';
+        });
     }
-    backBtn.style.opacity = '1';
   }
 
   scrollToSection(id: string) {
@@ -51,7 +49,7 @@ export class ProjectComponent implements OnInit {
         if (el) {
           el.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
-      }, 100); // Delay ensures content is rendered first
+      }, 100);
     });
   }
 }

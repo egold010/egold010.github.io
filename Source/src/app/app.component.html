@@ -1,17 +1,104 @@
+<div class="splash-screen" [class.fade-out]="!showSplash" *ngIf="splashExists">
+  <div class="terminal-content">
+    <div class="boot-logs">
+      <p *ngFor="let line of bootLines" class="boot-line">{{ line }}</p>
+    </div>
+    
+    <div class="boot-progress-container" *ngIf="bootProgress > 0">
+      <div class="boot-progress-bar" [style.width.%]="bootProgress"></div>
+      <div class="boot-progress-text">{{ bootProgress | number:'1.0-0' }}%</div>
+    </div>
+    
+    <div class="main-boot-messages">
+      <p class="cmd" *ngIf="bootProgress > 10">INIT <span class="highlight">SYSTEM_BOOT</span>...</p>
+      <p class="cmd delay-1" *ngIf="bootProgress > 30">LOADING <span class="highlight">KERNEL</span>...</p>
+      <p class="cmd delay-2" *ngIf="bootProgress > 50">MOUNTING <span class="highlight">NEURAL_NET</span> [OK]</p>
+      <p class="cmd delay-3" *ngIf="bootProgress > 80">ESTABLISHING <span class="highlight">CONNECTION</span>...</p>
+      <p class="cmd delay-4" *ngIf="bootProgress === 100">WELCOME, <span class="highlight">GUEST</span>.</p>
+      <p class="cmd blink-cursor delay-5" *ngIf="bootProgress === 100">> ACCESS GRANTED_</p>
+    </div>
+  </div>
+</div>
+
+<canvas id="matrix-canvas"></canvas>
+<canvas id="radar-canvas"></canvas>
+<div class="noise-overlay"></div>
+<div class="grid-overlay"></div>
+<div class="scanner-line"></div>
+<div class="ambient-orb orb-1"></div>
+<div class="ambient-orb orb-2"></div>
+<div class="ambient-orb orb-3"></div>
+<div id="glow-blob"></div>
+<div class="custom-cursor" id="custom-cursor"></div>
+<div class="custom-cursor-follower" id="custom-cursor-follower">
+  <svg class="cursor-text-ring" viewBox="0 0 100 100" width="100" height="100">
+    <defs>
+      <path id="circlePath" d="M 50, 50 m -40, 0 a 40,40 0 1,1 80,0 a 40,40 0 1,1 -80,0" />
+    </defs>
+    <text>
+      <textPath href="#circlePath" startOffset="0%">
+        EVAN GOLDMAN • ROBOTICS • AI • EVAN GOLDMAN • ROBOTICS • AI •
+      </textPath>
+    </text>
+  </svg>
+</div>
+<div class="depth-gauge">
+  <div class="depth-track">
+    <div class="depth-fill" [style.height.%]="scrollProgress"></div>
+    <div class="depth-marker" [style.top.%]="scrollProgress"></div>
+  </div>
+  <div class="depth-readout">
+    DEPTH<br>
+    <span class="depth-value">{{ scrollProgress | number:'1.0-0' }}</span>
+  </div>
+</div>
+
 <div class="background">
-  <div class="nav-bar" [class.hidden]="isBarHidden">
+  <ng-particles [id]="id" [options]="particlesOptions" [particlesInit]="particlesInit"></ng-particles>
+  <div class="nav-bar" [class.hidden]="isBarHidden" role="navigation" aria-label="Main Navigation">
     <div class="top-bar">
-      <h3 class="name-header">Evan Goldman</h3>
-      <button class="hamburger" (click)="toggleMenu()">&#9776;</button>
+      <h3 class="name-header" appExplode appDecode>Evan Goldman</h3>
+      <button class="hamburger" (click)="toggleMenu()" aria-label="Toggle navigation menu" [attr.aria-expanded]="isMenuOpen">&#9776;</button>
     </div>
     <nav class="nav-header" [class.open]="isMenuOpen">
       <div *ngFor="let anchor of anchors">
-        <a (click)="scrollToSection(anchor.name)">
-          <h3 class="nav-item">{{ anchor.name }}</h3>
+        <a (click)="scrollToSection(anchor.name)" tabindex="0" (keyup.enter)="scrollToSection(anchor.name)" role="button" [attr.aria-label]="'Scroll to ' + anchor.name + ' section'">
+          <h3 class="nav-item" appDecode>{{ anchor.name }}</h3>
         </a>
       </div>
     </nav>
   </div>
 
-  <router-outlet></router-outlet>
+  <div class="spotlight-layer" id="spotlight-layer"></div>
+
+  <!-- System HUD Overlay -->
+  <div class="system-hud" [class.hidden]="isBarHidden">
+    <div class="hud-corner top-left"></div>
+    <div class="hud-corner top-right"></div>
+    <div class="hud-corner bottom-left"></div>
+    <div class="hud-corner bottom-right"></div>
+    
+    <div class="hud-data top-left-data">
+      SYS.CORE // {{ timeString }}<br>
+      UPTIME // {{ uptimeString }}
+    </div>
+    <div class="hud-data top-right-data text-right">
+      TARGET: ACQUIRED<br>
+      LATENCY: {{ latency }}ms
+    </div>
+    <div class="hud-data bottom-left-data">
+      POS_X: {{ mouseX | number:'1.0-0' }}<br>
+      POS_Y: {{ mouseY | number:'1.0-0' }}
+    </div>
+    <div class="hud-data bottom-right-data text-right">
+      SCROLL_DEPTH: {{ scrollProgress | number:'1.2-2' }}%<br>
+      MEM_ADDR: {{ randomMemAddr }}
+    </div>
+    
+    <div class="hud-crosshair center-crosshair"></div>
+  </div>
+
+  <div [@routeAnimations]="prepareRoute(outlet)">
+    <router-outlet #outlet="outlet"></router-outlet>
+  </div>
 </div>

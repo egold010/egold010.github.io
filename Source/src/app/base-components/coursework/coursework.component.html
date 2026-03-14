@@ -1,14 +1,20 @@
 <section class="container">
-    <h1>Relevant Coursework</h1>
+    <h1 appReveal appDecode>Relevant Coursework</h1>
     <div class="coursework-columns">
-        <div class="course-category">
-            <h3>Graduate</h3>
+        <div class="course-category glass glow-on-hover" appTilt [tiltMax]="3">
+            <div class="category-header">
+                <h3>Graduate</h3>
+                <div class="badge">MS</div>
+            </div>
             <ul>
                 <li *ngFor="let course of coursework.graduate">{{ course }}</li>
             </ul>
         </div>
-        <div class="course-category">
-            <h3>Undergrad</h3>
+        <div class="course-category glass glow-on-hover" appTilt [tiltMax]="3">
+            <div class="category-header">
+                <h3>Undergrad</h3>
+                <div class="badge">BS</div>
+            </div>
             <ul>
                 <li *ngFor="let course of coursework.undergrad">{{ course }}</li>
             </ul>

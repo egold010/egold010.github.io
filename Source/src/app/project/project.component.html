@@ -1,10 +1,10 @@
 <div class="container">
-    <iframe #iframe (load)="iframeLoad(iframe, backBtn)" [src]="projectSrc"></iframe>
-    <button #backBtn class="backBtn" (click)="scrollToSection('projects')">
+    <div class="project-content" [innerHTML]="projectHtml | safeHtml"></div>
+    <button class="backBtn" appMagnetic [magneticPull]="0.3" (click)="scrollToSection('projects')">
         <img
           src="assets/arrow_down.png"
-          alt="Arrow"
+          alt="" aria-hidden="true"
         />
-        Back
+        Back to Projects
     </button>
 </div>
