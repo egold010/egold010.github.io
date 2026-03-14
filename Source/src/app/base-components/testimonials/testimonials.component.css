@@ -1,0 +1,81 @@
+/* Testimonials and Achievements Styles */
+
+.testimonial-card {
+  @apply bg-gray-800/50 backdrop-blur-sm border border-gray-700 rounded-xl p-6 shadow-xl hover:shadow-2xl transition-all duration-500 hover:border-primary-500/50 hover:-translate-y-2;
+  position: relative;
+  overflow: hidden;
+}
+
+.testimonial-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(14, 165, 233, 0.05), rgba(14, 165, 233, 0.02));
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  border-radius: 0.75rem;
+}
+
+.testimonial-card:hover::before {
+  opacity: 1;
+}
+
+.achievement-card {
+  @apply bg-gray-800/30 backdrop-blur-sm border border-gray-600 rounded-xl p-6 hover:bg-gray-800/50 hover:border-gray-500 transition-all duration-300 hover:shadow-lg;
+}
+
+.achievement-card:hover {
+  transform: translateX(4px);
+}
+
+/* Star rating animation */
+.star-rating {
+  animation: twinkle 2s ease-in-out infinite;
+}
+
+@keyframes twinkle {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+/* Quote styling */
+.testimonial-card blockquote::before {
+  content: '"';
+  font-size: 4rem;
+  color: rgba(14, 165, 233, 0.1);
+  position: absolute;
+  top: -10px;
+  left: 10px;
+  font-family: serif;
+  line-height: 1;
+}
+
+/* Hover effects for achievement icons */
+.achievement-card .group:hover .bg-gradient-to-br {
+  filter: brightness(1.1);
+  transform: scale(1.1) rotate(5deg);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .testimonial-card {
+    @apply p-4;
+  }
+
+  .achievement-card {
+    @apply p-4;
+  }
+}
+
+/* Light mode support */
+body.light .testimonial-card {
+  @apply bg-white/70 border-gray-200 hover:border-primary-500/50;
+}
+
+body.light .achievement-card {
+  @apply bg-white/50 border-gray-300 hover:bg-white/70 hover:border-gray-400;
+}

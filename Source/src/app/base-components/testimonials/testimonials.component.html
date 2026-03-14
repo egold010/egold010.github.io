@@ -1,0 +1,153 @@
+<section id="testimonials" class="section-padding bg-gradient-to-b from-gray-900/50 to-gray-950/50">
+    <div class="container-custom">
+        <div class="max-w-7xl mx-auto">
+            <!-- Section Header -->
+            <div class="text-center mb-20" data-aos="fade-up">
+                <h2 class="text-4xl lg:text-5xl font-bold mb-6 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
+                    Trusted by Industry Leaders
+                </h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-primary-500 to-primary-600 mx-auto rounded-full mb-8"></div>
+                <p class="text-lg text-gray-400 max-w-3xl mx-auto">
+                    Don't just take my word for it. Here's what industry experts and research leaders say about working with me.
+                </p>
+            </div>
+
+            <!-- Testimonials Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20">
+                <div *ngFor="let testimonial of testimonials; let i = index"
+                     class="testimonial-card group"
+                     data-aos="fade-up"
+                     [attr.data-aos-delay.ms]="i * 100">
+
+                    <!-- Rating Stars -->
+                    <div class="flex items-center space-x-1 mb-4">
+                        <div class="flex text-yellow-400">
+                            <svg *ngFor="let star of getStarArray(testimonial.rating)"
+                                 class="w-5 h-5 fill-current"
+                                 viewBox="0 0 24 24">
+                                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                            </svg>
+                        </div>
+                        <span class="text-sm text-gray-400 ml-2">{{ testimonial.rating }}/5</span>
+                    </div>
+
+                    <!-- Testimonial Content -->
+                    <blockquote class="text-gray-300 mb-6 leading-relaxed italic">
+                        "{{ testimonial.content }}"
+                    </blockquote>
+
+                    <!-- Project Badge -->
+                    <div *ngIf="testimonial.project" class="mb-4">
+                        <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-primary-500/10 text-primary-400 border border-primary-500/20">
+                            <svg class="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                            </svg>
+                            {{ testimonial.project }}
+                        </span>
+                    </div>
+
+                    <!-- Author Info -->
+                    <div class="flex items-center space-x-3">
+                        <div class="w-12 h-12 bg-gradient-to-br from-primary-500 to-primary-600 rounded-full flex items-center justify-center text-white font-bold text-sm">
+                            {{ getInitials(testimonial.name) }}
+                        </div>
+                        <div class="flex-1">
+                            <h4 class="font-semibold text-white group-hover:text-primary-400 transition-colors">
+                                {{ testimonial.name }}
+                            </h4>
+                            <p class="text-sm text-gray-400">
+                                {{ testimonial.title }}
+                            </p>
+                            <p class="text-sm font-medium text-primary-400">
+                                {{ testimonial.company }}
+                            </p>
+                        </div>
+                        <div class="text-xs text-gray-500">
+                            {{ testimonial.date }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Achievements Section -->
+            <div class="mb-20" data-aos="fade-up">
+                <div class="text-center mb-12">
+                    <h3 class="text-3xl font-bold mb-4 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
+                        Professional Achievements
+                    </h3>
+                    <p class="text-gray-400 max-w-2xl mx-auto">
+                        Recognitions, certifications, and milestones that demonstrate expertise and dedication
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div *ngFor="let achievement of achievements; let i = index"
+                         class="achievement-card group"
+                         data-aos="fade-up"
+                         [attr.data-aos-delay.ms]="i * 50">
+
+                        <div class="flex items-start space-x-4">
+                            <!-- Achievement Icon -->
+                            <div class="flex-shrink-0">
+                                <div class="w-12 h-12 rounded-xl bg-gradient-to-br {{ achievement.color }} flex items-center justify-center text-white text-xl shadow-lg group-hover:scale-110 transition-transform duration-300">
+                                    {{ achievement.icon }}
+                                </div>
+                            </div>
+
+                            <!-- Achievement Details -->
+                            <div class="flex-1 min-w-0">
+                                <div class="flex items-center space-x-2 mb-2">
+                                    <h4 class="text-lg font-semibold text-white group-hover:text-primary-400 transition-colors">
+                                        {{ achievement.title }}
+                                    </h4>
+                                    <div *ngIf="achievement.verified" class="flex-shrink-0">
+                                        <svg class="w-5 h-5 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                        </svg>
+                                    </div>
+                                </div>
+                                <p class="text-gray-300 text-sm mb-2 leading-relaxed">
+                                    {{ achievement.description }}
+                                </p>
+                                <div class="flex items-center justify-between text-xs">
+                                    <span class="text-primary-400 font-medium">{{ achievement.issuer }}</span>
+                                    <span class="text-gray-400">{{ achievement.date }}</span>
+                                </div>
+                                <div *ngIf="achievement.credentialId" class="mt-2 text-xs text-gray-500">
+                                    ID: {{ achievement.credentialId }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Call to Action -->
+            <div class="text-center" data-aos="fade-up">
+                <div class="bg-gradient-to-r from-primary-500/10 to-primary-600/10 border border-primary-500/20 rounded-2xl p-8 max-w-4xl mx-auto">
+                    <h3 class="text-2xl font-bold text-white mb-4">Ready to Work Together?</h3>
+                    <p class="text-gray-300 mb-6 max-w-2xl mx-auto">
+                        Join the ranks of industry leaders who have benefited from my expertise in robotics, AI, and autonomous systems.
+                        Let's discuss how I can contribute to your team's success.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                        <a href="mailto:evangoldman10@gmail.com"
+                           class="btn-primary inline-flex items-center space-x-2">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                            </svg>
+                            <span>Start a Conversation</span>
+                        </a>
+                        <button (click)="scrollToContact()"
+                                class="btn-secondary inline-flex items-center space-x-2">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                            </svg>
+                            <span>View My Resume</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

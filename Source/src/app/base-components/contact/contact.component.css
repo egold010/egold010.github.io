@@ -1,0 +1,136 @@
+/* Enhanced contact form styles */
+
+.form-group {
+  position: relative;
+}
+
+.form-input {
+  @apply w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-300;
+  padding-right: 3rem;
+}
+
+.form-input:focus {
+  @apply bg-gray-700 border-primary-500/50;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 20px rgba(14, 165, 233, 0.15);
+}
+
+.input-icon {
+  @apply absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none;
+}
+
+.input-border {
+  @apply absolute bottom-0 left-0 h-0.5 bg-gradient-to-r from-primary-500 to-primary-600 transform scale-x-0 transition-transform duration-300;
+}
+
+.form-input:focus + .input-icon + .input-border,
+.form-input:focus ~ .input-border {
+  transform: scaleX(1);
+}
+
+/* Submit button styles */
+.submit-button {
+  @apply relative bg-gradient-to-r from-primary-500 to-primary-600 hover:from-primary-600 hover:to-primary-700 text-white font-medium py-3 px-6 rounded-lg transition-all duration-300 transform hover:scale-105 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 focus:ring-offset-gray-900 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none disabled:hover:scale-100;
+  overflow: hidden;
+}
+
+.submit-button:disabled {
+  @apply cursor-not-allowed;
+}
+
+.submit-content {
+  @apply relative z-10;
+}
+
+/* Loading spinner */
+.loading-spinner {
+  width: 20px;
+  height: 20px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: white;
+  animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Success animation */
+.success-check {
+  animation: checkmark 0.8s ease-in-out;
+}
+
+@keyframes checkmark {
+  0% {
+    transform: scale(0) rotate(-45deg);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.2) rotate(-45deg);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1) rotate(0deg);
+    opacity: 1;
+  }
+}
+
+/* Form validation animations */
+.animate-fade-in {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Enhanced social links */
+.social-link {
+  @apply relative overflow-hidden;
+}
+
+.social-link::before {
+  content: '';
+  @apply absolute inset-0 bg-gradient-to-r from-primary-500/10 to-primary-600/10 opacity-0 transition-opacity duration-300;
+}
+
+.social-link:hover::before {
+  @apply opacity-100;
+}
+
+/* Contact info animations */
+.contact-item {
+  @apply transform transition-all duration-300 hover:scale-105;
+}
+
+.contact-item:hover .contact-icon {
+  @apply rotate-12 scale-110;
+}
+
+/* Quick contact cards */
+.quick-contact-card {
+  @apply bg-gray-800/50 backdrop-blur-sm border border-gray-700 rounded-xl p-6 text-center hover:bg-gray-800/70 hover:border-gray-600 transition-all duration-300 hover:shadow-lg hover:-translate-y-1 cursor-pointer;
+}
+
+/* Light mode support */
+body.light .form-input {
+  @apply bg-white border-gray-300 text-gray-900 placeholder-gray-500 focus:bg-gray-50;
+}
+
+body.light .submit-button {
+  @apply focus:ring-offset-white;
+}
+
+body.light .quick-contact-card {
+  @apply bg-white/70 border-gray-200 hover:bg-white/90 hover:border-gray-300;
+}

@@ -1,19 +1,105 @@
-<div class="container">
-    <h1>Career</h1>
-    <div class="timeline-container">
-        <div class="timeline-entry" *ngFor="let item of timeline">
-            <img [src]="item.image" alt="icon" class="timeline-icon" />
-            <div class="timeline-content">
-                <h3>
-                    {{ item.title }}
-                    <span class="company-name"> &#64;<a class="company-name" [href]="item.link" target="_blank">{{ item.company }}</a></span>
-                </h3>
-                <span class="timeline-date">{{ item.date }}</span>
-                <p>{{ item.description }}</p>
-                <div class="skills" *ngIf="item.skills?.length">
-                    <span *ngFor="let skill of item.skills" class="skill-pill">{{ skill }}</span>
+<section id="career" class="section-padding bg-gray-900/30">
+    <div class="container-custom">
+        <div class="max-w-6xl mx-auto">
+            <!-- Section Header -->
+            <div class="text-center mb-20" data-aos="fade-up">
+                <h2 class="text-4xl lg:text-5xl font-bold mb-6 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
+                    Career Journey
+                </h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-primary-500 to-primary-600 mx-auto rounded-full mb-8"></div>
+                <p class="text-lg text-gray-400 max-w-2xl mx-auto">
+                    My professional path in robotics, AI, and autonomous systems
+                </p>
+            </div>
+
+            <!-- Timeline -->
+            <div class="relative">
+                <!-- Timeline Line -->
+                <div class="absolute left-1/2 transform -translate-x-1/2 w-0.5 h-full bg-gradient-to-b from-primary-500 via-primary-400 to-primary-600"></div>
+
+                <!-- Timeline Entries -->
+                <div class="space-y-12">
+                    <div *ngFor="let item of timeline; let i = index"
+                         class="relative flex items-center"
+                         [class.flex-row-reverse]="i % 2 === 1"
+                         data-aos="fade-up"
+                         [attr.data-aos-delay]="i * 100">
+
+                        <!-- Timeline Dot -->
+                        <div class="absolute left-1/2 transform -translate-x-1/2 w-4 h-4 bg-primary-500 rounded-full border-4 border-gray-900 shadow-lg z-10">
+                            <div class="absolute inset-0 bg-primary-400 rounded-full animate-ping opacity-75"></div>
+                        </div>
+
+                        <!-- Content Card -->
+                        <div class="w-full max-w-md mx-8" [class.ml-auto]="i % 2 === 1">
+                            <div class="card group hover:scale-105 transition-all duration-300 cursor-pointer"
+                                 (click)="toggleExpanded(item)"
+                                 [class.expanded]="item.expanded">
+
+                                <!-- Card Header -->
+                                <div class="flex items-start space-x-4 mb-4">
+                                    <div class="flex-shrink-0">
+                                        <div class="w-12 h-12 bg-gradient-to-br from-primary-500 to-primary-600 rounded-lg flex items-center justify-center shadow-lg">
+                                            <img [src]="item.image" [alt]="item.company + ' logo'"
+                                                 class="w-8 h-8 object-contain filter brightness-0 invert">
+                                        </div>
+                                    </div>
+                                    <div class="flex-1 min-w-0">
+                                        <h3 class="text-lg font-semibold text-white group-hover:text-primary-400 transition-colors">
+                                            {{ item.title }}
+                                        </h3>
+                                        <a [href]="item.link" target="_blank" rel="noopener noreferrer"
+                                           class="text-primary-400 hover:text-primary-300 text-sm font-medium transition-colors">
+                                            @{{ item.company }}
+                                        </a>
+                                        <p class="text-sm text-gray-400 mt-1">{{ item.date }}</p>
+                                    </div>
+                                </div>
+
+                                <!-- Description -->
+                                <p class="text-gray-300 leading-relaxed mb-4 text-sm">
+                                    {{ item.description }}
+                                </p>
+
+                                <!-- Skills -->
+                                <div class="flex flex-wrap gap-2" *ngIf="item.skills?.length">
+                                    <span *ngFor="let skill of item.skills"
+                                          class="px-3 py-1 bg-primary-500/10 text-primary-400 text-xs font-medium rounded-full border border-primary-500/20 hover:bg-primary-500/20 transition-colors">
+                                        {{ skill }}
+                                    </span>
+                                </div>
+
+                                <!-- Expand/Collapse Indicator -->
+                                <div class="mt-4 flex justify-center">
+                                    <svg class="w-5 h-5 text-gray-400 group-hover:text-primary-400 transition-colors transform"
+                                         [class.rotate-180]="item.expanded"
+                                         fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Call to Action -->
+            <div class="text-center mt-20" data-aos="fade-up" data-aos-delay="500">
+                <div class="bg-gradient-to-r from-primary-500/10 to-primary-600/10 border border-primary-500/20 rounded-2xl p-8 max-w-2xl mx-auto">
+                    <h3 class="text-xl font-semibold text-white mb-4">Open to Opportunities</h3>
+                    <p class="text-gray-300 mb-6">
+                        I'm always interested in challenging projects in robotics, AI, and autonomous systems.
+                        Let's discuss how we can work together!
+                    </p>
+                    <a href="mailto:evangoldman10@gmail.com"
+                       class="btn-primary inline-flex items-center space-x-2">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                        </svg>
+                        <span>Get In Touch</span>
+                    </a>
                 </div>
             </div>
         </div>
     </div>
-</div>
+</section>

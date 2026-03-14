@@ -1,0 +1,12 @@
+/* Skills component specific styles */
+
+/* Light mode chart colors */
+body.light .chartjs-text {
+  color: #1f2937 !important;
+}
+
+/* Ensure charts are properly sized */
+canvas {
+  max-width: 100%;
+  height: auto !important;
+}

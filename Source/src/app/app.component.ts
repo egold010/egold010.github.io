@@ -1,9 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { HostListener } from '@angular/core';
 
 import { Router, NavigationEnd } from '@angular/router';
 import { ViewportScroller } from '@angular/common';
 import { filter } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
+
+import { ThemeService } from './theme.service';
 
 interface anchor {
   name: string,
@@ -15,23 +18,46 @@ interface anchor {
   styleUrls: ['./app.component.css']
 })
 
-export class AppComponent {
+export class AppComponent implements OnInit, OnDestroy {
   title = 'Evan Goldman';
+  currentTheme: 'dark' | 'light' = 'dark';
+  private themeSubscription: Subscription = new Subscription();
 
-  constructor (protected router: Router, private viewportScroller: ViewportScroller) {}
+  constructor(
+    protected router: Router,
+    private viewportScroller: ViewportScroller,
+    private themeService: ThemeService
+  ) {}
 
   anchors: anchor[] = [
     { name: "home" },
     { name: "about" },
+    { name: "skills" },
     { name: "career" },
-    { name: "papers" },
     { name: "projects" },
-    { name: "coursework" },
+    { name: "github-stats" },
+    { name: "testimonials" },
+    { name: "contact" },
   ]
 
   lastScrollTop = 0;
   isBarHidden = false;
   isMenuOpen = false;
+
+  ngOnInit() {
+    this.themeSubscription = this.themeService.theme$.subscribe(theme => {
+      this.currentTheme = theme;
+    });
+    this.themeService.initializeTheme();
+  }
+
+  ngOnDestroy() {
+    this.themeSubscription.unsubscribe();
+  }
+
+  toggleTheme() {
+    this.themeService.toggleTheme();
+  }
 
   @HostListener('window:scroll', [])
   onWindowScroll() {

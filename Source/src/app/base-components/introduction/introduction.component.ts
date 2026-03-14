@@ -12,4 +12,11 @@ export class IntroductionComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  scrollToNext(): void {
+    const nextSection = document.querySelector('#about');
+    if (nextSection) {
+      nextSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }
+
 }

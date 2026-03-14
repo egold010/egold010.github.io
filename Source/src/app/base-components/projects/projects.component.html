@@ -1,43 +1,144 @@
-<section class="container">
-  <h1>Projects <span class="title-subtext">(click for more info)</span></h1>
-  <div class="project-list">
-    <!-- Relevant projects -->
-    <div *ngFor="let project of relevantProjects" class="project-card" [routerLink]="['/project', project.title]">
-      <div class="project-image">
-        <img [src]="'assets/item-images/' + project.title + '.png'" [alt]="project.title" />
-      </div>
-      <div class="project-info">
-        <h3>{{ project.title }}</h3>
-        <p class="description">{{ project.description }}</p>
-        <div class="skill-list">
-          <span *ngFor="let skill of project.skills" class="skill-pill">{{ skill }}</span>
+<section id="projects" class="section-padding">
+    <div class="container-custom">
+        <div class="max-w-7xl mx-auto">
+            <!-- Section Header -->
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="text-4xl lg:text-5xl font-bold mb-6 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
+                    Featured Projects
+                </h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-primary-500 to-primary-600 mx-auto rounded-full mb-8"></div>
+                <p class="text-lg text-gray-400 max-w-3xl mx-auto">
+                    A showcase of my work in robotics, machine learning, and software development.
+                    Click on any project to explore in detail.
+                </p>
+            </div>
+
+            <!-- Filter Tabs -->
+            <div class="flex flex-wrap justify-center gap-2 mb-12" data-aos="fade-up" data-aos-delay="200">
+                <button
+                    *ngFor="let category of categories"
+                    (click)="setActiveCategory(category)"
+                    [class.active]="activeCategory === category"
+                    class="px-6 py-3 rounded-full text-sm font-medium transition-all duration-300 hover:scale-105
+                           {{ activeCategory === category
+                               ? 'bg-primary-500 text-white shadow-lg'
+                               : 'bg-gray-800 text-gray-300 hover:bg-gray-700 border border-gray-600' }}">
+                    {{ category }}
+                </button>
+            </div>
+
+            <!-- Projects Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+                <div *ngFor="let project of filteredProjects; let i = index"
+                     class="project-card group cursor-pointer transform transition-all duration-500 hover:scale-105 hover:-translate-y-2"
+                     [routerLink]="['/project', project.title]"
+                     data-aos="fade-up"
+                     [attr.data-aos-delay]="i * 100"
+                     (mouseenter)="onCardHover(project, $event)"
+                     (mouseleave)="onCardLeave(project, $event)">
+
+                    <!-- Project Image -->
+                    <div class="relative overflow-hidden rounded-t-xl bg-gray-800 group-hover:shadow-2xl group-hover:shadow-primary-500/20 transition-all duration-500">
+                        <div class="aspect-video bg-gradient-to-br from-gray-700 to-gray-800 flex items-center justify-center transform group-hover:scale-110 transition-transform duration-500">
+                            <div class="text-6xl opacity-20 group-hover:opacity-40 group-hover:rotate-12 transition-all duration-500">
+                                {{ getCategoryIcon(project.category) }}
+                            </div>
+                        </div>
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+
+                        <!-- Animated border effect -->
+                        <div class="absolute inset-0 rounded-t-xl border-2 border-primary-500/0 group-hover:border-primary-500/50 transition-all duration-500"></div>
+
+                        <!-- Floating action button -->
+                        <div class="absolute top-4 right-4 transform translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">
+                            <div class="w-10 h-10 bg-primary-500 rounded-full flex items-center justify-center shadow-lg hover:shadow-xl transition-shadow">
+                                <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                                </svg>
+                            </div>
+                        </div>
+
+                        <div class="absolute bottom-4 left-4 right-4 transform translate-y-4 group-hover:translate-y-0 transition-all duration-500 delay-100">
+                            <div class="flex flex-wrap gap-2">
+                                <span *ngFor="let skill of getHoverSkills(project)"
+                                      class="px-3 py-1 bg-primary-500/90 text-white text-xs rounded-full backdrop-blur-sm transform scale-95 group-hover:scale-100 transition-transform duration-300 animate-pulse">
+                                    {{ skill }}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project Info -->
+                    <div class="p-6 bg-gray-800/50 group-hover:bg-gray-800/70 transition-all duration-300 rounded-b-xl">
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="px-3 py-1 bg-primary-500/10 text-primary-400 text-xs font-medium rounded-full border border-primary-500/20 group-hover:bg-primary-500/20 group-hover:border-primary-500/40 transition-all duration-300">
+                                {{ project.category }}
+                            </span>
+                            <span class="text-xs text-gray-400 group-hover:text-gray-300 transition-colors duration-300">{{ project.date }}</span>
+                        </div>
+
+                        <h3 class="text-xl font-semibold text-white mb-3 group-hover:text-primary-400 transition-all duration-300 line-clamp-2 transform group-hover:translate-x-1">
+                            {{ project.title }}
+                        </h3>
+
+                        <p class="text-gray-400 text-sm leading-relaxed mb-4 line-clamp-3 group-hover:text-gray-300 transition-colors duration-300">
+                            {{ project.description }}
+                        </p>
+
+                        <div class="flex items-center justify-between">
+                            <div class="flex flex-wrap gap-1">
+                                <span *ngFor="let skill of getSkillsToShow(project)"
+                                      class="px-2 py-1 bg-gray-700 text-gray-300 text-xs rounded-md group-hover:bg-gray-600 group-hover:text-gray-200 transition-all duration-300 transform hover:scale-105">
+                                    {{ skill }}
+                                </span>
+                                <span *ngIf="getAdditionalSkillsCount(project) > 0"
+                                      class="px-2 py-1 bg-gray-700 text-gray-400 text-xs rounded-md group-hover:bg-gray-600 group-hover:text-gray-300 transition-all duration-300">
+                                    +{{ getAdditionalSkillsCount(project) }}
+                                </span>
+                            </div>
+
+                            <div class="flex items-center text-primary-400 group-hover:text-primary-300 transition-all duration-300 transform group-hover:scale-105">
+                                <span class="text-sm font-medium mr-2 group-hover:mr-3 transition-all duration-300">View Details</span>
+                                <svg class="w-4 h-4 transform group-hover:translate-x-2 group-hover:scale-110 transition-all duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Load More Button -->
+            <div class="text-center" *ngIf="hasMoreProjects" data-aos="fade-up">
+                <button (click)="loadMoreProjects()"
+                        class="btn-secondary inline-flex items-center space-x-2">
+                    <span>Load More Projects</span>
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Project Stats -->
+            <div class="mt-20 grid grid-cols-2 md:grid-cols-4 gap-6" data-aos="fade-up" data-aos-delay="300">
+                <div class="text-center">
+                    <div class="text-3xl font-bold text-primary-400 mb-2">{{ projects.length }}</div>
+                    <div class="text-sm text-gray-400">Total Projects</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-3xl font-bold text-primary-400 mb-2">{{ getCategoryCount('Machine Learning') }}</div>
+                    <div class="text-sm text-gray-400">ML Projects</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-3xl font-bold text-primary-400 mb-2">{{ getCategoryCount('Software') }}</div>
+                    <div class="text-sm text-gray-400">Software Projects</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-3xl font-bold text-primary-400 mb-2">{{ getCategoryCount('Electrical') }}</div>
+                    <div class="text-sm text-gray-400">Hardware Projects</div>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-
-    <!-- Toggle button -->
-    <button class="toggle-button" (click)="showAllProjects = !showAllProjects">
-      {{ showAllProjects ? 'Show Less' : 'Show More' }}
-      <img src="assets/arrow_down.png" alt="Arrow"
-        [style.transform]="showAllProjects ? 'rotate(-180deg)' : 'rotate(0deg)'"
-        [style.transition]="'transform 0.3s ease'" />
-    </button>
-
-    <!-- Hidden projects -->
-    <ng-container *ngIf="showAllProjects">
-      <div *ngFor="let project of hiddenProjects; let i = index" class="project-card animate"
-        [routerLink]="['/project', project.title]" [style.animation-delay]="(i * 100) + 'ms'">
-        <div class="project-image">
-          <img [src]="'assets/item-images/' + project.title + '.png'" [alt]="project.title" />
-        </div>
-        <div class="project-info">
-          <h3>{{ project.title }}</h3>
-          <p class="description">{{ project.description }}</p>
-          <div class="skill-list">
-            <span *ngFor="let skill of project.skills" class="skill-pill">{{ skill }}</span>
-          </div>
-        </div>
-      </div>
-    </ng-container>
-  </div>
 </section>

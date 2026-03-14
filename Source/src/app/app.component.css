@@ -5,8 +5,16 @@
     align-items: center;
     width: 100%;
     background-color: rgb(15, 15, 17);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     z-index: 1000;
-    transition: transform 0.15s ease;
+    transition: transform 0.15s ease, background-color 0.3s ease, border-color 0.3s ease;
+}
+
+/* Light mode styles */
+body.light .nav-bar {
+    background-color: rgba(248, 250, 252, 0.95);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .top-bar {
@@ -23,6 +31,12 @@
     color: white;
     margin: 0;
     text-wrap: nowrap;
+    transition: color 0.3s ease;
+}
+
+/* Light mode text colors */
+body.light .name-header {
+    color: #1f2937;
 }
 
 .hamburger {
@@ -32,6 +46,12 @@
     border: none;
     color: white;
     cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+/* Light mode hamburger */
+body.light .hamburger {
+    color: #1f2937;
 }
 
 .nav-header {
@@ -42,7 +62,29 @@
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    gap: 3rem
+    gap: 3rem;
+    transition: color 0.3s ease;
+}
+
+/* Light mode nav header */
+body.light .nav-header {
+    color: #1f2937;
+}
+
+/* Theme toggle button */
+.theme-toggle {
+    background: rgba(255, 255, 255, 0.05);
+    transition: all 0.3s ease;
+}
+
+body.light .theme-toggle {
+    background: rgba(0, 0, 0, 0.05);
+    border-color: rgba(0, 0, 0, 0.1);
+}
+
+.theme-toggle:hover {
+    background: rgba(14, 165, 233, 0.1);
+    border-color: rgba(14, 165, 233, 0.3);
 }
 
 .nav-bar.hidden {
@@ -60,6 +102,12 @@ a {
     background-attachment: fixed;
     height: 100%;
     min-height: 100vh;
+    transition: background-image 0.3s ease;
+}
+
+/* Light mode background */
+body.light .background {
+    background-image: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
 }
 
 /* Mobile Styles */

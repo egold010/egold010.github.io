@@ -1,20 +1,30 @@
-<div class="container">
+<div class="min-h-screen">
     <section id="home">
         <app-introduction></app-introduction>
     </section>
     <section id="about">
         <app-about></app-about>
     </section>
-    <section id="career">
+    <section id="skills" appParallax [parallaxSpeed]="0.1" parallaxDirection="up">
+        <app-skills></app-skills>
+    </section>
+    <section id="career" appParallax [parallaxSpeed]="0.15" parallaxDirection="down">
         <app-career></app-career>
     </section>
-    <section id="papers">
-        <app-papers></app-papers>
-    </section>
-    <section id="projects">
+    <section id="projects" appParallax [parallaxSpeed]="0.1" parallaxDirection="up">
         <app-projects></app-projects>
     </section>
-    <section id="coursework">
-        <app-coursework></app-coursework>
+    <section id="github-stats" appParallax [parallaxSpeed]="0.08" parallaxDirection="up">
+        <app-github-stats></app-github-stats>
     </section>
+    <section id="testimonials" appParallax [parallaxSpeed]="0.05" parallaxDirection="up">
+        <app-testimonials></app-testimonials>
+    </section>
+    <section id="contact">
+        <app-contact></app-contact>
+    </section>
+
+    <footer>
+        <app-footer></app-footer>
+    </footer>
 </div>
