@@ -1,5 +1,19 @@
 .container {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 4rem;
+  padding: 2rem 0;
+}
+
+section {
+  scroll-margin-top: 2rem;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+section:nth-child(even) {
+  background: linear-gradient(135deg, rgba(30, 30, 35, 0.6) 0%, rgba(20, 20, 25, 0.6) 100%);
+  backdrop-filter: blur(10px);
 }

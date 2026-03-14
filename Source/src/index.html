@@ -3,24 +3,111 @@
 
 <head>
   <meta charset="utf-8">
-  <title>Evan Goldman | Portfolio</title>
+  <title>Evan Goldman | Portfolio - Machine Learning & Software Engineer</title>
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Portfolio of Evan Goldman - Machine Learning Engineer and Software Developer specializing in computer vision, reinforcement learning, and full-stack development.">
+  <meta name="keywords" content="Evan Goldman, portfolio, machine learning, software engineer, computer vision, reinforcement learning, Angular, Python, PyTorch">
+  <meta name="author" content="Evan Goldman">
+  
+  <!-- Open Graph -->
+  <meta property="og:title" content="Evan Goldman | Portfolio">
+  <meta property="og:description" content="Machine Learning Engineer and Software Developer specializing in computer vision and reinforcement learning.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="assets/evan.jpg">
+  
+  <!-- Preload critical resources -->
+  <link rel="preload" href="assets/evan.jpg" as="image">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  
+  <!-- Preload Inter font -->
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  </noscript>
+  
   <link rel="icon" type="image/x-icon" href="assets/evan.jpg">
+  
+  <!-- Preload CSS -->
+  <link rel="preload" href="styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <link rel="stylesheet" href="styles.css" media="print" onload="this.media='all'">
+  
+  <!-- Inline critical CSS -->
+  <style>
+    /* Critical CSS - above the fold styles */
+    html {
+      background-color: rgb(15, 15, 17);
+      scroll-behavior: smooth;
+    }
+    
+    body {
+      margin: 0;
+      font-family: "Inter", "Monaco", "Lucida Console", monospace;
+      background-color: rgb(15, 15, 17);
+      color: white;
+    }
+    
+    /* Loading animation */
+    .loading {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgb(15, 15, 17);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      transition: opacity 0.5s ease;
+    }
+    
+    .loading.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+  </style>
 </head>
 
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-BEDP09TR8X"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+<body class="dark-mode">
+  <!-- Loading screen -->
+  <div class="loading" id="loading">
+    <div class="gradient-text" style="font-size: 2rem; font-weight: 600;">Evan Goldman</div>
+  </div>
 
-  gtag('config', 'G-BEDP09TR8X');
-</script>
-
-<body>
   <app-root></app-root>
+
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-BEDP09TR8X"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BEDP09TR8X');
+    
+    // Hide loading screen when Angular app loads
+    window.addEventListener('load', function() {
+      setTimeout(function() {
+        document.getElementById('loading').classList.add('hidden');
+      }, 500);
+    });
+  </script>
+  
+  <!-- Load non-critical CSS asynchronously -->
+  <script>
+    // Load Google Fonts
+    var fontLink = document.createElement('link');
+    fontLink.rel = 'stylesheet';
+    fontLink.href = 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap';
+    document.head.appendChild(fontLink);
+    
+    // Load main CSS
+    var cssLink = document.createElement('link');
+    cssLink.rel = 'stylesheet';
+    cssLink.href = 'styles.css';
+    document.head.appendChild(cssLink);
+  </script>
 </body>
 
 </html>

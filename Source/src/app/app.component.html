@@ -2,12 +2,17 @@
   <div class="nav-bar" [class.hidden]="isBarHidden">
     <div class="top-bar">
       <h3 class="name-header">Evan Goldman</h3>
-      <button class="hamburger" (click)="toggleMenu()">&#9776;</button>
+      <div class="nav-controls">
+        <button class="theme-toggle" (click)="toggleTheme()" [title]="isDarkMode ? 'Switch to light mode' : 'Switch to dark mode'">
+          {{ isDarkMode ? '☀️' : '🌙' }}
+        </button>
+        <button class="hamburger" (click)="toggleMenu()">&#9776;</button>
+      </div>
     </div>
     <nav class="nav-header" [class.open]="isMenuOpen">
       <div *ngFor="let anchor of anchors">
         <a (click)="scrollToSection(anchor.name)">
-          <h3 class="nav-item">{{ anchor.name }}</h3>
+          <h3 class="nav-item" [class.active]="anchor.active">{{ anchor.name }}</h3>
         </a>
       </div>
     </nav>
