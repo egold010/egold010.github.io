@@ -11,17 +11,221 @@
 }
 
 h1 {
-    font-size: 2.5rem;
+    font-size: 3rem;
     font-weight: 700;
 }
 
+/* Two-column about layout */
+.about-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3.5rem;
+    align-items: start;
+}
+
+.about-text-col {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+}
+
+.about-visual-col {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
 p {
-    line-height: 1.5;
+    line-height: 1.6;
+}
+
+/* Skill bars */
+.skill-bars-header {
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #444;
+    margin-bottom: -0.5rem;
+}
+
+.skill-bars {
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+}
+
+.skill-bar-row {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+
+.skill-bar-label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.skill-bar-name {
+    font-size: 0.78rem;
+    color: #bbb;
+    letter-spacing: 0.03em;
+}
+
+.skill-bar-pct {
+    font-size: 0.68rem;
+    color: #444;
+    transition: color 0.3s ease;
+}
+
+.skill-bar-track {
+    height: 2px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.skill-bar-fill {
+    height: 100%;
+    border-radius: 2px;
+    width: 0;
+    transition: width 1.3s cubic-bezier(0.25, 1, 0.5, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.skill-bar-fill::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -60%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.5), transparent);
+    animation: skillShimmer 2.8s ease-in-out infinite;
+    animation-delay: 1.8s;
+}
+
+@keyframes skillShimmer {
+    0%   { left: -60%; }
+    100% { left: 130%; }
+}
+
+.kw {
+    color: var(--accent);
+    font-style: italic;
+    text-shadow: 0 0 12px rgba(94, 234, 212, 0.3);
+    transition: text-shadow 0.2s ease;
+}
+
+.kw:hover {
+    text-shadow: 0 0 20px rgba(94, 234, 212, 0.6);
+}
+
+.stats-row {
+    display: flex;
+    gap: 1.25rem;
+    flex-wrap: wrap;
+}
+
+.stat-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    min-width: 120px;
+    padding: 1.25rem 1rem;
+    background-color: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 12px;
+    gap: 0.3rem;
+    overflow: hidden;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+    will-change: transform;
+    transform-style: preserve-3d;
+    cursor: default;
+}
+
+.stat-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 50% 120%, rgba(94, 234, 212, 0.1) 0%, transparent 60%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.stat-card:hover::before {
+    opacity: 1;
+}
+
+.stat-card:hover {
+    border-color: rgba(94, 234, 212, 0.35);
+    box-shadow: 0 0 24px rgba(94, 234, 212, 0.07);
+}
+
+.stat-number {
+    position: relative;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--accent);
+    line-height: 1;
+}
+
+.stat-label {
+    position: relative;
+    font-size: 0.8rem;
+    color: #888;
+    text-align: center;
+}
+
+.focus-tags-marquee {
+    overflow: hidden;
+    mask: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+    -webkit-mask: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+}
+
+.focus-tags-track {
+    display: flex;
+    gap: 0.6rem;
+    width: max-content;
+    animation: marquee 22s linear infinite;
+}
+
+.focus-tags-track:hover {
+    animation-play-state: paused;
+}
+
+@keyframes marquee {
+    0%   { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
+.focus-tag {
+    border: 1px solid #444;
+    color: #ccc;
+    font-size: 0.85rem;
+    padding: 0.35rem 0.8rem;
+    border-radius: 20px;
+    white-space: nowrap;
+    transition: border-color 0.2s ease, color 0.2s ease;
+}
+
+.focus-tag:hover {
+    border-color: var(--accent);
+    color: var(--accent);
 }
 
 /* Mobile Styles */
-@media (max-width: 600px) {
+@media (max-width: 768px) {
     .container {
         width: 90vw;
+    }
+
+    .about-layout {
+        grid-template-columns: 1fr;
+        gap: 2rem;
     }
 }

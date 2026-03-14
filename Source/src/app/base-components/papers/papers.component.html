@@ -1,14 +1,19 @@
 <div class="container">
     <h1>Papers</h1>
     <div class="paper-list">
-        <ul>
-            <li *ngFor="let paper of papers">
-                <!-- <a class="paper-name" [routerLink]="['/paper', paper.link]">{{ paper.title }}</a> -->
-                <a href="assets/papers/{{ paper.link }}.pdf" class="paper-name"
-                target="_blank"
-                rel="noopener noreferrer">{{ paper.title }}</a>
-                <span class="date">({{ paper.date }})</span>
-            </li>
-        </ul>
+        <a *ngFor="let paper of papers; let i = index"
+            href="assets/papers/{{ paper.link }}.pdf"
+            class="paper-card"
+            target="_blank"
+            rel="noopener noreferrer"
+            (mousemove)="onCardTilt($event)"
+            (mouseleave)="resetTilt($event)">
+            <span class="paper-idx">{{ i < 9 ? '0' + (i + 1) : (i + 1) }}</span>
+            <div class="paper-card-body">
+                <span class="paper-title">{{ paper.title }}</span>
+                <span class="paper-arrow">&#8599;</span>
+            </div>
+            <span class="date">{{ paper.date }}</span>
+        </a>
     </div>
 </div>

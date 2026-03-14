@@ -2,7 +2,8 @@
   <h1>Projects <span class="title-subtext">(click for more info)</span></h1>
   <div class="project-list">
     <!-- Relevant projects -->
-    <div *ngFor="let project of relevantProjects" class="project-card" [routerLink]="['/project', project.title]">
+    <div *ngFor="let project of relevantProjects" class="project-card" [routerLink]="['/project', project.title]"
+      (mousemove)="onCardTilt($event)" (mouseleave)="resetTilt($event)">
       <div class="project-image">
         <img [src]="'assets/item-images/' + project.title + '.png'" [alt]="project.title" />
       </div>
@@ -26,7 +27,8 @@
     <!-- Hidden projects -->
     <ng-container *ngIf="showAllProjects">
       <div *ngFor="let project of hiddenProjects; let i = index" class="project-card animate"
-        [routerLink]="['/project', project.title]" [style.animation-delay]="(i * 100) + 'ms'">
+        [routerLink]="['/project', project.title]" [style.animation-delay]="(i * 100) + 'ms'"
+        (mousemove)="onCardTilt($event)" (mouseleave)="resetTilt($event)">
         <div class="project-image">
           <img [src]="'assets/item-images/' + project.title + '.png'" [alt]="project.title" />
         </div>

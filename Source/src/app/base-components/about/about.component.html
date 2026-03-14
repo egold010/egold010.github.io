@@ -1,25 +1,87 @@
 <div class="container">
     <h1>About Me</h1>
-    <p>
-        I'm an Electrical Engineering graduate from the University of California, Riverside, with a Master's degree
-        focused on Machine Intelligence and autonomous systems. My academic background in both Electrical Engineering
-        and Applied Mathematics (Physics) has shaped my ability to approach complex technical challenges with analytical
-        precision and interdisciplinary insight.
-    </p>
-    <p>
-        I'm passionate about building intelligent machines that can perceive, decide, and act autonomously in dynamic
-        environments. My experience spans robotics, computer vision, reinforcement learning, and embedded systems —
-        enabling me to understand and contribute to intelligent systems across both hardware and software layers.
-    </p>
-    <p>
-        Professionally, I've worked across startups, research labs, and industry roles, contributing to projects in
-        SLAM, perception, and navigation pipelines. From integrating advanced localization algorithms at a robotics
-        startup to leading autonomy development for a drone team, I bring a hands-on, full-cycle R&D mindset to every
-        challenge.
-    </p>
-    <p>
-        I'm always seeking opportunities to apply and grow these skills in meaningful, forward-thinking projects —
-        whether in robotics, intelligent systems, or AI applications that create real-world impact.
-    </p>
+
+    <div class="about-layout">
+        <!-- Left: Bio text -->
+        <div class="about-text-col">
+            <p>
+                I'm an Electrical Engineering graduate from the University of California, Riverside, with a Master's degree
+                focused on <span class="kw">Machine Intelligence</span> and autonomous systems. My academic background in both
+                Electrical Engineering and Applied Mathematics (Physics) has shaped my ability to approach complex technical
+                challenges with analytical precision and interdisciplinary insight.
+            </p>
+            <p>
+                I'm passionate about building intelligent machines that can perceive, decide, and act autonomously in dynamic
+                environments. My experience spans <span class="kw">robotics</span>, <span class="kw">computer vision</span>,
+                <span class="kw">reinforcement learning</span>, and <span class="kw">embedded systems</span> —
+                enabling me to understand and contribute to intelligent systems across both hardware and software layers.
+            </p>
+            <p>
+                Professionally, I've worked across startups, research labs, and industry roles, contributing to projects in
+                <span class="kw">SLAM</span>, perception, and navigation pipelines. From integrating advanced localization
+                algorithms at a robotics startup to leading autonomy development for a drone team, I bring a hands-on,
+                full-cycle R&amp;D mindset to every challenge.
+            </p>
+        </div>
+
+        <!-- Right: Skill bars + Stats -->
+        <div class="about-visual-col">
+            <div class="skill-bars-header">Technical Proficiency</div>
+            <div class="skill-bars">
+                <div class="skill-bar-row" *ngFor="let skill of skills">
+                    <div class="skill-bar-label">
+                        <span class="skill-bar-name">{{ skill.name }}</span>
+                        <span class="skill-bar-pct">{{ skill.animated ? skill.level : 0 }}%</span>
+                    </div>
+                    <div class="skill-bar-track">
+                        <div class="skill-bar-fill"
+                             [style.width.%]="skill.animated ? skill.level : 0"
+                             [style.background]="skill.color">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="stats-row">
+                <div class="stat-card" (mousemove)="onStatTilt($event)" (mouseleave)="resetStatTilt($event)">
+                    <span class="stat-number">5+</span>
+                    <span class="stat-label">Years Experience</span>
+                </div>
+                <div class="stat-card" (mousemove)="onStatTilt($event)" (mouseleave)="resetStatTilt($event)">
+                    <span class="stat-number">10+</span>
+                    <span class="stat-label">Projects Built</span>
+                </div>
+                <div class="stat-card" (mousemove)="onStatTilt($event)" (mouseleave)="resetStatTilt($event)">
+                    <span class="stat-number">5</span>
+                    <span class="stat-label">Papers Written</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="focus-tags-marquee">
+        <div class="focus-tags-track">
+            <span class="focus-tag">SLAM</span>
+            <span class="focus-tag">Computer Vision</span>
+            <span class="focus-tag">ROS2</span>
+            <span class="focus-tag">Reinforcement Learning</span>
+            <span class="focus-tag">Embedded Systems</span>
+            <span class="focus-tag">PyTorch</span>
+            <span class="focus-tag">Autonomous Systems</span>
+            <span class="focus-tag">C++</span>
+            <span class="focus-tag">Python</span>
+            <span class="focus-tag">Neural Networks</span>
+            <span class="focus-tag">SLAM</span>
+            <span class="focus-tag">Computer Vision</span>
+            <span class="focus-tag">ROS2</span>
+            <span class="focus-tag">Reinforcement Learning</span>
+            <span class="focus-tag">Embedded Systems</span>
+            <span class="focus-tag">PyTorch</span>
+            <span class="focus-tag">Autonomous Systems</span>
+            <span class="focus-tag">C++</span>
+            <span class="focus-tag">Python</span>
+            <span class="focus-tag">Neural Networks</span>
+        </div>
+    </div>
 
 </div>

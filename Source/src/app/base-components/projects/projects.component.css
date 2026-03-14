@@ -11,43 +11,157 @@
 }
 
 h1 {
-    font-size: 2.5rem;
+    font-size: 3rem;
     font-weight: 700;
 }
 
-.project-section {
-    max-width: 900px;
-    margin: 4rem auto;
-    padding: 0 1rem;
-}
-
-.project-section h2 {
-    text-align: center;
-    margin-bottom: 2rem;
-    font-size: 2rem;
-}
-
+/* 2-column grid */
 .project-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem;
+    align-items: start;
+}
+
+/* Toggle button spans both columns */
+.toggle-button {
+    grid-column: 1 / -1;
+}
+
+/* All cards — base vertical layout for grid */
+.project-card {
+    position: relative;
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
-}
-
-.project-card {
-    display: flex;
-    gap: 1.5rem;
-    align-items: center;
+    gap: 0;
+    align-items: stretch;
     text-decoration: none;
     color: inherit;
     background-color: #1b1b1b;
-    padding: 1.5rem;
+    padding: 0;
     border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-    border-width: 1px;
-    border-color: #2e2e2e;
+    border: 1px solid #2e2e2e;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     text-align: left;
     cursor: pointer;
+    will-change: transform;
+    transform-style: preserve-3d;
+    opacity: 0;
+    overflow: hidden;
+}
+
+/* Featured first card: full width, horizontal */
+.project-card:first-child {
+    grid-column: 1 / -1;
+    flex-direction: row;
+    align-items: stretch;
+}
+
+.project-card:first-child .project-image {
+    flex-shrink: 0;
+    width: auto;
+    border-radius: 0;
+    box-shadow: none;
+}
+
+.project-card:first-child .project-image img {
+    width: 260px;
+    height: 100%;
+    min-height: 170px;
+    object-fit: cover;
+    border-radius: 12px 0 0 12px;
+}
+
+.project-card:first-child .project-info {
+    padding: 1.75rem;
+}
+
+/* Non-featured grid cards: image on top, info below */
+.project-card:not(:first-child) .project-image {
+    width: 100%;
+    border-radius: 0;
+    box-shadow: none;
+}
+
+.project-card:not(:first-child) .project-image img {
+    width: 100%;
+    height: 155px;
+    object-fit: cover;
+    border-radius: 0;
+}
+
+.project-card:not(:first-child) .project-info {
+    padding: 1rem 1.25rem 1.25rem;
+}
+
+.project-card.card-enter {
+    animation: cardEnter 0.6s cubic-bezier(0.25, 1, 0.5, 1) both;
+}
+
+@keyframes cardEnter {
+    from { opacity: 0; transform: translateY(22px) scale(0.97); }
+    to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.project-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: linear-gradient(
+        105deg,
+        transparent 30%,
+        rgba(255, 255, 255, 0.045) 50%,
+        transparent 70%
+    );
+    transform: translateX(-120%);
+    pointer-events: none;
+    z-index: 3;
+    overflow: hidden;
+}
+
+.project-card:hover::after {
+    transform: translateX(120%);
+    transition: transform 0.65s ease;
+}
+
+/* Holographic foil effect — spinning conic gradient follows cursor */
+@property --holo-angle {
+    syntax: '<angle>';
+    initial-value: 0deg;
+    inherits: false;
+}
+
+.project-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background:
+        radial-gradient(ellipse 65% 65% at var(--mx, 50%) var(--my, 50%),
+            rgba(255, 255, 255, 0.04) 0%, transparent 60%),
+        conic-gradient(from var(--holo-angle) at var(--mx, 50%) var(--my, 50%),
+            rgba(94, 234, 212, 0.11),
+            rgba(96, 165, 250, 0.09),
+            rgba(167, 139, 250, 0.1),
+            rgba(251, 191, 36, 0.07),
+            rgba(248, 113, 113, 0.07),
+            rgba(52, 211, 153, 0.09),
+            rgba(94, 234, 212, 0.11)
+        );
+    opacity: 0;
+    transition: opacity 0.35s ease;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.project-card:hover::before {
+    opacity: 1;
+    animation: holoSpin 5s linear infinite;
+}
+
+@keyframes holoSpin {
+    to { --holo-angle: 360deg; }
 }
 
 .project-card.animate {
@@ -56,27 +170,91 @@ h1 {
 }
 
 .project-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-    background-color: #2e2e2e;
-    ;
+    border-color: transparent;
+    background: linear-gradient(#222, #222) padding-box,
+                conic-gradient(from var(--border-angle), #5eead4, #60a5fa, #a78bfa, #f59e0b, #34d399, #5eead4) border-box;
+    animation: cardBorderSpin 2.5s linear infinite;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45), 0 0 24px rgba(94, 234, 212, 0.08);
+}
+
+.project-image::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(to right, transparent, var(--accent) 30%, rgba(94, 234, 212, 0.9) 50%, var(--accent) 70%, transparent);
+    box-shadow: 0 0 14px 3px rgba(94, 234, 212, 0.6);
+    top: -4px;
+    pointer-events: none;
+    z-index: 4;
+    opacity: 0;
+}
+
+.project-card:hover .project-image::before {
+    animation: laserScan 0.7s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes laserScan {
+    0%   { top: -4px; opacity: 0; }
+    5%   { opacity: 1; }
+    95%  { opacity: 1; }
+    100% { top: calc(100% + 4px); opacity: 0; }
+}
+
+.project-image {
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
+    flex-shrink: 0;
+    box-shadow: 0 0 0 1px #333;
+    z-index: 2;
+}
+
+.project-image::after {
+    content: 'View →';
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.6);
+    color: var(--accent);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    border-radius: 8px;
+    opacity: 0;
+    transition: opacity 0.25s ease;
+}
+
+.project-card:hover .project-image::after {
+    opacity: 1;
 }
 
 .project-image img {
-    width: 150px;
-    height: auto;
-    border-radius: 8px;
-    object-fit: cover;
-    box-shadow: 0 0 0 1px #ddd;
+    display: block;
+    transition: transform 0.4s ease;
+}
+
+.project-card:hover .project-image img {
+    transform: scale(1.06);
 }
 
 .project-info {
     flex: 1;
+    position: relative;
+    z-index: 2;
 }
 
 .project-info h3 {
     margin: 0 0 0.5rem;
     font-size: 1.5rem;
+    transition: color 0.2s ease;
+}
+
+.project-card:hover .project-info h3 {
+    color: var(--accent);
 }
 
 .description {
@@ -92,11 +270,12 @@ h1 {
 }
 
 .skill-pill {
-    background-color: #2b2b2b;
-    color: #ffffff;
+    background-color: #1e2a28;
+    color: var(--accent);
     font-size: 0.8rem;
     padding: 0.3rem 0.7rem;
     border-radius: 6px;
+    border: 1px solid rgba(94, 234, 212, 0.15);
 }
 
 .title-subtext {
@@ -107,23 +286,41 @@ h1 {
 }
 
 .toggle-button {
+    grid-column: 1 / -1;
     background-color: transparent;
-    color: white;
-    border: none;
-    padding: 0.8rem 1.5rem;
+    color: #aaa;
+    border: 1px solid #333;
+    padding: 0.6rem 1.5rem;
     margin: 0 auto 0;
-    border-radius: 8px;
+    border-radius: 20px;
     cursor: pointer;
-    font-size: 1rem;
+    font-size: 0.9rem;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 0.5rem;
+    transition: border-color 0.2s ease, color 0.2s ease;
+}
+
+.toggle-button:hover {
+    border-color: var(--accent);
+    color: var(--accent);
 }
 
 .toggle-button img {
     height: 1rem;
     filter: invert(80%);
+}
+
+/* Rotating gradient border on hover */
+@property --border-angle {
+    syntax: '<angle>';
+    initial-value: 0deg;
+    inherits: false;
+}
+
+@keyframes cardBorderSpin {
+    to { --border-angle: 360deg; }
 }
 
 @keyframes fadeIn {
@@ -139,27 +336,26 @@ h1 {
 }
 
 /* Mobile Styles */
-@media (max-width: 600px) {
+@media (max-width: 768px) {
     .container {
         width: 90vw;
     }
 
-    .project-card {
+    .project-list {
+        grid-template-columns: 1fr;
+    }
+
+    .project-card:first-child {
         flex-direction: column;
-        align-items: flex-start;
     }
 
-    .project-image {
-        display: flex;
-        justify-content: center;
+    .project-card:first-child .project-image img {
         width: 100%;
-
+        height: 180px;
+        border-radius: 12px 12px 0 0;
     }
 
-    .project-image img {
-        width: 100%;
-        height: auto;
-        border-radius: 8px;
-        margin: auto;
+    .project-card:not(:first-child) .project-image img {
+        height: 180px;
     }
 }

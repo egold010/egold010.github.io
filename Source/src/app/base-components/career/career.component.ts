@@ -1,20 +1,55 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 
 @Component({
   selector: 'app-career',
   templateUrl: './career.component.html',
   styleUrls: ['./career.component.css']
 })
-export class CareerComponent implements OnInit {
+export class CareerComponent implements OnInit, AfterViewInit {
 
   constructor() { }
 
-  ngOnInit(): void {
+  ngOnInit(): void { }
+
+  ngAfterViewInit(): void {
+    const container = document.querySelector('.timeline-container');
+    if (container) {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              (entry.target as HTMLElement).classList.add('animated');
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.05 }
+      );
+      observer.observe(container);
+    }
   }
 
   timeline = [
     {
-      title: 'Robotics Engineer (Part-Time)',
+      title: 'Robotics Engineer',
+      company: 'Duality AI',
+      link: 'https://www.duality.ai/',
+      date: 'Sep 2025 - Present',
+      description: 'Integrating robots into a digital twin simulator.',
+      skills: ['Python', 'ROS2', 'UE5'],
+      image: 'assets/timeline-images/duality.jpg',
+    },
+    {
+      title: 'Content Creator',
+      company: 'Vibe Engineering',
+      link: 'https://www.youtube.com/@vibe-engineering-10',
+      date: 'Dec 2025 - Present',
+      description: 'Making videos about robotics and engineering. Check out my channel!',
+      skills: ['Robotics', 'Engineering', 'Video Editing'],
+      image: 'assets/timeline-images/vibe-engineering.png',
+    },
+    {
+      title: 'Robotics Engineer',
       company: 'Pursuit Robotics',
       link: 'https://www.pursuitrobotics.com/',
       date: 'June 2025 - Present',

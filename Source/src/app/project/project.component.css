@@ -3,31 +3,36 @@
 }
 
 .backBtn {
-    background-color: #1b1b1b;
-    color: white;
-    border: 1px solid #2e2e2e;
-    padding: 0.8rem 1.5rem;
+    background-color: transparent;
+    color: #aaa;
+    border: 1px solid #333;
+    padding: 0.5rem 1.2rem;
     margin: 20px 20% 20px;
-    border-radius: 8px;
+    border-radius: 20px;
     cursor: pointer;
-    font-size: 1.5rem;
-
+    font-size: 0.9rem;
     display: flex;
     align-items: center;
-    
     gap: 0.5rem;
-    height: 2.5rem;
-    width: 9rem;
+    height: 2.2rem;
+    width: auto;
+    transition: border-color 0.2s ease, color 0.2s ease;
 }
 
 .backBtn img {
-    height: 1.5rem;
-    filter: invert(80%);
+    height: 1rem;
+    filter: invert(60%);
     rotate: 90deg;
+    transition: filter 0.2s ease;
 }
 
 .backBtn:hover {
-    background-color: #2e2e2e;
+    border-color: var(--accent);
+    color: var(--accent);
+}
+
+.backBtn:hover img {
+    filter: invert(75%) sepia(100%) saturate(400%) hue-rotate(120deg);
 }
 
 iframe {

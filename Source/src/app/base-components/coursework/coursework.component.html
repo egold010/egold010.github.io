@@ -3,15 +3,17 @@
     <div class="coursework-columns">
         <div class="course-category">
             <h3>Graduate</h3>
-            <ul>
-                <li *ngFor="let course of coursework.graduate">{{ course }}</li>
-            </ul>
+            <div class="course-grid">
+                <div class="course-card" *ngFor="let course of coursework.graduate; let i = index"
+                    [style.animation-delay]="(i * 50) + 'ms'">{{ course }}</div>
+            </div>
         </div>
         <div class="course-category">
             <h3>Undergrad</h3>
-            <ul>
-                <li *ngFor="let course of coursework.undergrad">{{ course }}</li>
-            </ul>
+            <div class="course-grid">
+                <div class="course-card" *ngFor="let course of coursework.undergrad; let i = index"
+                    [style.animation-delay]="(i * 50) + 'ms'">{{ course }}</div>
+            </div>
         </div>
     </div>
 </section>

@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx ng build --configuration production)",
+      "Bash(npx ng build)",
+      "Bash(npx ng build --no-progress)",
+      "Bash(echo \"EXIT:$?\")"
+    ]
+  }
+}

@@ -1,17 +1,46 @@
+<div class="preloader" id="preloader">
+  <div class="preloader-content">
+    <span class="preloader-initials">EG</span>
+    <div class="preloader-bar"><div class="preloader-fill"></div></div>
+  </div>
+</div>
+<div class="cursor-dot"></div>
+<div class="cursor-ring"></div>
+<div class="mouse-glow" id="mouseGlow"></div>
+<div class="scroll-progress-bar" [style.width.%]="scrollProgress"></div>
+<div class="ambient-layer ambient-home"       [class.active]="activeSection === 'home'"></div>
+<div class="ambient-layer ambient-about"      [class.active]="activeSection === 'about'"></div>
+<div class="ambient-layer ambient-career"     [class.active]="activeSection === 'career'"></div>
+<div class="ambient-layer ambient-papers"     [class.active]="activeSection === 'papers'"></div>
+<div class="ambient-layer ambient-projects"   [class.active]="activeSection === 'projects'"></div>
+<div class="ambient-layer ambient-coursework" [class.active]="activeSection === 'coursework'"></div>
+<canvas id="bgCanvas" class="bg-canvas"></canvas>
 <div class="background">
   <div class="nav-bar" [class.hidden]="isBarHidden">
     <div class="top-bar">
-      <h3 class="name-header">Evan Goldman</h3>
-      <button class="hamburger" (click)="toggleMenu()">&#9776;</button>
+      <h3 class="name-header">Evan</h3>
+      <button class="hamburger" [class.open]="isMenuOpen" (click)="toggleMenu()">
+        <span></span><span></span><span></span>
+      </button>
     </div>
     <nav class="nav-header" [class.open]="isMenuOpen">
       <div *ngFor="let anchor of anchors">
         <a (click)="scrollToSection(anchor.name)">
-          <h3 class="nav-item">{{ anchor.name }}</h3>
+          <h3 class="nav-item" [class.active]="activeSection === anchor.name">{{ anchor.name }}</h3>
         </a>
       </div>
     </nav>
   </div>
 
   <router-outlet></router-outlet>
+  <button class="scroll-top" [class.visible]="scrollProgress > 15" (click)="scrollToTop()">↑</button>
+  <div class="section-counter" [class.visible]="scrollProgress > 3">{{ sectionLabel }}</div>
+  <nav class="section-dots">
+    <button *ngFor="let anchor of anchors"
+            class="section-dot"
+            [class.active]="activeSection === anchor.name"
+            [title]="anchor.name"
+            (click)="scrollToSection(anchor.name)">
+    </button>
+  </nav>
 </div>

@@ -1,22 +1,79 @@
-<div class="container">
-    <div class="left-side">
-        <img src="assets/evan.jpg" alt="My Picture" class="animate-left">
+<div class="container" [style.opacity]="heroOpacity" (mousemove)="onMouseMove($event)" (mouseleave)="resetParallax()">
+    <canvas #heroCanvas class="hero-canvas"></canvas>
+
+    <!-- HUD Corner Decorations -->
+    <span class="hud-corner tl"></span>
+    <span class="hud-corner tr"></span>
+    <span class="hud-corner bl"></span>
+    <span class="hud-corner br"></span>
+
+    <!-- HUD metadata bar -->
+    <div class="hud-meta">
+        <span>SYS</span>
+        <span class="hud-sep">//</span>
+        <span>egold010.github.io</span>
+        <span class="hud-sep">//</span>
+        <span>PORTFOLIO_v2.6</span>
+        <span class="hud-sep">//</span>
+        <span class="hud-time">{{ currentTime }}</span>
     </div>
-    
+
+    <!-- HUD status bar bottom -->
+    <div class="hud-status">
+        <span class="hud-status-item"><span class="status-dot"></span>ONLINE</span>
+        <span class="hud-sep">//</span>
+        <span>33.9737°N&nbsp;&nbsp;117.3281°W</span>
+        <span class="hud-sep">//</span>
+        <span>EVAN GOLDMAN // ROBOTICS ENG</span>
+    </div>
+
+    <!-- Scanline sweep -->
+    <div class="hero-scanline"></div>
+
+    <div class="left-side" [style.transform]="'translate(' + photoX + 'px, ' + (photoY + photoScrollY) + 'px)'">
+        <div class="photo-frame animate-left">
+            <div class="photo-ring"></div>
+            <img src="assets/evan.jpg" alt="My Picture">
+            <div class="orbit-ring orbit-1"><div class="orbit-dot"></div></div>
+            <div class="orbit-ring orbit-2"><div class="orbit-dot"></div></div>
+            <div class="orbit-ring orbit-3"><div class="orbit-dot"></div></div>
+        </div>
+    </div>
+
     <!-- Right Side: Text and Buttons -->
-    <div class="right-side">
-        <h1 class="animate-right" style="animation-delay: 0.5s;">Hello,</h1>
-        <h2 class="animate-right" style="animation-delay: 1s;">I'm Evan</h2>
-        <h2 class="animate-right long-text" style="animation-delay: 2s;">Welcome to my portfolio!</h2>
-        <div class="button-container animate-right" style="animation-delay: 3s;">
-            <a href="https://www.linkedin.com/in/egold018/" target="_blank">
+    <div class="right-side" [style.transform]="'translateY(' + textScrollY + 'px)'">
+        <div class="availability-badge animate-right" style="animation-delay: 0.2s;">
+            <span class="avail-dot"></span>
+            Open to opportunities
+        </div>
+        <p class="animate-right hello-label" style="animation-delay: 0.5s;">Hello, I'm</p>
+        <h2 class="animate-right name-gradient" style="animation-delay: 1s;">Evan<span class="name-line-two">Goldman</span></h2>
+        <div class="animate-right hero-meta" style="animation-delay: 1.3s;">
+            <span class="meta-item">Robotics</span>
+            <span class="meta-dot"></span>
+            <span class="meta-item">SLAM</span>
+            <span class="meta-dot"></span>
+            <span class="meta-item">Computer Vision</span>
+        </div>
+        <p class="animate-right tagline" style="animation-delay: 1.75s;">{{ typedTagline }}<span class="cursor" [class.done]="typingDone">|</span></p>
+        <div class="button-container animate-right" style="animation-delay: 2.5s;">
+            <a href="https://www.linkedin.com/in/egold018/" target="_blank"
+               (mousemove)="onButtonMove($event)" (mouseleave)="onButtonLeave($event)">
                 <img src="assets/linkedin-icon.png" alt="LinkedIn">
             </a>
-            <a href="https://github.com/egold010?tab=repositories" target="_blank">
+            <a href="https://github.com/egold010?tab=repositories" target="_blank"
+               (mousemove)="onButtonMove($event)" (mouseleave)="onButtonLeave($event)">
                 <img src="assets/github-icon.png" alt="GitHub">
             </a>
-            <a href="mailto:evangoldman10@gmail.com" target="_blank">
+            <a href="mailto:evangoldman10@gmail.com" target="_blank"
+               (mousemove)="onButtonMove($event)" (mouseleave)="onButtonLeave($event)">
                 <img src="assets/mail-icon.png" alt="Email">
+            </a>
+            <a href="https://www.youtube.com/@vibe-engineering-10" target="_blank"
+               (mousemove)="onButtonMove($event)" (mouseleave)="onButtonLeave($event)">
+                <svg class="social-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <path fill="white" d="M21.543 6.498C22 8.28 22 12 22 12s0 3.72-.457 5.502c-.254.985-.997 1.76-1.938 2.022C17.896 20 12 20 12 20s-5.893 0-7.605-.476c-.945-.266-1.687-1.04-1.938-2.022C2 15.72 2 12 2 12s0-3.72.457-5.502c.254-.985.997-1.76 1.938-2.022C6.107 4 12 4 12 4s5.896 0 7.605.476c.945.266 1.687 1.04 1.938 2.022zM10 15.5l6-3.5-6-3.5v7z"/>
+                </svg>
             </a>
         </div>
     </div>

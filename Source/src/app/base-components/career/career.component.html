@@ -1,12 +1,15 @@
 <div class="container">
     <h1>Career</h1>
     <div class="timeline-container">
-        <div class="timeline-entry" *ngFor="let item of timeline">
+        <div class="timeline-entry" *ngFor="let item of timeline; let i = index" [style.transition-delay]="(i * 0.07) + 's'">
             <img [src]="item.image" alt="icon" class="timeline-icon" />
             <div class="timeline-content">
                 <h3>
                     {{ item.title }}
                     <span class="company-name"> &#64;<a class="company-name" [href]="item.link" target="_blank">{{ item.company }}</a></span>
+                    <span class="current-badge" *ngIf="item.date.includes('Present')">
+                        <span class="pulse-dot"></span>now
+                    </span>
                 </h3>
                 <span class="timeline-date">{{ item.date }}</span>
                 <p>{{ item.description }}</p>

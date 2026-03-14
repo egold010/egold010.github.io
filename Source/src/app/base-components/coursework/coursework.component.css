@@ -29,24 +29,50 @@
 }
 
 .course-category h3 {
-    font-size: 1.25rem;
+    font-size: 0.85rem;
     margin-bottom: 1rem;
-    color: #8f8f8f;
+    color: var(--accent);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    border-left: 2px solid var(--accent);
+    padding-left: 0.6rem;
 }
 
-.course-category ul {
-    list-style-type: disc;
-    padding-left: 1.5rem;
+.course-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
 }
 
-.course-category li {
-    margin-bottom: 0.5rem;
-    color: #ffffff;
-    font-size: 1rem;
+.course-card {
+    background-color: #1b1b1b;
+    border: 1px solid #2a2a2a;
+    border-radius: 8px;
+    padding: 0.6rem 1rem;
+    font-size: 0.9rem;
+    color: #bbb;
+    opacity: 0;
+    transform: translateX(-10px);
+    animation: slideInCard 0.4s ease forwards;
+    transition: border-color 0.2s ease, color 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.course-card:hover {
+    border-color: rgba(94, 234, 212, 0.3);
+    color: #fff;
+    background-color: #222;
+    box-shadow: inset 2px 0 0 var(--accent);
+}
+
+@keyframes slideInCard {
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
 }
 
 h1 {
-    font-size: 2.5rem;
+    font-size: 3rem;
     font-weight: 700;
 }
 
