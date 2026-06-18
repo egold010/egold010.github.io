@@ -1,0 +1,38 @@
+<html>
+    <head>
+        <link href="../asset-styles.css" rel="stylesheet" type="text/css">
+    </head>
+    <body>
+        <h1 class="header">Geometry Dash Reinforcement Learning</h1>
+        <p class="subber">8/4/2023</p>
+        <img class="header-img" src="../details-images/GDSteam.png">
+        <h2 class="section">Introduction</h2>
+        <p class="content">
+            Geometry Dash is a simple game where the player is forced to move forward and jump over obstacles.
+        </p>
+        <p class="content">
+            Since I began videogame automation, the game I’ve wanted to automate the most is Geometry Dash. I’ve seen a few people on youtube make geometry dash bots to play the game, however they all copied the first level exactly. Since the level is the same every time, the bots they make are likely just learning how long to wait between key presses rather than how to react to certain obstacles. In other words, dropping their bots into a new level will mean the bot has to learn again from the ground up. I’ve remade the basic mechanics of geometry dash and randomized the levels so that the bot has to react to different obstacles rather than memorize the layout of the level.
+        </p>
+        <p class="content">
+            At the time of writing this, I am currently looking to do graduate school research and almost every project professors are working on involve machine learning, and I knew nothing about machine learning before this project. Learning about reinforcement learning to make me a better candidate for research was another motivation for me to do this project.
+        </p>
+        <h2 class="section">Development</h2>
+        <p class="content">
+            I decided to use python for this project because it has the most online resources and seems to have the best and easiest access to machine learning libraries. I started by making the game in pygame and just creating a working geometry dash game. With the help of ChatGPT, I was able to get the exact speed and jumping power of the character right. The whole game was relatively simple to make and I just made it on my macbook on a flight back to California from Japan.
+        </p>
+        <p class="content">
+            After I got home, I installed stable baselines and looked into training the bot. I wanted to first test to see if I was doing everything right so that the bot would learn. I first set up a platform with just one spike in the middle to see if the bot would jump over it. I rewarded the bot each frame it spent alive and penalized it for every frame it jumped to prevent it from jumping unnecessarily. Training the bot for half an hour, it did learn how to jump over the spike, so tried shifting that spike to the left and adding another spike to the right near the end of the platform. To my disdain, the bot would lose every time. I tried removing the first spike and leaving the second near the end. The bot would just jump over nothing where the spike was when it was trained the first time and run right into the second spike. I realized that I would have to randomize the level a little bit to get it to learn.
+        </p>
+        <p class="content">
+            I created three preset levels modeled after different parts of the first level in Geometry Dash and trained the bot overnight. It did learn how to pass every level, but upon testing it with another premade level, it lost immediately, so I figured that the bot was again just memorizing the layouts of the levels.
+        </p>
+        <p class="content">
+            Again, with the help of ChatGPT, I devised an algorithm that randomly produces beatable geometry dash levels and trained the bot there for 2 days. When the training finished, I checked in on the bot and it was able to beat the level around 80% of the time. I considered this satisfactory as the bot will probably be able to beat the level 99% of the time with a few more days of training time. Here is a gif of the final version.
+        </p>
+        <img class="header-img" src="../details-images/Geometry Dash.gif">
+        <h2 class="section">Conclusion</h2>
+        <p class="content">
+            This was a very valuable project for me to try. It taught me a lot of new skills including game development with python, reinforcement learning with stable baselines, and machine learning with OpenAI’s gymnasium. This was also a relatively quick project and only took me a few days of development time (not including training time). I hope that the skills I learned while making this project will help me stay up to date with our AI revolution.
+        </p>
+    </body>
+</html>
