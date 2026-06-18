@@ -14,7 +14,10 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  // useHash keeps the portfolio self-contained when served from a
+  // subpath (evan-goldman.com/portfolio/) on GitHub Pages: routes live
+  // in the URL fragment, so deep links/refreshes never hit the server.
+  imports: [RouterModule.forRoot(routes, { useHash: true })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
