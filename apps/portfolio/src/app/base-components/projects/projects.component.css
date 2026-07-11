@@ -1,0 +1,248 @@
+.container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 70vw;
+    align-items: left;
+    justify-content: center;
+    gap: 2rem;
+    margin: 2rem auto;
+    margin-top: 10vh;
+}
+
+h1 {
+    font-family: "Rajdhani", sans-serif;
+    font-size: 2.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: var(--text-primary);
+}
+
+h1::before {
+    content: '< ';
+    color: var(--accent-primary);
+    font-weight: 400;
+}
+
+h1::after {
+    content: ' />';
+    color: var(--accent-primary);
+    font-weight: 400;
+}
+
+.project-section {
+    max-width: 900px;
+    margin: 4rem auto;
+    padding: 0 1rem;
+}
+
+.project-section h2 {
+    font-family: "Rajdhani", sans-serif;
+    text-align: center;
+    margin-bottom: 2rem;
+    font-size: 2rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--accent-secondary);
+}
+
+.project-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.project-card {
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+    text-decoration: none;
+    color: inherit;
+    background: linear-gradient(135deg, 
+        rgba(18, 23, 31, 0.8) 0%, 
+        rgba(26, 35, 50, 0.6) 100%);
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 
+        0 4px 20px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    transition: all 0.3s ease;
+    border: 1px solid var(--steel-dark);
+    text-align: left;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Accent corner */
+.project-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: linear-gradient(180deg, var(--accent-primary), var(--accent-secondary));
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.project-card.animate {
+    opacity: 0;
+    animation: fadeIn 0.5s ease forwards;
+}
+
+.project-card:hover {
+    transform: translateY(-4px) translateX(3px);
+    box-shadow: 
+        0 8px 30px rgba(0, 0, 0, 0.4),
+        0 0 20px rgba(255, 107, 53, 0.1);
+    border-color: var(--accent-primary);
+}
+
+.project-card:hover::before {
+    opacity: 1;
+}
+
+.project-image img {
+    width: 150px;
+    height: auto;
+    border-radius: 6px;
+    object-fit: cover;
+    border: 2px solid var(--steel-dark);
+    transition: all 0.3s ease;
+}
+
+.project-card:hover .project-image img {
+    border-color: var(--accent-secondary);
+    box-shadow: 0 0 15px rgba(0, 212, 255, 0.3);
+}
+
+.project-info {
+    flex: 1;
+}
+
+.project-info h3 {
+    font-family: "Rajdhani", sans-serif;
+    margin: 0 0 0.5rem;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.description {
+    font-family: "Exo 2", sans-serif;
+    color: var(--text-secondary);
+    margin-bottom: 0.75rem;
+    line-height: 1.6;
+    font-size: 0.95rem;
+}
+
+.skill-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.skill-pill {
+    background: linear-gradient(135deg, var(--bg-tertiary) 0%, var(--steel-dark) 100%);
+    color: var(--accent-secondary);
+    font-family: "Exo 2", sans-serif;
+    font-size: 0.75rem;
+    font-weight: 500;
+    padding: 0.3rem 0.7rem;
+    border-radius: 4px;
+    border: 1px solid var(--steel-dark);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: all 0.2s ease;
+}
+
+.skill-pill:hover {
+    border-color: var(--accent-primary);
+    color: var(--accent-primary);
+}
+
+.title-subtext {
+    display: inline-block;
+    font-weight: 400;
+    color: var(--text-muted);
+    font-size: 1.1rem;
+    text-transform: none;
+    letter-spacing: 0;
+}
+
+.toggle-button {
+    background: linear-gradient(135deg, var(--bg-tertiary) 0%, var(--steel-dark) 100%);
+    color: var(--text-primary);
+    border: 1px solid var(--steel-dark);
+    padding: 0.8rem 2rem;
+    margin: 1rem auto 0;
+    border-radius: 6px;
+    cursor: pointer;
+    font-family: "Rajdhani", sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    transition: all 0.3s ease;
+}
+
+.toggle-button:hover {
+    background: var(--steel-dark);
+    border-color: var(--accent-primary);
+    box-shadow: 0 5px 20px rgba(255, 107, 53, 0.2);
+}
+
+.toggle-button img {
+    height: 1rem;
+    filter: invert(50%) sepia(100%) saturate(500%) hue-rotate(340deg);
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Mobile Styles */
+@media (max-width: 600px) {
+    .container {
+        width: 90vw;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    .project-card {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .project-image {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+    }
+
+    .project-image img {
+        width: 100%;
+        height: auto;
+        border-radius: 8px;
+        margin: auto;
+    }
+}

@@ -1,0 +1,122 @@
+/* ===================================
+   ASSET STYLES - Industrial Theme
+   =================================== */
+
+* {
+    font-family: "Exo 2", sans-serif;
+    color: var(--text-primary, #e2e8f0);
+}
+
+.header {
+    font-family: "Rajdhani", sans-serif;
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-bottom: -20px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--text-primary, #e2e8f0);
+}
+
+.section {
+    font-family: "Rajdhani", sans-serif;
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-top: 4px;
+    margin-bottom: -8px;
+    color: var(--accent-secondary, #00d4ff);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.category {
+    font-family: "Rajdhani", sans-serif;
+    font-size: 1.1rem;
+    font-weight: 500;
+    margin-bottom: -16px;
+    color: var(--accent-primary, #ff6b35);
+}
+
+.subber {
+    font-size: 1.1rem;
+    margin-left: 10px;
+    color: var(--text-secondary, #94a3b8);
+}
+
+.content {
+    font-size: 1rem;
+    line-height: 1.8;
+    text-indent: 40px;
+    color: var(--text-secondary, #94a3b8);
+}
+
+.header-img {
+    width: 750;
+    height: 400;
+    border-radius: 8px;
+    border: 2px solid var(--steel-dark, #2a3441);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+}
+
+.content-img {
+    width: 750;
+    height: auto;
+    border-radius: 8px;
+    border: 1px solid var(--steel-dark, #2a3441);
+    transition: all 0.3s ease;
+}
+
+.content-img:hover {
+    border-color: var(--accent-primary, #ff6b35);
+    box-shadow: 0 5px 20px rgba(255, 107, 53, 0.2);
+}
+
+li {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: var(--text-secondary, #94a3b8);
+    position: relative;
+    padding-left: 0.5rem;
+}
+
+div {
+    display: flex;
+    justify-content: center;
+    margin: auto;
+}
+
+div img {
+    margin: 10px;
+    height: auto;
+    border-radius: 6px;
+}
+
+body {
+    overflow: hidden;
+}
+
+@media (max-width: 600px) {
+    .container {
+        padding-top: 60px;
+    }
+
+    iframe {
+        width: 100%;
+    }
+
+    img {
+        max-width: 100%;
+    }
+
+    .multi-img {
+        margin: 3px;
+        max-width: 30%;
+    }
+
+    .header {
+        font-size: 1.6rem;
+    }
+
+    .section {
+        font-size: 1.1rem;
+    }
+}

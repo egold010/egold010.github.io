@@ -1,0 +1,199 @@
+.nav-bar {
+    position: fixed;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    background: linear-gradient(180deg, 
+        rgba(10, 13, 18, 0.98) 0%, 
+        rgba(10, 13, 18, 0.95) 100%);
+    backdrop-filter: blur(10px);
+    z-index: 1000;
+    transition: transform 0.15s ease;
+    border-bottom: 1px solid rgba(0, 212, 255, 0.15);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+}
+
+.nav-bar::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, 
+        transparent 0%, 
+        rgba(255, 107, 53, 0.6) 50%, 
+        transparent 100%);
+}
+
+.top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 80px;
+    padding: 0 6%;
+    width: 100%;
+}
+
+.name-header {
+    font-family: "Rajdhani", sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0;
+    text-wrap: nowrap;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    position: relative;
+}
+
+.name-header::before {
+    content: '//';
+    color: var(--accent-primary);
+    margin-right: 8px;
+    font-weight: 400;
+}
+
+.hamburger {
+    display: none;
+    font-size: 2rem;
+    background: none;
+    border: 1px solid var(--steel-dark);
+    color: var(--text-primary);
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+}
+
+.hamburger:hover {
+    border-color: var(--accent-primary);
+    color: var(--accent-primary);
+}
+
+.nav-header {
+    font-size: 0.85rem;
+    color: var(--text-primary);
+    margin-right: 6%;
+    margin-top: 0%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 2.5rem;
+}
+
+.nav-header a {
+    position: relative;
+    cursor: pointer;
+}
+
+.nav-header a h3 {
+    font-family: "Rajdhani", sans-serif;
+    font-weight: 500;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    transition: color 0.2s ease;
+    color: var(--text-secondary);
+}
+
+.nav-header a:hover h3 {
+    color: var(--accent-primary);
+}
+
+.nav-header a::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0%;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+    transition: width 0.3s ease;
+}
+
+.nav-header a:hover::after {
+    width: 100%;
+}
+
+.nav-bar.hidden {
+    transform: translateY(-100%);
+}
+
+a {
+    cursor: pointer;
+}
+
+.background {
+    background: 
+        /* Blueprint grid overlay */
+        linear-gradient(90deg, rgba(0, 212, 255, 0.02) 1px, transparent 1px),
+        linear-gradient(0deg, rgba(0, 212, 255, 0.02) 1px, transparent 1px),
+        /* Diagonal technical lines */
+        repeating-linear-gradient(
+            45deg,
+            transparent,
+            transparent 100px,
+            rgba(255, 107, 53, 0.01) 100px,
+            rgba(255, 107, 53, 0.01) 101px
+        ),
+        /* Radial spotlight effect */
+        radial-gradient(ellipse at 30% 20%, rgba(0, 212, 255, 0.06) 0%, transparent 40%),
+        radial-gradient(ellipse at 70% 80%, rgba(255, 107, 53, 0.04) 0%, transparent 40%),
+        /* Base gradient */
+        linear-gradient(135deg, #0a0d12 0%, #12171f 50%, #0a0d12 100%);
+    background-size: 
+        50px 50px,
+        50px 50px,
+        auto,
+        100% 100%,
+        100% 100%,
+        100% 100%;
+    background-attachment: fixed;
+    height: 100%;
+    min-height: 100vh;
+}
+
+/* Mobile Styles */
+@media (max-width: 600px) {
+    .nav-bar {
+        flex-direction: column;
+        align-items: center;
+        padding: 0 2%;
+        height: auto;
+        width: 100%;
+    }
+
+    .top-bar {
+        flex-direction: row;
+        height: 60px;
+    }
+    
+    .hamburger {
+        display: block;
+    }
+    
+    .name-header {
+        text-align: left;
+        font-size: 1.2rem;
+    }
+    
+    .nav-header {
+        display: none;
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+        width: 100%;
+        margin: 0;
+        padding: 15px 0;
+        border-top: 1px solid var(--steel-dark);
+    }
+    
+    .nav-header.open {
+        display: flex;
+    }
+    
+    .nav-header a h3 {
+        font-size: 1rem;
+    }
+}

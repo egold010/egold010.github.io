@@ -1,0 +1,10 @@
+<div class="container">
+    <iframe #iframe (load)="iframeLoad(iframe, backBtn)" [src]="projectSrc"></iframe>
+    <button #backBtn class="backBtn" (click)="scrollToSection('projects')">
+        <img
+          src="assets/arrow_down.png"
+          alt="Arrow"
+        />
+        Back
+    </button>
+</div>

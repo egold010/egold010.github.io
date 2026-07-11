@@ -1,20 +1,21 @@
 name: Deploy site (cursed + portfolio)
 
-# Builds BOTH branches into a single GitHub Pages output:
-#   /            -> gemini branch (the "cursed" YouTube site)
-#   /portfolio/  -> main branch   (the real portfolio)
-# A push to either branch rebuilds and redeploys the whole combined site.
-# If a build fails, nothing is deployed, so the live site is never left broken.
+# Builds BOTH apps from THIS single branch into one GitHub Pages output:
+#   /            -> apps/cursed     (the "cursed" YouTube site)
+#   /portfolio/  -> apps/portfolio  (the real portfolio)
+# The career timeline and project cards live once in /shared and are compiled
+# into both apps, so editing them in one place updates both sites.
+# If either build fails, nothing is deployed, so the live site is never broken.
 
 on:
   push:
-    branches: [gemini, main]
+    branches: [combined, main]
   workflow_dispatch:
 
 permissions:
   contents: write
 
-# Never run two deploys at once (a push to gemini + a push to main are serialized).
+# Never run two deploys at once.
 concurrency:
   group: deploy-gh-pages
   cancel-in-progress: false
@@ -23,17 +24,8 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout cursed site (gemini)
+      - name: Checkout
         uses: actions/checkout@v4
-        with:
-          ref: gemini
-          path: gemini
-
-      - name: Checkout portfolio (main)
-        uses: actions/checkout@v4
-        with:
-          ref: main
-          path: main
 
       - name: Set up Node
         uses: actions/setup-node@v4
@@ -41,13 +33,13 @@ jobs:
           node-version: '18'
 
       - name: Build cursed site -> root (base-href /)
-        working-directory: gemini/Source
+        working-directory: apps/cursed
         run: |
           npm ci
           npx ng build --configuration production --base-href=/
 
       - name: Build portfolio -> /portfolio/ (base-href /portfolio/)
-        working-directory: main/Source
+        working-directory: apps/portfolio
         run: |
           npm ci
           npx ng build --configuration production --base-href=/portfolio/
@@ -58,10 +50,10 @@ jobs:
           rm -rf out
           mkdir -p out
           # cursed site at the root
-          cp -a gemini/Source/dist/website/. out/
+          cp -a apps/cursed/dist/website/. out/
           # portfolio under /portfolio/
           mkdir -p out/portfolio
-          cp -a main/Source/dist/website/. out/portfolio/
+          cp -a apps/portfolio/dist/website/. out/portfolio/
           # custom domain
           echo "evan-goldman.com" > out/CNAME
           # SPA deep-link fallback for the root (cursed) app's path-based routes

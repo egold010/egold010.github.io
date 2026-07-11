@@ -1,0 +1,72 @@
+<html>
+    <head>
+        <script type="text/javascript" async
+            src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+                MathJax.Hub.Queue(function () {
+                    window.parent.postMessage({
+                        type: "resizeIframe",
+                        height: document.body.scrollHeight
+                    }, "*");
+                });
+            </script>
+        <link href="../asset-styles.css" rel="stylesheet" type="text/css">
+    </head>
+    <body>
+        <h1 class="header">SLAM from Scratch</h1>
+        <p class="subber">3/19/2025</p>
+        <div style="display: flex; flex-direction: column; align-items: center;">
+            <img src="../details-images/SlamFromScratch/slam_map_env_img.png" style="width: 750px;">
+            <p style="margin-top: 0;"><b>Figure: </b>Turtlebot3 mapping out its environment.</p>
+        </div>
+
+        <h2 class="section">Introduction</h2>
+        <p class="content">
+            Simultaneous Localization and Mapping (SLAM) is a computational technique that enables autonomous systems, such as robots and self-driving vehicles, to construct a map of an unknown environment while simultaneously determining their position within it. SLAM is essential for applications where GPS is unreliable or unavailable, including indoor navigation, underwater exploration, and planetary rovers. By integrating sensor data from sources such as LiDAR, cameras, and inertial measurement units (IMUs), SLAM algorithms allow machines to navigate complex environments in real time without prior knowledge of the terrain. This technology is fundamental to the advancement of robotics, augmented reality (AR), and autonomous systems, as it ensures safe and efficient operation in dynamic, unfamiliar settings.
+        </p>
+        <p class="content">
+            In this project, I implemented a ROS2 node to perform SLAM on the Turtlebot3. I also implemented a navigation node, allowing for the Turtlebot to autonomously explore its entire enviroment and create a map. It can then be directed to navigate to a certain position. It uses frontier exploration to determine the next best location to explore.
+        </p>
+        
+        <h2 class="section">Methodology</h2>
+        <p class="content">
+            All nodes and programs were launched from a single launch file, including the Nav2 stack, TurtleBot3 environment, RViz node, teleoperation node, SLAM node, and navigation node. The Nav2 stack, TurtleBot3 environment, and RViz node were sourced from ROS2, while I implemented the remaining components.
+        </p>
+
+        <h3 class="section">Teleoperation Node</h2>
+        <p class="content">
+            For testing, I required an intuitive method to control the TurtleBot. The built-in TurtleBot3 teleoperation node had counterintuitive controls, requiring users to press and release the "W" key to maintain constant forward velocity. To address this, I developed a custom teleoperation node that follows a more intuitive control scheme, similar to traditional video game controls. In this implementation, movement occurs while the keys are held down, allowing real-time direction control. The node listens for key presses and publishes a Twist message to the cmd_vel topic, dictating forward, backward, left, right, or stop (when no key is pressed).
+        </p>
+
+        <h3 class="section">SLAM Node</h2>
+        <p class="content">
+            The SLAM node is responsible for processing sensor data and constructing the environment map. The process begins by initializing an occupancy grid, where each cell is marked as occupied, empty, or unknown. The TurtleBot continuously publishes LiDAR and odometry data, which are processed to generate the map.
+        </p>
+        <p class="content">
+            The LiDAR data includes an angle increment variable and a list of range measurements relative to the robot's pose. Odometry data is provided in world coordinates, requiring a frame transformation to convert LiDAR rays from the robot's coordinate system to the global frame. The frame transformation from lidar to world coordinates is defined as the following:
+        </p>
+        \[
+        \begin{bmatrix} hit_x \\ hit_y \end{bmatrix} =
+        \begin{bmatrix} x_r \\ y_r \end{bmatrix} +
+        \begin{bmatrix} r \cos(\alpha + \theta) \\ r \sin(\alpha + \theta) \end{bmatrix}
+        \]
+        <p class="content">
+            If a detected range is less than the maximum, the corresponding cell is marked as occupied. The Bresenham's line algorithm is used to mark intermediate cells as free. The SLAM node also continuously publishes an updated occupancy grid for visualization.
+        </p>
+
+        <h3 class="section">Navigation Node</h2>
+        <p class="content">
+            The navigation node is responsible for reading the map and autonomously guiding the robot to explore the environment. It utilizes frontier-based exploration, identifying the boundaries between known and unknown regions to determine viable movement targets. The program continuously scans the occupancy grid for frontiers and selects the closest valid frontier cell to the robot as the next exploration target.
+        </p>
+
+        <h2 class="section">Results</h2>
+        <p class="content">
+            The final outcome of this project is a simulated TurtleBot capable of autonomously navigating and mapping the TurtleBot environment. Through this project, I gained valuable robotics skills, particularly in SLAM and autonomous navigation, which complement my expertise in perception. This experience enhances my competitiveness in the field of robotic perception and autonomous systems development.
+        </p>
+        
+        <div style="display: flex; flex-direction: column; align-items: center;">
+            <img src="../details-images/SlamFromScratch/slam_map_env_vid.gif" style="width: 750px;">
+            <p style="margin-top: 0;"><b>Figure: </b>Video result of Turtlebot3 performing autonomous navigation and SLAM.</p>
+        </div>
+
+    </body>
+</html>

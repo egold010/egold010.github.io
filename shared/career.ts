@@ -1,0 +1,97 @@
+// Single source of truth for the career timeline shown on BOTH the cursed site
+// (apps/cursed) and the portfolio (apps/portfolio). Edit here once and both
+// sites update. Imported via the "@shared/*" path alias in each app's tsconfig.
+// Each app keeps its own career.component styling/animation; only this data is shared.
+export interface TimelineEntry {
+  title: string;
+  company: string;
+  link: string;
+  date: string;
+  description: string;
+  skills: string[];
+  image: string;
+}
+
+export const timeline: TimelineEntry[] = [
+  {
+    title: 'Robotics Engineer',
+    company: 'Duality AI',
+    link: 'https://www.duality.ai/',
+    date: 'Sep 2025 - Present',
+    description: 'Integrating robots into a digital twin simulator.',
+    skills: ['Python', 'ROS2', 'UE5'],
+    image: 'assets/timeline-images/duality.jpg',
+  },
+  {
+    title: 'Content Creator',
+    company: 'Vibe Engineering',
+    link: 'https://www.youtube.com/@vibe-engineering-10',
+    date: 'Dec 2025 - Present',
+    description: 'Making videos about robotics and engineering. Check out my channel!',
+    skills: ['Robotics', 'Engineering', 'Video Editing'],
+    image: 'assets/timeline-images/vibe-engineering.png',
+  },
+  {
+    title: 'Robotics Engineer',
+    company: 'Pursuit Robotics',
+    link: 'https://www.pursuitrobotics.com/',
+    date: 'June 2025 - Sep 2025 | 4 mos',
+    description: 'Pre-seed robotics startup building autonomous security robots.',
+    skills: ['C++', 'Python', 'ROS1', 'ROS2'],
+    image: 'assets/timeline-images/pursuit.jpg',
+  },
+  {
+    title: 'Autonomy Lead/Co-Founder',
+    company: 'Aviat\'r',
+    link: 'https://aviatr.ucrhighlanders.org/',
+    date: 'Nov 2024 - June 2025 | 8 mos',
+    description: 'Manages the computer vision and autonomous navigation subteams (6 members) at UCR\'s drone club.',
+    skills: ['C++', 'Python'],
+    image: 'assets/timeline-images/aviatr.jpg',
+  },
+  {
+    title: 'Graduate Research Assistant',
+    company: 'TASL',
+    link: 'https://tasl.ucr.edu/',
+    date: 'Oct 2024 - June 2025 | 9 mos',
+    description: 'Trustworthy Autonomous Systems Laboratory. Advised by Prof. Jiachen Li.',
+    skills: ['C++', 'Python', 'ROS2'],
+    image: 'assets/timeline-images/tasl.png',
+  },
+  {
+    title: 'R&D Intern',
+    company: 'Standard Biotools',
+    link: 'https://www.standardbio.com/',
+    date: 'Jun 2024 - Sep 2024 | 4 mos',
+    description: 'Worked on various data science and electrical engineering projects for a mass cytometry instrument.',
+    skills: ['C++', 'Python'],
+    image: 'assets/timeline-images/stdbio.jpg',
+  },
+  {
+    title: 'Software Engineer (Part-Time)',
+    company: 'Seer',
+    link: 'https://seer.bio/',
+    date: 'Oct 2022 - Sep 2023 | 1 yr',
+    description: 'Continued my work as a part time employee while attending classes.',
+    skills: ['C#', 'HTML', 'CSS', 'JavaScript'],
+    image: 'assets/timeline-images/seer.jpg',
+  },
+  {
+    title: 'R&D Intern',
+    company: 'Seer',
+    link: 'https://seer.bio/',
+    date: 'Jun 2022 - Sep 2022 | 4 mos',
+    description: 'Developed a customer facing UI for biotech instruments.',
+    skills: ['C#', 'HTML', 'CSS', 'JavaScript'],
+    image: 'assets/timeline-images/seer.jpg',
+  },
+  {
+    title: 'R&D Intern',
+    company: 'Fluidigm Corp.',
+    link: 'https://www.standardbio.com/',
+    date: 'Jun 2020 - Sep 2021 | 1 yr 4 mos',
+    description: 'Built an internal dev tool used by engineers to run scripts and perform operations on the product.',
+    skills: ['C#', 'C++', 'Python'],
+    image: 'assets/timeline-images/fluidigm.png',
+  },
+];
