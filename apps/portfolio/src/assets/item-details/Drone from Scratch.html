@@ -1,0 +1,63 @@
+<html>
+    <head>
+        <link href="../asset-styles.css" rel="stylesheet" type="text/css">
+    </head>
+    <body>
+        <h1 class="header">Drone from Scratch</h1>
+        <p class="subber">1/29/2026</p>
+
+        <div style="flex-direction: column; align-items: center;">
+            <img class="header-img" src="../details-images/DroneFromScratch/hero.png" style="width: 600px; max-width: 100%; height: auto;">
+            <p style="margin-top: 8px;"><b>Figure: </b>The assembled quadcopter.</p>
+        </div>
+
+        <h2 class="section">Summary</h2>
+        <p class="content">This is an ongoing project to build a quadcopter completely from scratch, including the flight controller itself. Rather than buying an off-the-shelf board, I designed my own STM32-based flight controller PCB and wrote the firmware that reads the sensors, talks to the radio, estimates attitude, and drives the motors. The goal was to understand every layer of a flying vehicle, from the schematic up to the control loop. As of this writing the drone powers up, arms, and lifts off under its own stabilization, but the current motors are underpowered—it takes off, arcs over, and settles back down rather than holding altitude. Stronger motors are on the way, and the sections below document how each subsystem came together and the problems I worked through along the way.</p>
+
+        <h2 class="section">Flight Controller PCB</h2>
+        <p class="content">I originally hoped to wire the components together as separate modules, but it quickly became clear that a custom PCB was unavoidable if I wanted a compact, reliable board. The board is built around an STM32F103 microcontroller, with an MPU-6500 IMU and an nRF24 radio both on the SPI bus, power regulation, and the motor outputs. I started from a schematic—capturing every one of those connections as named nets—and then converted that schematic into a board layout.</p>
+        <p class="content">The layout went through several revisions, each triggered by a mistake I caught late. The IMU I first chose had pads roughly 0.2&nbsp;mm wide, far too fine to hand-solder reliably, so I switched to an IMU I could realistically assemble and planned to order that part of the board pre-populated. That IMU then went out of stock, which pushed me toward a separate breakout board for the sensor rather than placing it directly on the main PCB. I also caught, only after most of the layout was done, that I had left the motor outputs off the board entirely; I added simple pads for the ESC connections rather than committing to a specific connector, so I wouldn't be blocked on that decision while ordering. The finished board had one more flaw I didn't catch until it arrived: it was missing a proper power input. I still use it to supply the STM32 during development, but it was a good lesson in how a single missed net turns into a hardware limitation you live with for the rest of the project.</p>
+
+        <div style="flex-direction: column; align-items: center;">
+            <img class="content-img" src="../details-images/DroneFromScratch/pcb.jpg" style="width: 700px; max-width: 100%;">
+            <p style="margin-top: 8px;"><b>Figure: </b>The fabricated flight controller boards side by side—the first revision that didn't work (missing power input) next to the working one.</p>
+        </div>
+        <div style="flex-direction: column; align-items: center;">
+            <img class="content-img" src="../details-images/DroneFromScratch/schematic.png" style="width: 700px; max-width: 100%;">
+            <p style="margin-top: 8px;"><b>Figure: </b>The flight controller schematic.</p>
+        </div>
+
+        <h2 class="section">State Estimation</h2>
+        <p class="content">Stabilizing a drone requires a continuous estimate of its orientation. The MPU-6500 provides raw gyroscope and accelerometer readings, but each on its own is insufficient: the gyroscope integrates cleanly over short intervals but drifts over time, while the accelerometer is stable on average but noisy under the vibration of spinning motors. On startup I average a couple thousand samples with the drone sitting still and level to measure the gyro and accelerometer biases, and seed the initial attitude from the gravity vector. From then on I fuse the two sensors with a complementary filter that trusts the integrated gyro rate for 98% of each update and gently pulls the estimate back toward the accelerometer's sense of "down," with a light low-pass filter on the accelerometer to reject motor vibration. This runs at 1&nbsp;kHz off the IMU's data-ready interrupt and gives an attitude estimate stable enough to close the control loop. Understanding the fusion math well enough to trust it took longer than getting the sensor talking; a proper Extended Kalman Filter remains the last piece I plan to implement once the airframe is flying reliably.</p>
+
+        <h2 class="section">Stabilization and Control</h2>
+        <p class="content">The controller is a cascaded, two-loop design. An outer angle loop runs at 200&nbsp;Hz: it takes the pilot's stick positions as desired roll and pitch angles (capped at 20 degrees), compares them to the estimated attitude, and turns the error into a desired rotation rate for each axis. An inner rate loop runs at the full 1&nbsp;kHz: it runs a PID controller on the difference between those desired rates and the gyro's measured rates, for roll, pitch, and yaw. The rate loop includes the usual practical touches—integrator clamping for anti-windup and a low-pass filter on the derivative term so gyro noise doesn't get amplified.</p>
+        <p class="content">The three axis outputs are combined with the throttle in a standard quad-X mixer, which adds and subtracts each correction across the four motors—for example, a nose-down pitch correction speeds up the rear motors and slows the front ones, while yaw plays the clockwise and counter-clockwise motor pairs against each other. Arming, disarming, and a one-second radio-loss failsafe that cuts the motors are all handled around this loop, and the integrators reset on each arm so the drone always starts from a clean state.</p>
+
+        <h2 class="section">Radio Link</h2>
+        <p class="content">For manual control I used an nRF24 radio module driven over SPI, building on an existing library and reference material to get a link established. The transmitter sends a small six-byte packet—throttle, yaw, pitch, roll, and arm/disarm flags. It worked immediately at the STM32's default clock, then broke the moment I raised the system clock from 16&nbsp;MHz to 72&nbsp;MHz. The cause was the SPI bus: its clock is derived from the system clock through a prescaler, so raising the core clock scaled the SPI clock up past the rate the radio could keep up with. Correcting the SPI prescaler brought the bus back within range and restored the link—a small fix, but a good reminder that changing the core clock quietly rescales every peripheral clock derived from it.</p>
+
+        <h2 class="section">Motors and ESCs</h2>
+        <p class="content">Each motor is driven by an electronic speed controller (ESC) that the flight controller commands with a standard 50&nbsp;Hz PWM signal, where a 1000–2000&nbsp;microsecond pulse maps to zero-through-full throttle. Two things made this stage harder than expected. First, the ESC's solder pads were awkward to work with and made for a genuinely unpleasant soldering job. Second, before an ESC will drive a motor it has to be armed—and calibrated—with a specific startup sequence of throttle values, so I had to work out the calibration routine (holding full throttle, then minimum) and the arming procedure before the motors would respond at all. With the ESCs armed and calibrated, commanding motor speed became a matter of mapping the mixer output to the right pulse widths.</p>
+        <p class="content">Getting there was not clean. Before the calibration was right, the ESCs interpreted my throttle signal inconsistently, so the four motors spun up unevenly—an early liftoff attempt lurched sideways and tipped over rather than rising level, as shown below. It was a useful failure: it made clear that a correct, repeatable ESC calibration and arming sequence is a prerequisite for the stabilization loop to have any chance of working.</p>
+
+        <div style="flex-direction: column; align-items: center;">
+            <img src="../details-images/DroneFromScratch/failed_liftoff.gif" style="width: 500px; max-width: 100%; border-radius: 8px;">
+            <p style="margin-top: 8px;"><b>Video: </b>An early liftoff attempt failing due to an improperly calibrated ESC—the motors spin up unevenly and the drone tips instead of rising level.</p>
+        </div>
+
+        <h2 class="section">Power</h2>
+        <p class="content">Power was where I did the most damage. Trying to simplify the wiring, I attempted to power my PCB directly from the ESC's battery-voltage output. That voltage was too high for the board's LDO regulator, which promptly started smoking. Fortunately I had ordered several spare regulators. As a stopgap I wired a replacement LDO in series with the damaged one to drop the voltage into a survivable range—not elegant, and firmly in the category of "temporary" fixes, but enough to keep making progress while I sorted out proper power input. Combined with the PCB's missing power input, power delivery is the subsystem most in need of a clean redesign on the next board revision.</p>
+
+        <h2 class="section">Chassis</h2>
+        <p class="content">With the electronics working, I designed and 3D printed the chassis and assembled the airframe, mounting the flight controller, ESCs, motors, and battery. Printing the frame myself kept iteration cheap and let me tailor the mounting points to my own board rather than a commercial one.</p>
+
+        <div style="flex-direction: column; align-items: center;">
+            <img class="content-img" src="../details-images/DroneFromScratch/chassis.jpg" style="width: 600px; max-width: 100%;">
+            <p style="margin-top: 8px;"><b>Figure: </b>The 3D printed chassis, assembled.</p>
+        </div>
+
+        <h2 class="section">Current Status and Next Steps</h2>
+        <p class="content">All of the individual subsystems now work: the IMU streams orientation, the complementary filter produces a stable attitude estimate, the radio link is solid, and the ESCs respond to PWM. Put together, the drone arms and takes off, but the current motors can't produce enough thrust to sustain a hover—it lifts off, arcs over, and comes back down. The immediate blocker is simply propulsion, and stronger motors are on the way. Once the airframe can hold altitude, the plan is to tighten the stabilization tuning and finally replace the complementary filter with an Extended Kalman Filter for a more robust attitude estimate. The whole build has stayed within budget so far, a little over $300 against a $500 target.</p>
+    </body>
+</html>

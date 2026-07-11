@@ -1,0 +1,44 @@
+<html>
+    <head>
+        <link href="../asset-styles.css" rel="stylesheet" type="text/css">
+    </head>
+    <body>
+        <h1 class="header">Reverse-Empathy Robot</h1>
+        <p class="subber">12/13/2025</p>
+        <div style="flex-direction: column; align-items: center;">
+            <iframe width="750" height="422" style="max-width: 100%; border-radius: 8px; border: 2px solid var(--steel-dark, #2a3441); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);"
+                src="https://www.youtube.com/embed/zyQbTz7sbXQ" title="Reverse-Empathy Robot"
+                frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <p style="margin-top: 8px;"><b>Video: </b>Full build and demonstration of the robot.</p>
+        </div>
+        <h2 class="section">Summary</h2>
+        <p class="content">I built a desktop robot that finds a person's face, keeps its camera pointed at them, and reacts to their expression with the opposite emotion—it looks angry when you are happy or neutral, and happy when you are sad. The head is a two-servo pan-tilt bracket carrying a camera and a small screen that renders the robot's face. A Raspberry Pi runs the perception and control software. The interesting engineering was not the concept but the two problems that show up the moment you try to close a vision-to-motion loop on a Raspberry Pi: servo jitter and detection latency.</p>
+        <p class="content">This project was originally produced as a video, which is embedded above. The write-up below focuses on the technical decisions behind the final build.</p>
+        <h2 class="section">System Overview</h2>
+        <p class="content">The system is split into four responsibilities: capturing frames from the camera, locating the face in each frame, converting the face position into servo angles, and displaying the correct emotion on the screen. I structured these as separate ROS2 nodes so that a slow stage—face detection in particular—could not stall frame capture or servo updates. Decoupling the pipeline this way was the single most effective change for keeping the robot responsive.</p>
+        <ul>
+            <li><b>Compute:</b> Raspberry Pi running Ubuntu, chosen so I could use ROS2, which is not supported on the Pi's default Debian release.</li>
+            <li><b>Perception:</b> An Arducam module feeding MediaPipe's face detector.</li>
+            <li><b>Actuation:</b> Two servos on a pan-tilt bracket, one for horizontal rotation and one for tilt.</li>
+            <li><b>Display:</b> A small screen mounted to the head that shows the current (inverted) emotion.</li>
+            <li><b>Power:</b> A 14.8V battery stepped down to 5.5V to drive the servos, with a shared ground reference to the Pi.</li>
+        </ul>
+        <h2 class="section">Face Tracking</h2>
+        <p class="content">I used MediaPipe for face detection. On my development machine the install initially failed because I had Python 3.13 installed while MediaPipe only supports 3.9 through 3.12; dropping to a supported interpreter resolved it. On the Pi the package built and installed cleanly, it just took a while to compile.</p>
+        <p class="content">The first end-to-end test tracked in exactly the wrong direction. The camera feed was arriving upside down, so the detected face coordinates were mirrored through the image center. The fix was to rotate the frame 180 degrees rather than flip it—because tracking depends on absolute pixel positions, a horizontal flip would have corrected the picture visually while leaving the coordinates inconsistent with the servo axes.</p>
+        <p class="content">Detection latency was the other perception problem. Running the detector on full-resolution frames left the head lagging noticeably behind the person. I ran detection on downscaled frames and used MediaPipe's short-range detector, which is tuned for close subjects like a desktop robot. Combined with the node-based architecture, this kept the effective tracking rate high enough that the motion reads as continuous rather than stepped.</p>
+        <h2 class="section">Servo Control</h2>
+        <p class="content">Turning a face position into motion is a small amount of geometry. Each frame, I take the offset of the face centroid from the image center, in pixels, and convert it to an angular error using the camera's field of view. That error is fed to a proportional controller that nudges the pan and tilt angles toward centering the face. Because the correction is proportional to the error, the head slows as it approaches the target instead of overshooting.</p>
+        <p class="content">The larger problem was jitter. Driving the servos with the Pi's default software-generated PWM produced constant twitching even when the target angle was steady. Software PWM builds the pulse timing on the CPU, so any time the operating system scheduler preempts the process the pulse width drifts, and a servo reads that drift as a command to move. The servo library's documentation pointed me at pigpio, which generates PWM using the Pi's DMA hardware instead of the CPU. Switching the backend to pigpio produced stable pulse widths and the standing jitter disappeared.</p>
+        <p class="content">On top of that I added two smoothing measures so the head would settle rather than hunt. A deadband ignores sub-threshold errors, so tiny frame-to-frame variation in the detected face position no longer triggers a correction. A low-pass filter on the target angle limits how quickly the commanded position can change, which turns abrupt detection jumps into smooth sweeps. The result is a head that tracks deliberately and holds still when you do.</p>
+        <h2 class="section">Emotion Mirroring</h2>
+        <p class="content">The robot's premise is "reverse empathy": it displays the emotional opposite of the person in front of it. A happy or neutral person gets an angry face; a sad person gets a happy one. Classifying the incoming expression from a webcam turned out to be the least reliable part of the system at first, producing noisy, flickering labels. I moved to a landmark-based approach, deriving simple features such as mouth curvature and eye openness from MediaPipe's face landmarks, and applied temporal smoothing so a single bad frame could not flip the displayed emotion. Once the label was stable, mapping it to the inverted face and rendering that image on the screen was straightforward.</p>
+        <h2 class="section">Electronics and Power</h2>
+        <p class="content">The two servos draw more current than the Raspberry Pi's onboard 5V rail can safely supply, so they need their own power. The only battery I had on hand was a 14.8V pack, which I stepped down to roughly 5.5V with a buck converter. The important detail is grounding: the buck converter's negative output goes to both the servo grounds and the Pi's ground. The servos need a common ground reference with the Pi, otherwise the PWM signal has no consistent zero to be measured against and the control is unreliable. With a shared ground the Pi's signal pins can command the externally powered servos correctly.</p>
+        <h2 class="section">Mechanical Design</h2>
+        <p class="content">Everything mounts to a commercial pan-tilt bracket, but the camera, screen, and Pi needed custom 3D-printed mounts. I designed these from measured dimensions and iterated on tolerances—several revisions came down to widening a screw spacing by around half a millimeter to get a clean fit. At roughly ten cents of filament per print, iterating on physical fit was cheap enough to just reprint until it was right.</p>
+        <p class="content">One deliberate choice was to mount the Raspberry Pi to the stationary base rather than the moving head. If the Pi rode on the head, every pan would twist its cable bundle; keeping it on the base means only the lightweight camera and screen rotate. Finally, the base is weighted with the battery so the robot does not tip over as the head swings—the heaviest component doubles as ballast.</p>
+        <h2 class="section">Conclusion</h2>
+        <p class="content">The finished robot tracks a person smoothly across its field of view and holds a steady gaze once it locks on, while the screen mirrors an inverted version of their expression. Most of the engineering effort went not into the novelty of the idea but into the two problems inherent to running a real-time vision loop on constrained hardware: eliminating servo jitter by moving PWM generation off the CPU and onto DMA-timed hardware, and hiding detection latency through a decoupled, node-based pipeline running on downscaled frames. The full build is documented in the video above.</p>
+    </body>
+</html>

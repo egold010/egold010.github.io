@@ -1,5 +1,139 @@
 .container {
     padding-top: 80px;
+    max-width: 850px;
+    margin: 0 auto;
+    padding-bottom: 40px;
+    min-height: 100vh;
+}
+
+.project-content {
+    padding: 0 20px;
+}
+
+/* ===================================
+   Injected detail styles (ported from
+   assets/asset-styles.css, scoped so
+   they only touch the detail content).
+   =================================== */
+::ng-deep .project-content,
+::ng-deep .project-content * {
+    font-family: "Exo 2", sans-serif;
+    color: var(--text-primary, #e2e8f0);
+}
+
+::ng-deep .project-content .header {
+    font-family: "Rajdhani", sans-serif;
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-top: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--text-primary, #e2e8f0);
+}
+
+::ng-deep .project-content .section {
+    font-family: "Rajdhani", sans-serif;
+    font-size: 1.5rem;
+    font-weight: 800;
+    margin-top: 2rem;
+    margin-bottom: 0.5rem;
+    color: var(--accent-secondary, #00d4ff);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+::ng-deep .project-content .category {
+    font-family: "Rajdhani", sans-serif;
+    font-size: 1.1rem;
+    font-weight: 500;
+    margin-bottom: -16px;
+    color: var(--accent-primary, #ff6b35);
+}
+
+::ng-deep .project-content .subber {
+    font-size: 1.1rem;
+    margin-left: 10px;
+    color: var(--text-secondary, #94a3b8);
+}
+
+::ng-deep .project-content .content {
+    font-size: 1rem;
+    line-height: 1.8;
+    text-indent: 40px;
+    color: var(--text-secondary, #94a3b8);
+}
+
+::ng-deep .project-content img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+::ng-deep .project-content .header-img {
+    border: 2px solid var(--steel-dark, #2a3441);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+}
+
+::ng-deep .project-content .content-img {
+    border: 1px solid var(--steel-dark, #2a3441);
+    transition: all 0.3s ease;
+}
+
+::ng-deep .project-content .content-img:hover {
+    border-color: var(--accent-primary, #ff6b35);
+    box-shadow: 0 5px 20px rgba(255, 107, 53, 0.2);
+}
+
+::ng-deep .project-content li {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: var(--text-secondary, #94a3b8);
+    position: relative;
+    padding-left: 0.5rem;
+}
+
+/* Figure wrappers in the detail markup are <div>s that center their image. */
+::ng-deep .project-content div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+}
+
+::ng-deep .project-content div img {
+    margin: 10px;
+}
+
+::ng-deep .project-content .multi-img {
+    max-width: 30%;
+}
+
+/* ===================================
+   Loading state
+   =================================== */
+.project-loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1.2rem;
+    padding: 6rem 2rem;
+    color: var(--text-secondary, #94a3b8);
+}
+
+.project-spinner {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: 3px solid var(--steel-dark, #2a3441);
+    border-top-color: var(--accent-primary, #ff6b35);
+    animation: project-spin 0.8s linear infinite;
+}
+
+@keyframes project-spin {
+    to {
+        transform: rotate(360deg);
+    }
 }
 
 .backBtn {
@@ -7,7 +141,7 @@
     color: var(--text-primary);
     border: 1px solid var(--steel-dark);
     padding: 0.8rem 1.5rem;
-    margin: 20px 20% 20px;
+    margin: 20px auto;
     border-radius: 6px;
     cursor: pointer;
     font-family: "Rajdhani", sans-serif;
@@ -40,26 +174,24 @@
     transform: translateX(-3px);
 }
 
-iframe {
-    border: 2px solid var(--steel-dark);
-    border-radius: 8px;
-    width: 800px;
-    display: flex;
-    margin: auto;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
-}
-
 @media (max-width: 600px) {
     .container {
         padding-top: 60px;
     }
 
-    .backBtn {
-        margin: 15px 5%;
+    .project-content {
+        padding: 0 12px;
     }
 
-    iframe {
-        width: 100%;
-        border-radius: 0;
+    ::ng-deep .project-content .header {
+        font-size: 1.6rem;
+    }
+
+    ::ng-deep .project-content .section {
+        font-size: 1.1rem;
+    }
+
+    .backBtn {
+        margin: 15px 5%;
     }
 }

@@ -1,5 +1,9 @@
 <div class="container">
-    <iframe #iframe (load)="iframeLoad(iframe, backBtn)" [src]="projectSrc"></iframe>
+    <div *ngIf="loading" class="project-loading">
+        <div class="project-spinner"></div>
+        <p>Loading project…</p>
+    </div>
+    <div class="project-content" [innerHTML]="projectHtml"></div>
     <button #backBtn class="backBtn" (click)="scrollToSection('projects')">
         <img
           src="assets/arrow_down.png"

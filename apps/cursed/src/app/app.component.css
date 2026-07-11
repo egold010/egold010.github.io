@@ -394,3 +394,130 @@ a {
         font-size: 1rem;
     }
 }
+
+/* Entry checkpoint — shown before the site/boot so recruiters can bail out */
+.entry-gate {
+    position: fixed;
+    inset: 0;
+    z-index: 100010;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+    background: radial-gradient(circle at 50% 30%, rgba(20, 12, 40, 0.98), rgba(5, 5, 10, 0.99));
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    animation: entry-gate-in 0.4s ease both;
+    /* The site hides the native cursor (body { cursor: none }) and draws its own
+       behind this gate — restore a normal cursor so it's usable at the checkpoint. */
+    cursor: auto;
+}
+
+@keyframes entry-gate-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.entry-gate-panel {
+    width: 100%;
+    max-width: 560px;
+    padding: 2.5rem;
+    border: 1px solid var(--accent-glow);
+    border-radius: 16px;
+    background: rgba(15, 15, 22, 0.85);
+    box-shadow: 0 0 40px var(--accent-glow), inset 0 0 0 1px rgba(255, 255, 255, 0.03);
+    text-align: center;
+    animation: entry-gate-panel-in 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes entry-gate-panel-in {
+    from { opacity: 0; transform: translateY(16px) scale(0.98); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.entry-gate-eyebrow {
+    margin: 0 0 0.75rem;
+    font-family: 'Courier New', monospace;
+    font-size: 0.8rem;
+    letter-spacing: 0.25em;
+    color: var(--accent);
+    text-shadow: 0 0 8px var(--accent-glow);
+}
+
+.entry-gate-title {
+    margin: 0 0 1rem;
+    font-size: 2rem;
+    line-height: 1.15;
+    color: #fff;
+}
+
+.entry-gate-text {
+    margin: 0 auto 2rem;
+    max-width: 42ch;
+    color: var(--text-muted);
+    font-size: 1.05rem;
+    line-height: 1.6;
+}
+
+.entry-gate-text strong {
+    color: #fff;
+}
+
+.entry-gate-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.9rem;
+    justify-content: center;
+}
+
+.entry-gate-btn {
+    display: inline-block;
+    padding: 0.85rem 1.6rem;
+    border-radius: 999px;
+    font-size: 1rem;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+}
+
+.entry-gate-btn.primary {
+    background: var(--primary-gradient);
+    color: #fff;
+    border: 1px solid transparent;
+}
+
+.entry-gate-btn.primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px var(--accent-glow);
+}
+
+.entry-gate-btn.ghost {
+    background: transparent;
+    color: var(--text-muted);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.entry-gate-btn.ghost:hover {
+    color: #fff;
+    border-color: var(--accent);
+    box-shadow: 0 0 16px var(--accent-glow);
+}
+
+@media (max-width: 520px) {
+    .entry-gate-panel {
+        padding: 1.75rem 1.35rem;
+    }
+
+    .entry-gate-title {
+        font-size: 1.6rem;
+    }
+
+    .entry-gate-actions {
+        flex-direction: column;
+    }
+
+    .entry-gate-btn {
+        width: 100%;
+    }
+}

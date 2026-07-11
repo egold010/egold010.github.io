@@ -13,6 +13,30 @@ export interface CardItem {
 
 export const Projects: CardItem[] = [
     {
+        title: "Drone from Scratch",
+        description: "I'm building a quadcopter completely from scratch, including a custom STM32 flight controller PCB. It currently lifts off for a short time under complementary-filter stabilization.",
+        category: "Robotics",
+        date: "1/29/2026",
+        relevant: true,
+        skills: ["C++", "Electrical", "Embedded Systems", "Robotics"]
+    },
+    {
+        title: "Tendon-Driven Robot Hand",
+        description: "I designed and 3D printed a five-finger robot hand with tendon-driven fingers, each pulled closed by its own servo. It mirrors my hand gestures in real time using MediaPipe.",
+        category: "Robotics",
+        date: "1/18/2026",
+        relevant: true,
+        skills: ["Python", "C++", "Computer Vision", "Electrical", "Embedded Systems", "Robotics"]
+    },
+    {
+        title: "Reverse-Empathy Robot",
+        description: "I built a face-tracking robot with a two-servo pan-tilt head, a Raspberry Pi, and MediaPipe. It follows your face and displays the opposite of your emotion.",
+        category: "Robotics",
+        date: "12/13/2025",
+        relevant: true,
+        skills: ["Python", "ROS2", "Linux", "Computer Vision", "Electrical", "Robotics"]
+    },
+    {
         title: "VGGT Visual SLAM",
         description: "I'm working on utilizing the new VGGT model to implement a new Visual SLAM algorithm that relies solely on visual data. Not even IMU data is used.",
         category: "Software",
@@ -25,7 +49,7 @@ export const Projects: CardItem[] = [
         description: "I developed a custom ROS2 node to implement the SLAM algorithm from the ground up, utilizing odometry and LIDAR data from the TurtleBot3 library.",
         category: "Software",
         date: "3/19/2025",
-        relevant: true,
+        relevant: false,
         skills: ["ROS2", "Python", "Linux", "SLAM"]
     },
     {
@@ -80,7 +104,7 @@ export const Projects: CardItem[] = [
         description: "I made a simple version of Galactica using AVR C++ as the final project for my Embedded Systems class.",
         category: "Electrical",
         date: "6/9/2024",
-        relevant: true,
+        relevant: false,
         skills: ["C++", "Game Dev", "Electrical", "Embedded Systems"],
     },
     {

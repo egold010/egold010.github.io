@@ -1,4 +1,8 @@
 <div class="container">
+    <div *ngIf="loading" class="project-loading">
+        <div class="project-spinner"></div>
+        <p>Loading project…</p>
+    </div>
     <div class="project-content" [innerHTML]="projectHtml | safeHtml"></div>
     <button class="backBtn" appMagnetic [magneticPull]="0.3" (click)="scrollToSection('projects')">
         <img

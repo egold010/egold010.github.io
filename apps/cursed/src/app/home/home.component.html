@@ -1,18 +1,4 @@
 <div class="container">
-    <!-- Recruiter notice: steer hiring folks to the real portfolio -->
-    <div class="recruiter-banner glass" *ngIf="!recruiterNoticeDismissed" role="note">
-        <p class="recruiter-banner-text">
-            <span class="recruiter-banner-emoji" aria-hidden="true">👔</span>
-            <span><strong>Recruiter or hiring manager?</strong> This is my experimental playground.
-            Head to my <span class="gradient-text">professional portfolio</span> instead.</span>
-        </p>
-        <div class="recruiter-banner-actions">
-            <a href="/portfolio/" class="recruiter-banner-btn">View my portfolio →</a>
-            <button type="button" class="recruiter-banner-close" (click)="dismissRecruiterNotice()"
-                    aria-label="Dismiss recruiter notice">✕</button>
-        </div>
-    </div>
-
     <section id="home">
         <app-introduction></app-introduction>
     </section>

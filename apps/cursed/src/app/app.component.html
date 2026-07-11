@@ -1,3 +1,21 @@
+<!-- Entry checkpoint: shown before anything else so recruiters can bail to the
+     real portfolio before the cursed site (and its boot sequence) even starts. -->
+<div class="entry-gate" *ngIf="showGate" role="dialog" aria-modal="true" aria-labelledby="entry-gate-title">
+  <div class="entry-gate-panel">
+    <p class="entry-gate-eyebrow">// ACCESS CHECKPOINT</p>
+    <h1 class="entry-gate-title" id="entry-gate-title">Before you enter</h1>
+    <p class="entry-gate-text">
+      This is my <strong>experimental</strong> website. If you're here to take a look at my
+      skills and experience, my normal <span class="gradient-text">professional portfolio</span>
+      is what you're looking for.
+    </p>
+    <div class="entry-gate-actions">
+      <a href="/portfolio/" class="entry-gate-btn primary">View my portfolio →</a>
+      <button type="button" class="entry-gate-btn ghost" (click)="enterSite()">Enter the experience</button>
+    </div>
+  </div>
+</div>
+
 <div class="splash-screen" [class.fade-out]="!showSplash" *ngIf="splashExists">
   <div class="terminal-content">
     <div class="boot-logs">

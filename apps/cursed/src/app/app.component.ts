@@ -111,6 +111,7 @@ export class AppComponent implements OnInit {
   isBarHidden = false;
   isMenuOpen = false;
   scrollProgress = 0;
+  showGate = true;
   showSplash = true;
   splashExists = true;
 
@@ -245,10 +246,19 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-    // Speak boot sequence
+    this.initHUDTelemetry();
+    // The boot sequence starts only when the visitor clicks through the
+    // checkpoint, so its speech/sound effects don't fire behind the gate.
+  }
+
+  enterSite() {
+    this.showGate = false;
+    this.startBoot();
+  }
+
+  private startBoot() {
     this.speakBootSequence();
     this.simulateIntenseBoot();
-    this.initHUDTelemetry();
   }
 
   initHUDTelemetry() {
