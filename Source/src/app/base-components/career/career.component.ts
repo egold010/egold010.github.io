@@ -15,12 +15,12 @@ export class CareerComponent implements OnInit {
   timeline = [
     {
       title: 'Robotics Engineer',
-      company: 'Duality AI',
-      link: 'https://www.duality.ai/',
-      date: 'Sep 2025 - Present',
-      description: 'Integrating robots into a digital twin simulator.',
-      skills: ['C++', 'Python', 'ROS1', 'ROS2'],
-      image: 'assets/timeline-images/duality.jpg',
+      company: 'Stealth Startup',
+      link: '',
+      date: 'Aug 2026 - Present',
+      description: 'Autonomous Robotics',
+      skills: [],
+      image: 'assets/timeline-images/stealth.svg',
     },
     {
       title: 'Content Creator',
@@ -30,6 +30,15 @@ export class CareerComponent implements OnInit {
       description: 'Making videos about robotics and engineering. Check out my channel!',
       skills: ['Robotics', 'Engineering', 'Video Editing'],
       image: 'assets/timeline-images/vibe-engineering.png',
+    },
+    {
+      title: 'Robotics Engineer',
+      company: 'Duality AI',
+      link: 'https://www.duality.ai/',
+      date: 'Sep 2025 - Aug 2026 | 1 yr',
+      description: 'Integrating robots into a digital twin simulator.',
+      skills: ['C++', 'Python', 'ROS1', 'ROS2'],
+      image: 'assets/timeline-images/duality.jpg',
     },
     {
       title: 'Robotics Engineer',
