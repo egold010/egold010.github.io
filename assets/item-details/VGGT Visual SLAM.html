@@ -1,0 +1,68 @@
+<html>
+    <head>
+        <script type="text/javascript" async
+            src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+                MathJax.Hub.Queue(function () {
+                    window.parent.postMessage({
+                        type: "resizeIframe",
+                        height: document.body.scrollHeight
+                    }, "*");
+                });
+            </script>
+        <link href="../asset-styles.css" rel="stylesheet" type="text/css">
+    </head>
+    <body>
+        <h1 class="header">VGGT Visual SLAM</h1>
+        <p class="subber">4/12/2025</p>
+        <div style="display: flex; flex-direction: column; align-items: center;">
+            <img src="../item-images/VGGT Visual SLAM.png" style="width: 750px;">
+            <img src="../details-images/VGGTVisualSlam/real-room.png" style="width: 750px;">
+            <p style="margin-top: 0;"><b>Figure: </b>A reconstruction of a room of the abandoned coal mine shown in the figure along with drone orientations.</p>
+        </div>
+
+        <h2 class="section">Introduction</h2>
+        <p class="content">
+            The internet hosts an enormous volume of drone footage and other navigation-related videos, capturing everything from scenic landscapes to complex aerial maneuvers. However, despite this abundance of visual data, these videos typically lack essential spatial information—such as odometry, GPS, or IMU data—which makes it difficult to reconstruct 3D environments or perform Simultaneous Localization and Mapping (SLAM).</p>
+        <p class="content">
+            Unlocking the spatial structure of these videos would enable a wide range of powerful applications. For instance, environments could be annotated at scale, providing rich semantic and geometric datasets that could support everything from environmental monitoring to machine learning and robotics.
+        </p>
+        <p class="content">
+            More specifically, drone trick footage—if annotated with spatial context—could be used to train autonomous agents to perform similar maneuvers, benefiting fields like aerial cinematography, entertainment, and robotics. The challenge, however, lies in the fact that most public video content lacks the metadata required for traditional SLAM pipelines.
+        </p>
+        <p class="content">
+            This project explores a novel solution: using deep learning to infer spatial information directly from video, offering a new way to leverage raw visual content for 3D scene reconstruction.
+        </p>
+        
+        <h2 class="section">VGGT</h2>
+        <p class="content">
+            The Visual Geometry Grounded Transformer (VGGT) is a feed-forward neural network designed to infer key 3D attributes of a scene from one or more images. These include camera intrinsics and extrinsics, depth maps, point maps, and 3D point tracks. Unlike traditional SLAM methods that rely on iterative optimization (like Bundle Adjustment), VGGT estimates all these components in a single forward pass.
+        </p>
+        <p class="content">
+            A key capability of VGGT—particularly relevant for SLAM—is its ability to simultaneously predict camera poses and reconstruct the surrounding environment, eliminating the need for odometry or additional sensor input. This efficiency allows VGGT to operate at high speed while maintaining strong geometric consistency across frames.
+        </p>
+
+        <h3 class="section">Method</h2>
+        <p class="content">
+            This project uses a pre-trained VGGT model to perform real-time 3D reconstruction from raw video frames. The pipeline consists of the following stages:
+        </p>
+        <ul>
+            <li><b>Data Preprocessing:</b> Video frames are loaded and preprocessed to serve as input to the VGGT model.</li>
+            <li><b>Feature Aggregation:</b> The model encodes the visual information from multiple frames into a shared feature space using a transformer-based architecture.</li>
+            <li><b>Simultaneous Prediction:</b> VGGT then predicts both the camera poses (extrinsics) and a dense 3D point map for each frame—essential elements for 3D reconstruction.</li>
+            <li><b>Geometric Alignment:</b> The predicted data is transformed into a consistent global coordinate frame using a series of geometric operations. This step ensures that all predictions align spatially, even without odometry data.</li>
+            <li><b>Incremental Mapping:</b> As the process iterates over video frames, new predictions are appended to the growing reconstruction, resulting in an incrementally refined and expanded 3D map.</li>
+            <li><b>Visualization:</b> The final output—consisting of 3D points, camera trajectories, and associated confidence scores—is exported as a GLB (GL Transmission Format Binary) file and rendered for interactive visualization.</li>
+        </ul>
+
+        <h3 class="section">Conclusion</h2>
+        <p class="content">
+            By combining deep learning with spatial inference, this method offers a practical and efficient alternative to traditional SLAM pipelines—particularly when working with video data that lacks sensor metadata. It demonstrates how modern vision models like VGGT can be used to extract structured spatial understanding from unstructured visual content, opening up exciting possibilities in autonomous systems, robotics, and immersive media.
+        </p>
+        
+        <div style="display: flex; flex-direction: column; align-items: center;">
+            <img src="../details-images/VGGTVisualSlam/current-state.png" style="width: 750px;">
+            <p style="margin-top: 0;"><b>Figure: </b>Failure case of method. Predictions overlap, causing buildup of stray geometry. Need to realign camera views with feature mapping.</p>
+        </div>
+
+    </body>
+</html>

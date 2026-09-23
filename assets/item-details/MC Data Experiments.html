@@ -1,0 +1,43 @@
+<html>
+    <head>
+        <link href="../asset-styles.css" rel="stylesheet" type="text/css">
+    </head>
+    <body>
+        <h1 class="header">MC Data Experiments</h1>
+        <p class="subber">12/3/2024</p>
+        <div style="display: flex; flex-direction: column; align-items: center;">
+            <img src="../details-images/MCDataExperiments/seg_pred_1.png" style="width: 750px;">
+            <p style="margin-top: 0;"><b>Figure: </b>Output of the trained models.</p>
+        </div>
+        <h2 class="section">Introduction</h2>
+        <p class="content">As a personal project, I created a dataset of 20,000 annotated Minecraft images with depth and semantic annotations. Using this dataset, I trained two separate U-Nets: one for metric depth estimation and another for semantic segmentation. I then compared the performance of these models against two foundation models—SAMv2 and DepthAnythingv2.</p>
+        <h2 class="section">Methodology</h2>
+        <p class="content">The U-Net architecture used in this project had a depth of 4 with 256 channels in the bottleneck layer. A shallower architecture (depth 3) yielded poor accuracy, while a deeper one (depth 5) exceeded the 24 GB VRAM limit of my RTX 4090 GPU. Due to the high resolution of the images, VRAM was a key constraint throughout the project.</p>
+        <p class="content">The training process followed a classical CNN approach. For depth estimation, I experimented with Mean Squared Error (MSE) loss and a weighted MSE loss to emphasize closer objects. For semantic segmentation, Cross Entropy loss was used. Optimization was carried out using the Adam optimizer with a learning rate of 0.0001. Each model was trained for 50 epochs, with training times averaging about 50 minutes.</p>
+        <h2 class="section">Results</h2>
+        <h3 class="category">Metric Depth Estimation</h3>
+        <p class="content">The U-Net model underperformed compared to DepthAnythingv2, even though DepthAnything focuses on relative depth estimation rather than metric depth. DepthAnything demonstrated superior handling of sharp edges and textures, while the U-Net struggled—often assigning inconsistent depths to textured blocks. Despite efforts to improve performance using a weighted loss function for closer objects, the U-Net failed to adequately estimate depth for nearby elements, while its performance on distant objects deteriorated further.</p>
+        <p class="content">One strength of the U-Net was its ability to correctly identify clouds as far away. However, it introduced gradients along the edges of objects adjacent to the background, a noticeable artifact in its outputs. These shortcomings suggest that older architectures like U-Net may be suboptimal for complex depth estimation tasks.</p>
+        <div style="display: flex; flex-direction: column; align-items: center;">
+            <img src="../details-images/MCDataExperiments/depth_pred_1.png" style="width: 750px;">
+        </div>
+        <h3 class="category">Semantic Segmentation</h3>
+        <p class="content">The U-Net achieved much better results in semantic segmentation, generally providing accurate classifications of objects. One highlight was its performance on grass, which is inherently challenging due to its sharp, detailed textures and holes revealing objects behind it. Unlike the depth estimation model, the semantic segmentation model handled grass relatively well.</p>
+        <p class="content">However, sharp edges posed challenges for this model as well. While achieving perfectly sharp boundaries, such as those seen in the ground truth, was not expected for complex textures like grass, sharper delineation on simpler objects would have been a valuable improvement.</p>
+        <div style="display: flex; flex-direction: column; align-items: center;">
+            <img src="../details-images/MCDataExperiments/seg_pred_2.png" style="width: 750px;">
+        </div>
+        <h2 class="section">Conclusion</h2>
+        <p class="content">DepthAnythingv2 demonstrated impressive performance on my dataset, significantly outperforming the model I trained in-domain. However, DepthAnythingv2 is unable to perform metric depth estimation, which is not surprising, as even humans find it challenging to estimate metric depth in Minecraft scenes. This limitation makes it unlikely for DepthAnythingv2 to be used in autonomous agents within the Minecraft environment.</p>
+        <p class="content">SAMv2 struggled considerably with segmenting terrain. In contrast, my model performed much better at segmenting chunks of terrain. While the comparison between my model and SAMv2 is not directly equivalent—since my model performs semantic segmentation and SAMv2 performs general segmentation—it still provides valuable insights into SAMv2's limitations and potential areas for improvement.</p>
+        <p class="content">The dataset I created, along with the proof-of-concept for generating large-scale, controllable datasets, shows great potential in supporting future research and model development. Additionally, I believe that advancing autonomous systems in Minecraft through methods like reinforcement learning could help bridge the gap between computer vision and reinforcement learning. This integration is critical, as many autonomous systems rely heavily on computer vision, and real-time training or simulation environments are often time-consuming to set up.</p>
+        <div style="display: flex; flex-direction: column; align-items: center;">
+            <img src="../details-images/MCDataExperiments/sam_failure.png" style="width: 750px;">
+            <p style="margin-top: 0;"><b>Figure: </b>SAMv2 struggles to segment grass blocks.</p>
+        </div>
+        <div style="display: flex; flex-direction: column; align-items: center;">
+            <img src="../details-images/MCDataExperiments/da_failure.png" style="width: 750px;">
+            <p style="margin-top: 0;"><b>Figure: </b>DepthAnything struggles on clouds.</p>
+        </div>
+    </body>
+</html>

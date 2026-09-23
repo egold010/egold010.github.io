@@ -1,0 +1,58 @@
+<html>
+    <head>
+        <link href="../asset-styles.css" rel="stylesheet" type="text/css">
+    </head>
+    <body>
+        <h1 class="header">Early Games</h1>
+        <p class="subber">9/21/2022</p>
+        <h2 class="section">Introduction</h2>
+        <p class="content">
+            After researching various platforms to create games on, I decided that Roblox would be the best platform for my purposes. I don’t intend for game development to become a primary source of income, so I chose Roblox because of their low risk in game development. Unity was a close second for the game engine to use. I would have an easier time making games with Unity since C# is my strongest programming language, but there is higher risk in Unity game development. 
+            I released two games prior to the game I am currently working on, each for their own purpose.
+        </p>
+        <h2 class="section">Junk Food Tycoon <a target="_blank" href="https://www.roblox.com/games/6362528517/Junk-Food-Tycoon">link</a></h2>
+        <p class="content">
+            A friend of mine who is an avid Roblox player said that the genre of game that is easiest to make money with is tycoon games. Tycoon games are business simulators, where the player invests money to increase their money generation speed and expand their business. In general, Roblox tycoons involve expanding a building and adding/upgrading components such as conveyor belts.
+        </p>
+        <p class="content">
+            Junk food tycoon follows the Tycoon structure, where the player expands their factory and upgrades their equipment to further increase their production. As an experiment to see what people would spend money on, as well as how to most efficiently utilize Roblox’s game system, I created a tycoon game with premium purchases for both buying a flat amount of money and for increasing production of money.
+        </p>
+        <h3 class="category">Results</h3>
+        <p class="content">
+            The two primary ways tycoons generate income is from microtransactions such as buying in-game currency, and premium payouts, where a developer gets paid based on how much time players with premium Roblox accounts spend in their game. The tycoon genre utilizes the premium payouts since a lot of the player’s time spent in a tycoon is waiting for their factory to create enough money to get the next upgrade, so players will often leave the game running in the background while they do other tasks such as homework.
+        </p>
+        <p class="content">
+            As of 9/21/2022, Junk food tycoon has generated $4.11 in income, with $3.36 coming from microtransactions and $0.75 coming from premium payouts. I was surprised by any income at all from Junk food tycoon because of the lack of quality and content, as well as how little time I invested into making the game.
+        </p>
+        <h3 class="category">Development</h3>
+        <p class="content">
+            Junk food tycoon was the first game I ever made that I intended to release. Since I was so new to making games, I struggled with an elegant system for representing upgrades that players had and I ended up just increasing a number associated with the player for how much income they generate. I wasn’t aware of modulescripts, which can be used to make pseudo classes with dictionaries. After the completion of the game, I realized I could have used modulescripts to represent the player’s inventory and the functions of each of the factory components in a more elegant way. The game took a total of 3 days to make and has only a few hundred lines of code. The game was created on 2/8/2021, which was over a year and a half ago as of the time I am writing this, so I don’t remember in detail specific struggles I faced.
+        </p>
+        <h2 class="section">Jelly Run <a target="_blank" href="https://www.roblox.com/games/6958327802/Jelly-Run">link</a></h2>
+        <p class="content">
+            Jelly Run consists of 2-20 players running through obstacles with toxic jelly below them rising at an increasing speed. The objective is to survive for longer than everyone else, and rewards players with in-game currency based on their performance, which can be used to buy cosmetics. Jelly run was inspired by another game, where the player has to compete or work together with others to climb an obstacle course and outrun rising water. Because of my interest in automation, I wanted to try to make a game about running through obstacles to outrun something but make it endless, with randomly generated obstacles. Jelly run was intended to be practice for making bigger and more complex games, but upon completion, I saw potential in it and added microtransactions. Microtransactions include cosmetics such as different running and jumping animations, as well as effects such as leaving a small trail of fire wherever the player runs. 
+        </p>
+        <h3 class="category">Results</h3>
+        <p class="content">
+            Jelly run was the first game I made where I used module scripts to represent items and used inheritance for the cosmetics. The game has been out for a few weeks and hasn’t generated any income yet despite being of much higher quality than Junk food tycoon. After investigating why Junk food tycoon was more successful than Jelly Run, I noticed that very few people were actually able to play the game since more than one person is needed for a round to begin. I concluded that although Roblox advertises themselves as a very social platform, a good single player experience is necessary for a game. I intend to either add a single player version where the player just tries to get as far as possible or add bots if other players don’t join after a certain amount of time.
+        </p>
+        <h3 class="category">Development</h3>
+        <p class="content">
+            I made Jelly Run in two parts. After finishing Junk food tycoon, I immediately started making Jelly Run with the intention of also finishing it in a short amount of time. After a few days of development, I had the core concept and the map for the game done, but I noticed that I was still struggling with elegantly representing different objects in the game such as cosmetics and obstacles, so I decided that I would put the project on hold and learn new game development techniques. I created the core features for multiple games such as 3 different RPG games, as well as a ping pong game and learned new inventory management systems, as well as how to effectively use module scripts. After a few months, I came back to Jelly Run and was able to quickly finish it.
+        </p>
+        <p class="content">
+            There are multiple preset obstacles that the game chooses from for players to run though. The obstacles have a start and an end zone marked and when the end zone of the previous obstacle is reached, it spawns the next obstacle with the start area of the new obstacle touching the end area of the previous obstacle. It took a lot of effort to make the obstacle system work well with my sloppy code from months before, so I had to remake a lot of what I previously made.
+        </p>
+        <h3 class="category">Challenges</h3>
+        <p class="content">
+            A module script concept I had to learn the hard way was that they are lazy-loaded. This means that each modulescript will only run once for each environment, so even if you call the modulescript multiple times, it will return the same object. The effects of this include strange behavior when there are supposed to be multiple instances of the same obstacle on the map.
+        </p>
+        <p class="content">
+            For the running and jumping cosmetics, I had to make the animation script from scratch, which is normally included with the game and is over a thousand lines long. It also included a lot of advanced syntax, so although it took a long time to figure out how the animations worked, I learned a lot of scripting tricks.
+        </p>
+        <h2 class="section">Conclusion</h2>
+        <p class="content">
+            This was my experience up to the creation of Mecha-Raptor simulator, where I spent a bulk of my time and gained much more experience. An in depth dev-blog about Mecha-Raptor simulator is in its own section.
+        </p>
+    </body>
+</html>

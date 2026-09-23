@@ -1,0 +1,60 @@
+<html>
+    <head>
+        <link href="../asset-styles.css" rel="stylesheet" type="text/css">
+    </head>
+    <body>
+        <h1 class="header">Tendon-Driven Robot Hand</h1>
+        <p class="subber">1/18/2026</p>
+        <div style="flex-direction: column; align-items: center;">
+            <iframe width="750" height="422" style="max-width: 100%; border-radius: 8px; border: 2px solid var(--steel-dark, #2a3441); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);"
+                src="https://www.youtube.com/embed/zwZwDDzCAnw" title="Tendon-Driven Robot Hand"
+                frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <p style="margin-top: 8px;"><b>Video: </b>Full build, including every design iteration.</p>
+        </div>
+        <h2 class="section">Summary</h2>
+        <p class="content">Inspired by the recent wave of humanoid robotics, I designed and 3D printed a five-finger robot hand that mirrors my own hand gestures in real time. Each finger is tendon-driven and pulled closed by its own servo, and a webcam running MediaPipe reads my hand and sends the target finger states to an Arduino. The project went through a long chain of design revisions before it worked, and the write-up below covers the mechanical decisions that actually mattered: how the fingers actuate, why they were so hard to close at first, and the changes that finally made the hand functional. The full process, mistakes included, is in the video above.</p>
+        <!-- IMAGE: hero shot of the finished hand. Name it "hero.png" -> shared/assets/details-images/RobotHand/hero.png -->
+        <div style="flex-direction: column; align-items: center;">
+            <img class="content-img" src="../details-images/RobotHand/hero.png" style="width: 600px;">
+            <p style="margin-top: 0;"><b>Figure: </b>The finished hand.</p>
+        </div>
+        <h2 class="section">How a Robot Finger Works</h2>
+        <p class="content">Each finger is built from a chain of rigid links with a tendon running through them. To close the finger, a servo pulls the tendon, which curls the links inward. To open it, the servo releases the tendon and a rubber band running along the back of the finger pulls it straight again. This antagonistic setup—an actuated tendon for flexion and a passive elastic for extension—is the standard way tendon-driven fingers work, and it keeps the motor count to one per finger instead of two.</p>
+        <!-- IMAGE (optional): a simple diagram of the tendon (close) + rubber band (open). Name it "mechanism.png" -> shared/assets/details-images/RobotHand/mechanism.png -->
+        <div style="flex-direction: column; align-items: center;">
+            <img class="content-img" src="../details-images/RobotHand/mechanism.png" style="width: 600px;">
+            <p style="margin-top: 0;"><b>Figure: </b>Tendon pulls the finger closed; the rubber band returns it open.</p>
+        </div>
+        <h2 class="section">Actuation Layout</h2>
+        <p class="content">The hand was originally only meant to play rock-paper-scissors, which would have let me couple several fingers to a single motor and save on hardware. That simplification fell apart the moment I accounted for the middle finger needing to move independently, so I committed to one servo per finger—five in total. Rather than try to pack the servos inside the palm, I mounted them on a rack behind the hand and routed each tendon back to its motor. It is not the most compact solution, but it made assembly and tendon routing far simpler than an in-palm layout would have.</p>
+        <!-- IMAGE: the motor rack behind the palm with the 5 servos. Name it "motor-rack.png" -> shared/assets/details-images/RobotHand/motor-rack.png -->
+        <div style="flex-direction: column; align-items: center;">
+            <img class="content-img" src="../details-images/RobotHand/motor-rack.jpg" style="width: 600px;">
+            <p style="margin-top: 0;"><b>Figure: </b>The five servos mounted on a rack behind the palm.</p>
+        </div>
+        <h2 class="section">Finger Design and Iteration</h2>
+        <p class="content">I modeled each finger link split into two halves so I could seat a length of PTFE tubing inside before closing it up. The tubing gives the tendon a low-friction channel to slide through, which turned out to be essential—early versions without it were stiff enough that the servo could barely move the finger. I also added a screw to hold the two halves together rather than relying on the fit alone, and hooks on the back of each link to anchor the return rubber bands.</p>
+        <p class="content">Two problems dominated the early prototypes. The first was scale: I forgot to account for the length of the links when sizing the finger, so the first working finger came out noticeably larger than my own. The second, and more important, was leverage. On the first design the tendon's attachment geometry gave the servo a poor lever arm, so closing the finger required more force than the small servos could provide. Re-spacing the links to improve the effective moment arm was the change that took a floppy, barely-moving finger to one that closed cleanly.</p>
+        <!-- IMAGE: side-by-side of the oversized printed finger next to your real hand for scale. Name it "scale.png" -> shared/assets/details-images/RobotHand/scale.png -->
+        <div style="flex-direction: column; align-items: center;">
+            <img class="content-img" src="../details-images/RobotHand/scale.png" style="width: 600px;">
+            <p style="margin-top: 0;"><b>Figure: </b>The first finger came out larger than the hand it was based on.</p>
+        </div>
+        <h2 class="section">Getting Enough Travel: The Spool</h2>
+        <p class="content">Even with better leverage, the MG90S servos did not have enough travel to fully close a finger. A servo horn only sweeps about 180 degrees, and pulling the tendon directly off a short arm simply did not take up enough wire. The fix was to wind the tendon around a spool on the servo output instead of pulling it off a lever.</p>
+        <p class="content">The reason this helps comes down to geometry. A lever arm of radius <i>r</i> swinging through 180 degrees only displaces its tip by about one diameter, roughly 2<i>r</i>. Winding that same tendon onto a spool of radius <i>r</i> over the same 180 degrees takes up an arc of &pi;&middot;<i>r</i> of wire. That is a factor of &pi;/2 &asymp; 1.57 more tendon travel out of the exact same servo rotation, which was enough to get the fingers fully closing.</p>
+        <h2 class="section">Return Springs</h2>
+        <p class="content">The other recurring issue was the return path. The rubber bands could not reliably pull the full-size fingers back open against the friction in the system, leaving them stuck half-closed. The one finger they could reset consistently was the pinky, which I had modeled smaller and lighter than the rest. Rather than fight the problem with stronger springs, I reprinted the other fingers using that smaller pinky design, so every finger was now light enough for the existing rubber bands to extend. It is a blunt fix, but it got the whole hand resetting reliably.</p>
+        <h2 class="section">Electronics</h2>
+        <p class="content">The five servos are driven by an Arduino I salvaged from an old RC car. The motors run on up to six volts, which I supplied by stepping a 4S LiPo battery down through a buck converter. Each servo curls one finger, so control is simple: the Arduino just needs a target open/closed state per finger.</p>
+        <h2 class="section">Gesture Tracking</h2>
+        <p class="content">The perception side uses MediaPipe's hand tracking in Python. From a webcam it locates the hand landmarks each frame, and I derive an open-or-closed state for each finger from those landmarks. Those states are streamed to the Arduino over serial, and the Arduino drives each servo to match. As on my previous robotics project, MediaPipe refused to install on Python 3.13—it only supports up to 3.12—so dropping to a supported interpreter was the first step to getting tracking running.</p>
+        <!-- IMAGE (optional): screenshot of MediaPipe tracking your hand landmarks. Name it "tracking.png" -> shared/assets/details-images/RobotHand/tracking.png -->
+        <div style="flex-direction: column; align-items: center;">
+            <img class="content-img" src="../details-images/RobotHand/tracking.png" style="width: 600px;">
+            <p style="margin-top: 0;"><b>Figure: </b>MediaPipe tracking the hand; finger states are sent to the Arduino over serial.</p>
+        </div>
+        <h2 class="section">Conclusion</h2>
+        <p class="content">The finished hand copies my gestures in real time—open, close, and everything in between per finger. Most of the engineering came down to a few fundamentals of tendon-driven mechanisms: minimizing friction so a small servo can move the tendon, giving that servo a good lever arm, and using a spool to trade rotation for the linear travel needed to fully close a finger. It was an unusually iterative build, but every revision came back to those same principles. The complete process is documented in the video above.</p>
+    </body>
+</html>
