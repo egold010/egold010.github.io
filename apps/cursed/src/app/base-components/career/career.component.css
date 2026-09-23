@@ -139,7 +139,7 @@ h1 {
     transition: color 0.2s;
 }
 
-.company-link:hover {
+a.company-link:hover {
     color: #c4b5fd;
     text-shadow: 0 0 8px rgba(196, 181, 253, 0.5);
 }

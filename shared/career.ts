@@ -5,7 +5,7 @@
 export interface TimelineEntry {
   title: string;
   company: string;
-  link: string;
+  link: string; // '' shows the company name without a link
   date: string;
   description: string;
   skills: string[];
@@ -15,12 +15,12 @@ export interface TimelineEntry {
 export const timeline: TimelineEntry[] = [
   {
     title: 'Robotics Engineer',
-    company: 'Duality AI',
-    link: 'https://www.duality.ai/',
-    date: 'Sep 2025 - Present',
-    description: 'Integrating robots into a digital twin simulator.',
-    skills: ['Python', 'ROS2', 'UE5'],
-    image: 'assets/timeline-images/duality.jpg',
+    company: 'Stealth Startup',
+    link: '',
+    date: 'Aug 2026 - Present',
+    description: 'Autonomous Robotics',
+    skills: [],
+    image: 'assets/timeline-images/stealth.svg',
   },
   {
     title: 'Content Creator',
@@ -30,6 +30,15 @@ export const timeline: TimelineEntry[] = [
     description: 'Making videos about robotics and engineering. Check out my channel!',
     skills: ['Robotics', 'Engineering', 'Video Editing'],
     image: 'assets/timeline-images/vibe-engineering.png',
+  },
+  {
+    title: 'Robotics Engineer',
+    company: 'Duality AI',
+    link: 'https://www.duality.ai/',
+    date: 'Sep 2025 - Aug 2026 | 1 yr',
+    description: 'Integrating robots into a digital twin simulator.',
+    skills: ['Python', 'ROS2', 'UE5'],
+    image: 'assets/timeline-images/duality.jpg',
   },
   {
     title: 'Robotics Engineer',
